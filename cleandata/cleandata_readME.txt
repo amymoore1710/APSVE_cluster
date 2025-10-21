@@ -1,0 +1,1 @@
+A folder for new datafiles created during the data cleaning process. 

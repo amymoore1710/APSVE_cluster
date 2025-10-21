@@ -1,0 +1,1 @@
+A folder for models creating during the model fitting process throughout the workflow
