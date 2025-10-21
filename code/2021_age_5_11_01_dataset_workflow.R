@@ -26,13 +26,13 @@ library(splines) #Adding Splines to GLMMs
 vstests_deid_raw <- read_csv("/home/amoor53/APSVE/data/vstests_newid_5.6.25.csv")
 
   #Vaccination records by Student ID
-aps_vax <- read_csv("data", "/home/amoor53/APSVE/data/aps_vax.csv")
+aps_vax <- read_csv("/home/amoor53/APSVE/data/aps_vax.csv")
 
   #Demographic info by Student ID
-studentinfo_deid <- read_csv("data", "/home/amoor53/APSVE/data/studentinfo_newid_5.6.25.csv")
+studentinfo_deid <- read_csv("/home/amoor53/APSVE/data/studentinfo_newid_5.6.25.csv")
 
   #School Enrollment by Student ID
-enrollment_newid <- read_csv("data", "/home/amoor53/APSVE/data/enrollment_newid_5.6.25.csv")
+enrollment_newid <- read_csv("/home/amoor53/APSVE/data/enrollment_newid_5.6.25.csv")
 
   #Direct Certification
 Direct_Certification <- read_csv("/home/amoor53/APSVE/data/2022_directly_certified_school.csv")
