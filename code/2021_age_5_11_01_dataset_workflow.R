@@ -23,26 +23,26 @@ library(splines) #Adding Splines to GLMMs
 
 
   #VS testing results by student ID
-vstests_deid_raw <- read_csv("/home/amoor53/APSVE/data/vstests_newid_5.6.25.csv")
+vstests_deid_raw <- read_csv("/home/amoor53/APSVE_cluster/data/vstests_newid_5.6.25.csv")
 
   #Vaccination records by Student ID
-aps_vax <- read_csv("/home/amoor53/APSVE/data/aps_vax.csv")
+aps_vax <- read_csv("/home/amoor53/APSVE_cluster/data/aps_vax.csv")
 
   #Demographic info by Student ID
-studentinfo_deid <- read_csv("/home/amoor53/APSVE/data/studentinfo_newid_5.6.25.csv")
+studentinfo_deid <- read_csv("/home/amoor53/APSVE_cluster/data/studentinfo_newid_5.6.25.csv")
 
   #School Enrollment by Student ID
-enrollment_newid <- read_csv("/home/amoor53/APSVE/data/enrollment_newid_5.6.25.csv")
+enrollment_newid <- read_csv("/home/amoor53/APSVE_cluster/data/enrollment_newid_5.6.25.csv")
 
   #Direct Certification
-Direct_Certification <- read_csv("/home/amoor53/APSVE/data/2022_directly_certified_school.csv")
+Direct_Certification <- read_csv("/home/amoor53/APSVE_cluster/data/2022_directly_certified_school.csv")
 
   #Schools by Cluster
-APS_School_List <- read_csv("/home/amoor53/APSVE/data/APS School List.csv")
+APS_School_List <- read_csv("/home/amoor53/APSVE_cluster/data/APS School List.csv")
 APS_School_List[which(APS_School_List$School == "BEST MS/HS"),]$School <- "BEST MS-HS"
 
   #SendSS cases
-SendSS_tests <- read_csv("/home/amoor53/APSVE/data/pui_deid.csv")
+SendSS_tests <- read_csv("/home/amoor53/APSVE_cluster/data/pui_deid.csv")
 
 
 
@@ -408,7 +408,7 @@ sample.sizes$more_than_3_tests <- c(ntests, nIDs)
 print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school and reported at least 3 tests"))
 print(paste("There are", nIDs, "students with tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school and reported at least 3 tests"))
 
-write.csv(VScohort.merged, "/home/amoor53/APSVE/cleandata/2021_age_5_11_daily_testing_by_ID.csv")
+write.csv(VScohort.merged, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_daily_testing_by_ID.csv")
 
 
 
@@ -620,7 +620,7 @@ for (i in 1:length(duplicates)) {
 VScohort.alltests <- VScohort.alltests[which(VScohort.alltests$duplicate == 0),]
 
 #Save the list of all positive tests as a csv
-write.csv(VScohort.alltests, "/home/amoor53/APSVE/cleandata/2021_age_5_11_positive_tests.csv")
+write.csv(VScohort.alltests, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_positive_tests.csv")
 
 VScohort.alltests <- VScohort.alltests %>% select(c(ID, resultdate)) %>% arrange(resultdate)
 
@@ -706,7 +706,7 @@ nIDs <- length(unique(together$ID))
 sample.sizes$more_than_3_weeks <- c(ntests, nIDs)
 
 #Save Dataset
-write.csv(together, "/home/amoor53/APSVE/cleandata/2021_age_5_11_weekly_testing_by_ID.csv")
+write.csv(together, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_weekly_testing_by_ID.csv")
 
 
 
@@ -744,7 +744,7 @@ reg.fit <-  glmer(formula = tested ~ vax_status + start_age + gender + race + di
                     data = VScohort.tested)
 summary(reg.fit)
 
-saveRDS(reg.fit, "/home/amoor53/APSVE/models/2021_age_5_11_predicted_propensity_scores_model.rds")
+saveRDS(reg.fit, "/home/amoor53/APSVE_cluster/models/2021_age_5_11_predicted_propensity_scores_model.rds")
 
 
 prediction_data <- VScohort.tested %>% select(vax_status, start_age, gender, race, dir_cert, prior_infections, schoolname, ID, week, num_prev_test, time_since_last, tests_in_28, tests_in_14, test_density, adj_test_density, no_history)
@@ -754,8 +754,8 @@ VScohort.tested$propensity <- propensities
 
 
 #Save Dataset
-write.csv(VScohort.tested, "/home/amoor53/APSVE/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
+write.csv(VScohort.tested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
 
-write.csv(sample.sizes, "/home/amoor53/APSVE/results/2021_age_5_11_dataset_workflow_sample_sizes.csv")
+write.csv(sample.sizes, "/home/amoor53/APSVE_cluster/results/2021_age_5_11_dataset_workflow_sample_sizes.csv")
 
 
