@@ -741,7 +741,8 @@ VScohort.IDs <- sort(unique(VScohort.tested$ID))
 #Logistic Regression Model (school and ID as random effect)
 reg.fit <-  glmer(formula = tested ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + no_history,
                     family = binomial,
-                    data = VScohort.tested)
+                    data = VScohort.tested,
+                    control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1000000)))
 summary(reg.fit)
 
 saveRDS(reg.fit, "/home/amoor53/APSVE_cluster/models/2021_age_5_11_predicted_propensity_scores_model.rds")

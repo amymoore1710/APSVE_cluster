@@ -5,8 +5,8 @@
 #SBATCH --time=06:00:00
 #SBATCH --partition=short-cpu
 #SBATCH --job-name=APSVE_dataset_workflow
-#SBATCH --error=job.%J.err
-#SBATCH --output=job.%J.out
+#SBATCH --error=/cluster_output/job.%J.err
+#SBATCH --output=j/cluster_output/ob.%J.out
 #SBATCH --mail-user=amoor53@emory.edu
 #SBATCH --mail-type=ALL
 
