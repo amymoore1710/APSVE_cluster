@@ -1,0 +1,540 @@
+       raw_data school_year_21_22 primary_enroll ages_5_11
+ntests  1299989                NA             NA        NA
+nIDs      28912                NA             NA        NA
+       school_sample_size_large gender no_transfers more_than_3_tests
+ntests                       NA     NA           NA                NA
+nIDs                         NA     NA           NA                NA
+       only_1_per_week more_than_3_weeks
+ntests              NA                NA
+nIDs                NA                NA
+[1] 640094
+[1] 25059
+[1] 25039
+[1] 25059
+[1] "There are 640094 tests with matching vaccine and demographic info"
+[1] "There are 638168 tests with matching vaccine and demographic info at primary enrolled schools"
+[1] "There are 24875 unique students reporting tests with matching vaccine and demographic info at primary enrolled schools"
+[1] "There are 483847 tests with matching vaccine and demographic info at primary enrolled schools between the ages of 5 and 11"
+[1] 483847
+[1] 16021
+
+     0      1 
+341435 142412 
+   
+         0      1
+  0 340157   1278
+  1 141942    470
+                    n tests n + tests n vaxed    % vaxed n + vaxed    % + vaxed
+ANCS Middle            2276         3    1421 0.62434095         1 0.0007037298
+Springdale            24333        73   14859 0.61065220        50 0.0033649640
+Long                   2014         9     154 0.07646475         1 0.0064935065
+Invictus               1478         2      62 0.04194858         0 0.0000000000
+King                   4611        12    1458 0.31620039         2 0.0013717421
+Sutton                 8523        45    3410 0.40009386        18 0.0052785924
+H Russell              2597         4     217 0.08355795         0 0.0000000000
+KIPP Vision             177         3      34 0.19209040         0 0.0000000000
+Young                  2271         6     327 0.14398943         0 0.0000000000
+Garden Hills          10811        41    2667 0.24669318        10 0.0037495313
+Morningside           14562        50    8858 0.60829556        32 0.0036125536
+Bunche                 2218         7     206 0.09287647         0 0.0000000000
+Sylvan                 1701         7     140 0.08230453         0 0.0000000000
+Kindezi                2348         8      93 0.03960818         0 0.0000000000
+KIPP Soul               145         0      14 0.09655172         0 0.0000000000
+Howard                 8247        24    5258 0.63756518        14 0.0026626094
+Hollis                 9303        24     801 0.08610126         3 0.0037453184
+CSK                     778         0     179 0.23007712         0 0.0000000000
+KIPP Woodson Park       420         8      43 0.10238095         0 0.0000000000
+Toomer                14274        52    4229 0.29627294        14 0.0033104753
+Kindezi O4W            3003        13     194 0.06460206         2 0.0103092784
+Hutchinson             7644        40     345 0.04513344         0 0.0000000000
+Dobbs                  4196         7     356 0.08484271         0 0.0000000000
+Smith                 16270        83    6365 0.39121082        37 0.0058130401
+Scott                  6542        29     344 0.05258331         0 0.0000000000
+Peyton Forest          5629        15     437 0.07763368         0 0.0000000000
+Benteen                5700        22    1447 0.25385965         1 0.0006910850
+Humphries              5934        31     287 0.04836535         1 0.0034843206
+Heritage               9752        38     745 0.07639459         2 0.0026845638
+Boyd                   3831        13     149 0.03889324         0 0.0000000000
+KIPP WAYS               280         1      32 0.11428571         0 0.0000000000
+KIPP STRIVE             278         2      53 0.19064748         0 0.0000000000
+Cascade                5715         9     388 0.06789151         0 0.0000000000
+Continental            7457        30     467 0.06262572         0 0.0000000000
+Wesley                 9220        40    3081 0.33416486        11 0.0035702694
+Tuskegee              10309        31     547 0.05306043         3 0.0054844607
+Centennial            13760        65    1941 0.14106105         3 0.0015455951
+Finch                  7219        30     656 0.09087131         1 0.0015243902
+BEST MS-HS              395         2      10 0.02531646         0 0.0000000000
+Jones                  8812        20     809 0.09180663         0 0.0000000000
+Drew Secondary           13         0       6 0.46153846         0 0.0000000000
+Harper-Archer ES       8549        22     685 0.08012633         0 0.0000000000
+Deerwood              12138        36    1662 0.13692536         6 0.0036101083
+Kimberly               9086        29     544 0.05987233         1 0.0018382353
+Hope-Hill              8166        41    1279 0.15662503        11 0.0086004691
+BAMO                   6902        13     451 0.06534338         0 0.0000000000
+FL Stanton             3423         6     362 0.10575519         0 0.0000000000
+Cleveland              7814        31     531 0.06795495         1 0.0018832392
+Bolton                13412        58    5994 0.44691321        25 0.0041708375
+Burgess               17452        72    8075 0.46269769        25 0.0030959752
+Hank Aaron                8         0       0 0.00000000         0          NaN
+Parkside              16520        53    7206 0.43619855        20 0.0027754649
+ANCS Elementary       12221        26    7884 0.64511906        15 0.0019025875
+E Rivers              14592        53    6686 0.45819627        28 0.0041878552
+KIPP Vision Primary     360         4      30 0.08333333         0 0.0000000000
+Beecher                7041        24    1712 0.24314728         3 0.0017523364
+Dunbar                 7403        21     330 0.04457652         1 0.0030303030
+Lin                   24684        94   17241 0.69846864        68 0.0039440868
+Fickett               10972        51    1093 0.09961721         5 0.0045745654
+Brandon               17922        61    9092 0.50730945        27 0.0029696436
+KIPP STRIVE Primary     702        12     111 0.15811966         2 0.0180180180
+Jackson Elementary     9630        55    5021 0.52139148        24 0.0047799243
+Miles                  9679        26     863 0.08916210         1 0.0011587486
+West Manor             6375        16     936 0.14682353         0 0.0000000000
+Usher-Collier          7168        17     499 0.06961496         0 0.0000000000
+Perkerson              4012        16     768 0.19142572         1 0.0013020833
+Gideons                1660         5      21 0.01265060         0 0.0000000000
+KIPP WAYS Primary       445         4      55 0.12359551         0 0.0000000000
+Slater                    5         1       4 0.80000000         0 0.0000000000
+KIPP Soul Primary       273         1      41 0.15018315         0 0.0000000000
+Classical                 2         1       0 0.00000000         0          NaN
+Toomer at WELA          185         0     147 0.79459459         0 0.0000000000
+                    n + unvaxed % + unvaxed
+ANCS Middle                   2 0.002339181
+Springdale                   23 0.002427697
+Long                          8 0.004301075
+Invictus                      2 0.001412429
+King                         10 0.003171583
+Sutton                       27 0.005280657
+H Russell                     4 0.001680672
+KIPP Vision                   3 0.020979021
+Young                         6 0.003086420
+Garden Hills                 31 0.003806483
+Morningside                  18 0.003155680
+Bunche                        7 0.003479125
+Sylvan                        7 0.004484305
+Kindezi                       8 0.003547672
+KIPP Soul                     0 0.000000000
+Howard                       10 0.003345601
+Hollis                       21 0.002470007
+CSK                           0 0.000000000
+KIPP Woodson Park             8 0.021220159
+Toomer                       38 0.003782977
+Kindezi O4W                  11 0.003915984
+Hutchinson                   40 0.005480203
+Dobbs                         7 0.001822917
+Smith                        46 0.004644119
+Scott                        29 0.004678929
+Peyton Forest                15 0.002889060
+Benteen                      21 0.004937691
+Humphries                    30 0.005312555
+Heritage                     36 0.003996891
+Boyd                         13 0.003530690
+KIPP WAYS                     1 0.004032258
+KIPP STRIVE                   2 0.008888889
+Cascade                       9 0.001689506
+Continental                  30 0.004291845
+Wesley                       29 0.004723896
+Tuskegee                     28 0.002868265
+Centennial                   62 0.005245791
+Finch                        29 0.004418711
+BEST MS-HS                    2 0.005194805
+Jones                        20 0.002499063
+Drew Secondary                0 0.000000000
+Harper-Archer ES             22 0.002797558
+Deerwood                     30 0.002863688
+Kimberly                     28 0.003277921
+Hope-Hill                    30 0.004356033
+BAMO                         13 0.002015191
+FL Stanton                    6 0.001960144
+Cleveland                    30 0.004119182
+Bolton                       33 0.004448638
+Burgess                      47 0.005012264
+Hank Aaron                    0 0.000000000
+Parkside                     33 0.003543053
+ANCS Elementary              11 0.002536315
+E Rivers                     25 0.003162155
+KIPP Vision Primary           4 0.012121212
+Beecher                      21 0.003940702
+Dunbar                       20 0.002827654
+Lin                          26 0.003493215
+Fickett                      46 0.004656342
+Brandon                      34 0.003850510
+KIPP STRIVE Primary          10 0.016920474
+Jackson Elementary           31 0.006725971
+Miles                        25 0.002835753
+West Manor                   16 0.002941717
+Usher-Collier                17 0.002549108
+Perkerson                    15 0.004623921
+Gideons                       5 0.003050641
+KIPP WAYS Primary             4 0.010256410
+Slater                        1 1.000000000
+KIPP Soul Primary             1 0.004310345
+Classical                     1 0.500000000
+Toomer at WELA                0 0.000000000
+[1] "There are 482711 tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11"
+[1] "There are 15917 unique students reporting tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among children between the ages of 5 and 11"
+                    n tests n + tests n vaxed    % vaxed n + vaxed    % + vaxed
+ANCS Middle            2276         3    1421 0.62434095         1 0.0007037298
+Springdale            24333        73   14859 0.61065220        50 0.0033649640
+Long                   2014         9     154 0.07646475         1 0.0064935065
+Invictus               1478         2      62 0.04194858         0 0.0000000000
+King                   4611        12    1458 0.31620039         2 0.0013717421
+Sutton                 8523        45    3410 0.40009386        18 0.0052785924
+H Russell              2597         4     217 0.08355795         0 0.0000000000
+KIPP Vision             177         3      34 0.19209040         0 0.0000000000
+Young                  2271         6     327 0.14398943         0 0.0000000000
+Garden Hills          10811        41    2667 0.24669318        10 0.0037495313
+Morningside           14562        50    8858 0.60829556        32 0.0036125536
+Bunche                 2218         7     206 0.09287647         0 0.0000000000
+Sylvan                 1701         7     140 0.08230453         0 0.0000000000
+Kindezi                2348         8      93 0.03960818         0 0.0000000000
+Howard                 8247        24    5258 0.63756518        14 0.0026626094
+Hollis                 9303        24     801 0.08610126         3 0.0037453184
+KIPP Woodson Park       420         8      43 0.10238095         0 0.0000000000
+Toomer                14274        52    4229 0.29627294        14 0.0033104753
+Kindezi O4W            3003        13     194 0.06460206         2 0.0103092784
+Hutchinson             7644        40     345 0.04513344         0 0.0000000000
+Dobbs                  4196         7     356 0.08484271         0 0.0000000000
+Smith                 16270        83    6365 0.39121082        37 0.0058130401
+Scott                  6542        29     344 0.05258331         0 0.0000000000
+Peyton Forest          5629        15     437 0.07763368         0 0.0000000000
+Benteen                5700        22    1447 0.25385965         1 0.0006910850
+Humphries              5934        31     287 0.04836535         1 0.0034843206
+Heritage               9752        38     745 0.07639459         2 0.0026845638
+Boyd                   3831        13     149 0.03889324         0 0.0000000000
+KIPP WAYS               280         1      32 0.11428571         0 0.0000000000
+KIPP STRIVE             278         2      53 0.19064748         0 0.0000000000
+Cascade                5715         9     388 0.06789151         0 0.0000000000
+Continental            7457        30     467 0.06262572         0 0.0000000000
+Wesley                 9220        40    3081 0.33416486        11 0.0035702694
+Tuskegee              10309        31     547 0.05306043         3 0.0054844607
+Centennial            13760        65    1941 0.14106105         3 0.0015455951
+Finch                  7219        30     656 0.09087131         1 0.0015243902
+BEST MS-HS              395         2      10 0.02531646         0 0.0000000000
+Jones                  8812        20     809 0.09180663         0 0.0000000000
+Harper-Archer ES       8549        22     685 0.08012633         0 0.0000000000
+Deerwood              12138        36    1662 0.13692536         6 0.0036101083
+Kimberly               9086        29     544 0.05987233         1 0.0018382353
+Hope-Hill              8166        41    1279 0.15662503        11 0.0086004691
+BAMO                   6902        13     451 0.06534338         0 0.0000000000
+FL Stanton             3423         6     362 0.10575519         0 0.0000000000
+Cleveland              7814        31     531 0.06795495         1 0.0018832392
+Bolton                13412        58    5994 0.44691321        25 0.0041708375
+Burgess               17452        72    8075 0.46269769        25 0.0030959752
+Parkside              16520        53    7206 0.43619855        20 0.0027754649
+ANCS Elementary       12221        26    7884 0.64511906        15 0.0019025875
+E Rivers              14592        53    6686 0.45819627        28 0.0041878552
+KIPP Vision Primary     360         4      30 0.08333333         0 0.0000000000
+Beecher                7041        24    1712 0.24314728         3 0.0017523364
+Dunbar                 7403        21     330 0.04457652         1 0.0030303030
+Lin                   24684        94   17241 0.69846864        68 0.0039440868
+Fickett               10972        51    1093 0.09961721         5 0.0045745654
+Brandon               17922        61    9092 0.50730945        27 0.0029696436
+KIPP STRIVE Primary     702        12     111 0.15811966         2 0.0180180180
+Jackson Elementary     9630        55    5021 0.52139148        24 0.0047799243
+Miles                  9679        26     863 0.08916210         1 0.0011587486
+West Manor             6375        16     936 0.14682353         0 0.0000000000
+Usher-Collier          7168        17     499 0.06961496         0 0.0000000000
+Perkerson              4012        16     768 0.19142572         1 0.0013020833
+Gideons                1660         5      21 0.01265060         0 0.0000000000
+KIPP WAYS Primary       445         4      55 0.12359551         0 0.0000000000
+KIPP Soul Primary       273         1      41 0.15018315         0 0.0000000000
+                    n + unvaxed % + unvaxed
+ANCS Middle                   2 0.002339181
+Springdale                   23 0.002427697
+Long                          8 0.004301075
+Invictus                      2 0.001412429
+King                         10 0.003171583
+Sutton                       27 0.005280657
+H Russell                     4 0.001680672
+KIPP Vision                   3 0.020979021
+Young                         6 0.003086420
+Garden Hills                 31 0.003806483
+Morningside                  18 0.003155680
+Bunche                        7 0.003479125
+Sylvan                        7 0.004484305
+Kindezi                       8 0.003547672
+Howard                       10 0.003345601
+Hollis                       21 0.002470007
+KIPP Woodson Park             8 0.021220159
+Toomer                       38 0.003782977
+Kindezi O4W                  11 0.003915984
+Hutchinson                   40 0.005480203
+Dobbs                         7 0.001822917
+Smith                        46 0.004644119
+Scott                        29 0.004678929
+Peyton Forest                15 0.002889060
+Benteen                      21 0.004937691
+Humphries                    30 0.005312555
+Heritage                     36 0.003996891
+Boyd                         13 0.003530690
+KIPP WAYS                     1 0.004032258
+KIPP STRIVE                   2 0.008888889
+Cascade                       9 0.001689506
+Continental                  30 0.004291845
+Wesley                       29 0.004723896
+Tuskegee                     28 0.002868265
+Centennial                   62 0.005245791
+Finch                        29 0.004418711
+BEST MS-HS                    2 0.005194805
+Jones                        20 0.002499063
+Harper-Archer ES             22 0.002797558
+Deerwood                     30 0.002863688
+Kimberly                     28 0.003277921
+Hope-Hill                    30 0.004356033
+BAMO                         13 0.002015191
+FL Stanton                    6 0.001960144
+Cleveland                    30 0.004119182
+Bolton                       33 0.004448638
+Burgess                      47 0.005012264
+Parkside                     33 0.003543053
+ANCS Elementary              11 0.002536315
+E Rivers                     25 0.003162155
+KIPP Vision Primary           4 0.012121212
+Beecher                      21 0.003940702
+Dunbar                       20 0.002827654
+Lin                          26 0.003493215
+Fickett                      46 0.004656342
+Brandon                      34 0.003850510
+KIPP STRIVE Primary          10 0.016920474
+Jackson Elementary           31 0.006725971
+Miles                        25 0.002835753
+West Manor                   16 0.002941717
+Usher-Collier                17 0.002549108
+Perkerson                    15 0.004623921
+Gideons                       5 0.003050641
+KIPP WAYS Primary             4 0.010256410
+KIPP Soul Primary             1 0.004310345
+   
+         0      1
+  F 242494    854
+  M 238313    892
+  N    158      0
+[1] "There are 482553 tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender"
+[1] "There are 15913 tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender"
+   
+         0      1
+  F 242494    854
+  M 238313    892
+                    num_students num_vaxed Perc_vaxed num_unvaxed
+ANCS Middle                   70        54 0.77142857          16
+Springdale                   654       448 0.68501529         206
+Long                          94         9 0.09574468          85
+Invictus                      74         3 0.04054054          71
+King                         160        51 0.31875000         109
+Sutton                       316       145 0.45886076         171
+H Russell                     92        10 0.10869565          82
+KIPP Vision                   53        11 0.20754717          42
+Young                         85        13 0.15294118          72
+Garden Hills                 303        94 0.31023102         209
+Morningside                  530       413 0.77924528         117
+Bunche                        99        12 0.12121212          87
+Sylvan                        75         8 0.10666667          67
+Kindezi                      225        35 0.15555556         190
+Howard                       233       170 0.72961373          63
+Hollis                       328        37 0.11280488         291
+KIPP Woodson Park            131        12 0.09160305         119
+Toomer                       377       128 0.33952255         249
+Kindezi O4W                  268        46 0.17164179         222
+Hutchinson                   246        14 0.05691057         232
+Dobbs                        174        21 0.12068966         153
+Smith                        488       231 0.47336066         257
+Scott                        210        13 0.06190476         197
+Peyton Forest                180        16 0.08888889         164
+Benteen                      169        48 0.28402367         121
+Humphries                    202        17 0.08415842         185
+Heritage                     298        31 0.10402685         267
+Boyd                         200        11 0.05500000         189
+KIPP WAYS                     80         9 0.11250000          71
+KIPP STRIVE                   86        17 0.19767442          69
+Cascade                      181        15 0.08287293         166
+Continental                  231        18 0.07792208         213
+Wesley                       368       157 0.42663043         211
+Tuskegee                     314        22 0.07006369         292
+Centennial                   403        80 0.19851117         323
+Finch                        234        25 0.10683761         209
+BEST MS-HS                    15         1 0.06666667          14
+Jones                        299        35 0.11705686         264
+Harper-Archer ES             293        29 0.09897611         264
+Deerwood                     352        60 0.17045455         292
+Kimberly                     297        26 0.08754209         271
+Hope-Hill                    253        38 0.15019763         215
+BAMO                         210        19 0.09047619         191
+FL Stanton                   126        13 0.10317460         113
+Cleveland                    228        21 0.09210526         207
+Bolton                       364       179 0.49175824         185
+Burgess                      472       260 0.55084746         212
+Parkside                     455       223 0.49010989         232
+ANCS Elementary              372       299 0.80376344          73
+E Rivers                     426       228 0.53521127         198
+KIPP Vision Primary           97        11 0.11340206          86
+Beecher                      192        55 0.28645833         137
+Dunbar                       230        13 0.05652174         217
+Lin                          601       504 0.83860233          97
+Fickett                      365        41 0.11232877         324
+Brandon                      499       324 0.64929860         175
+KIPP STRIVE Primary          185        34 0.18378378         151
+Jackson Elementary           308       176 0.57142857         132
+Miles                        363        34 0.09366391         329
+West Manor                   182        32 0.17582418         150
+Usher-Collier                247        22 0.08906883         225
+Perkerson                    127        29 0.22834646          98
+Gideons                      164         6 0.03658537         158
+KIPP WAYS Primary            125        14 0.11200000         111
+KIPP Soul Primary             75        11 0.14666667          64
+                           
+                                 0      1
+  Asian                       8389     33
+  Black or African American 290177   1030
+  Hispanic/Latino            41402    177
+  Other                      23149     78
+  White                     117690    428
+                           
+                                 0      1
+  Asian                       3461   4961
+  Black or African American 253386  37821
+  Hispanic/Latino            32276   9303
+  Other                      10988  12239
+  White                      40509  77609
+, ,  = 0
+
+                           
+                                 0      1
+  Asian                       3449   4940
+  Black or African American 252455  37722
+  Hispanic/Latino            32134   9268
+  Other                      10951  12198
+  White                      40355  77335
+
+, ,  = 1
+
+                           
+                                 0      1
+  Asian                         12     21
+  Black or African American    931     99
+  Hispanic/Latino              142     35
+  Other                         37     41
+  White                        154    274
+
+    
+         0     1
+  5  66257   246
+  6  72766   281
+  7  75847   286
+  8  74046   263
+  9  71899   266
+  10 72591   226
+  11 47401   178
+    
+         0     1
+  5  47260 19243
+  6  51443 21604
+  7  52728 23405
+  8  53329 20980
+  9  50719 21446
+  10 52794 20023
+  11 32347 15232
+
+    1     2     3 
+15676   234     3 
+[1] "There are 475999 tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school"
+[1] "There are 15676 students with tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school"
+
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+211 224 290 420 273 108  88 116 115 176 246 296 280 125 116 108 115 124 141 162 
+ 21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
+157 175 216 205 250 283 296 366 373 409 406 370 350 394 430 393 422 459 518 607 
+ 41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56 
+703 800 873 831 711 470 261  83  31  22  23  11  19   6  13   6 
+[1] "There are 475340 tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school and reported at least 3 tests"
+[1] "There are 15241 students with tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school and reported at least 3 tests"
+# A tibble: 35 × 2
+    week num_tests
+   <dbl>     <dbl>
+ 1     1      6758
+ 2     2      9113
+ 3     3      9385
+ 4     4      9313
+ 5     5      5179
+ 6     6      7856
+ 7     7     10180
+ 8     8     10218
+ 9     9      5970
+10    10     10378
+# ℹ 25 more rows
+# A tibble: 34 × 2
+    week num_tests
+   <dbl>     <dbl>
+ 1     1      6758
+ 2     2      9113
+ 3     3      9385
+ 4     4      9313
+ 5     5      5179
+ 6     6      7856
+ 7     7     10180
+ 8     8     10218
+ 9     9      5970
+10    10     10378
+# ℹ 24 more rows
+
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+   1   38  312  438  281  108   98  146  136  234  324  388  393  286  324  388 
+  17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32 
+ 452  516  453  234  209  259  340  399  528  640  681  903 1216 1693 1636  952 
+  33   34 
+ 203   32 
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: tested ~ vax_status + start_age + gender + race + dir_cert +  
+    prior_infections + (1 | schoolname) + (1 | ID) + ns(week,  
+    df = 5) + num_prev_test + time_since_last + tests_in_28 +  
+    tests_in_14 + test_density + adj_test_density + no_history
+   Data: VScohort.tested
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+ 392297.0  392564.7 -196124.5  392249.0    516844 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-12.931  -0.272   0.234   0.431  39.663 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ID         (Intercept) 0.2753   0.5247  
+ schoolname (Intercept) 0.5746   0.7580  
+Number of obs: 516868, groups:  ID, 15202; schoolname, 65
+
+Fixed effects:
+                                Estimate Std. Error  z value Pr(>|z|)    
+(Intercept)                    5.618e+00  2.476e-01   22.686  < 2e-16 ***
+vax_status                     6.177e-02  1.520e-02    4.064 4.82e-05 ***
+start_age                     -9.925e-03  3.579e-03   -2.773 0.005551 ** 
+genderM                       -4.487e-02  1.195e-02   -3.756 0.000173 ***
+raceBlack or African American -2.791e-01  5.180e-02   -5.387 7.16e-08 ***
+raceHispanic/Latino           -1.995e-01  5.413e-02   -3.685 0.000228 ***
+raceOther                     -5.666e-02  5.693e-02   -0.995 0.319663    
+raceWhite                     -8.458e-04  5.085e-02   -0.017 0.986729    
+dir_cert                      -7.632e-03  4.171e-03   -1.830 0.067273 .  
+prior_infections              -2.469e-01  1.510e-02  -16.351  < 2e-16 ***
+ns(week, df = 5)1             -8.539e-01  2.924e-02  -29.203  < 2e-16 ***
+ns(week, df = 5)2             -4.301e+00  4.132e-02 -104.086  < 2e-16 ***
+ns(week, df = 5)3             -8.339e-01  4.379e-02  -19.042  < 2e-16 ***
+ns(week, df = 5)4             -6.522e+00  6.581e-02  -99.095  < 2e-16 ***
+ns(week, df = 5)5             -2.758e+00  5.003e-02  -55.116  < 2e-16 ***
+num_prev_test                  8.228e-02  1.682e-03   48.905  < 2e-16 ***
+time_since_last               -3.475e-02  4.294e-04  -80.936  < 2e-16 ***
+tests_in_28                    3.148e-01  5.242e-03   60.050  < 2e-16 ***
+tests_in_14                    4.753e-01  7.616e-03   62.401  < 2e-16 ***
+test_density                  -2.555e+01  3.035e-01  -84.199  < 2e-16 ***
+adj_test_density              -8.306e+00  1.531e-01  -54.246  < 2e-16 ***
+no_history                    -5.255e+00  3.693e-02 -142.282  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 4 (failure to converge in 10000 evaluations)
+Model failed to converge with max|grad| = 25.5228 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+failure to converge in 10000 evaluations
+

@@ -1,0 +1,126 @@
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats 1.0.1     ✔ stringr 1.5.0
+✔ ggplot2 4.0.0     ✔ tibble  3.3.0
+✔ purrr   1.0.1     ✔ tidyr   1.3.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following objects are masked from ‘package:tidyr’:
+
+    expand, pack, unpack
+
+Rows: 1299989 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): schoolname, result
+dbl  (1): ID
+date (2): dob, resultdate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 74963 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl  (1): ID.x
+date (5): ADMIN_DATE_2_1, ADMIN_DATE_2_2, ADMIN_DATE_2_3, ADMIN_DATE_2_4, AD...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 75001 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (3): gender, fed_race_ethnicity_name, ethnicity_hispanic
+dbl  (7): race_american_indian_alaska_native, race_asian, race_black_african...
+date (1): birthdate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+Rows: 186145 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (3): school, servicetype, grade
+dbl  (3): endyear, schoolnumber, ID
+date (2): startdate, enddate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+Rows: 2308 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): SYSTEM_NAME, SCHOOL_NAME
+dbl (7): FISCAL_YEAR, sys_sch, SYSTEM_ID, SCHOOL_ID, direct_cert_perc, K12_P...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 92 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (5): School, #, School Name, Type, Cluster
+dbl (1): SY
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 13995 Columns: 37
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (20): LAB_NAME, LAB_DATE, LAB_TEST, RESULT, gender, fed_race_ethnicity_...
+dbl   (9): QARESPONSEID, INCIDENTID, ID, year, AGE, zip_most_recent, vsenrol...
+lgl   (2): PE_REINFECTION_DATE3, PE_REINFECTION_DATE4
+date  (6): result_date, DOB, HOSPITALIZATION_DATE, DISCHARGE_DATE, PE_REINFE...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat <- vroom(...)
+  problems(dat) 
+Warning messages:
+1: In (function (fn, par, lower = rep.int(-Inf, n), upper = rep.int(Inf,  :
+  failure to converge in 10000 evaluations
+2: In optwrap(optimizer, devfun, start, rho$lower, control = control,  :
+  convergence code 4 from Nelder_Mead: failure to converge in 10000 evaluations
+3: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge with max|grad| = 25.5228 (tol = 0.002, component 1)
+4: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?;Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+
+Correlation matrix not shown by default, as p = 22 > 12.
+Use print(x, correlation=TRUE)  or
+    vcov(x)        if you need it
+
