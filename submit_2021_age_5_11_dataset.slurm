@@ -2,8 +2,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
 #SBATCH --mem-per-cpu=1G
-#SBATCH --time=06:00:00
-#SBATCH --partition=short-cpu
+#SBATCH --time=20:00:00
+#SBATCH --partition=day-long-cpu
 #SBATCH --job-name=APSVE_dataset_workflow
 #SBATCH --error=job.%J.err
 #SBATCH --output=job.%J.out
