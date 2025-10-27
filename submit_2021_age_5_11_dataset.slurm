@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
-#SBATCH --mem-per-cpu=1G
+#SBATCH --mem-per-cpu=5G
 #SBATCH --time=20:00:00
 #SBATCH --partition=day-long-cpu
 #SBATCH --job-name=APSVE_dataset_workflow
