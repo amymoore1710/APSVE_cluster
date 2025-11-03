@@ -730,8 +730,12 @@ weeks <- sort(unique(VScohort.tested$week))
 
 #Creating Interaction terms implicitly
 
+# VScohort.tested <- read_csv(here("cleandata", "2021_age_5_11_weekly_testing_by_ID.csv"))
+
+
 #If there is no testing history, set all testing behavior covariates to 0
 VScohort.tested[which(VScohort.tested$no_history == 1), c("num_prev_test", "time_since_last", "tests_in_28", "tests_in_14", "test_density", "adj_test_density")] <- 0
+
 
 
 # Full Sample Fit --> Random effect for ID
