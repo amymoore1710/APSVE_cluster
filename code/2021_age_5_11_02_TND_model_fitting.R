@@ -55,6 +55,10 @@ results_table <- data.frame(method = c("No Adjustment", "Demographic Covariates"
 
   ### Model #1 - Simple Regression no covariates 
 
+print("Fitting Model 1")
+print(" ")
+print(" ")
+
 model1 <- glm(formula = result ~ vax_status,
                 family = binomial,
                 data = VScohort.alltested)
@@ -82,6 +86,10 @@ results_table[1,] <- results_model1
 
 
   ### Model #2 - Regression Adjusting for Demographic Covariates
+
+print("Fitting Model 2")
+print(" ")
+print(" ")
 
 model2 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5),
                 family = binomial,
@@ -111,6 +119,10 @@ results_table[2,] <- results_model2
 
   ### Model #3 - Regression Adjusting for Demographic Covariates on Super tester Subset
 
+print("Defining Super Tester Cohort")
+print(" ")
+print(" ")
+
   #Defining the Super Tester Cohort
 VScohort.byID <- VScohort.tested %>% group_by(ID) %>% summarize(num_tests = sum(tested))
 max_tests <- max(VScohort.byID$num_tests)
@@ -132,6 +144,10 @@ Supertester.IDs <- VScohort.subset.byID$ID
 
 STcohort.alltested <- VScohort.alltested %>% filter(ID %in% Supertester.IDs)
 
+
+print("Fitting Model 3")
+print(" ")
+print(" ")
 
 model3 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5),
                 family = binomial,
@@ -174,6 +190,11 @@ VScohort.alltested <- merge(x = VScohort.alltested,
                all.x = TRUE)
 
 #Fit the model
+
+print("Fitting Model 4")
+print(" ")
+print(" ")
+
 model4 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + total_tests + avg_time_since_last + avg_tests_in_28 + avg_tests_in_14 + avg_test_density + avg_adj_test_density,
                 family = binomial,
                 data = VScohort.alltested,
@@ -202,6 +223,11 @@ results_table[4,] <- results_model4
 
 
   ### Model #5 - Regression Adjusting for Demographic Covariates and Time-varying Testing Behavior
+
+print("Fitting Model 5")
+print(" ")
+print(" ")
+
 model5 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + no_history,
                 family = binomial,
                 data = VScohort.alltested,
@@ -230,6 +256,10 @@ results_table[5,] <- results_model5
 
 
   ### Model #6 - Regression Adjusting for Demographic Covariates and Time-varying Testing Behavior with Propensity Weights
+
+print("Fitting Model 6")
+print(" ")
+print(" ")
 
 # Create Inverse Propensity Weights
 IPS_weights <- round(1 / VScohort.alltested$propensity, digits = 0)
