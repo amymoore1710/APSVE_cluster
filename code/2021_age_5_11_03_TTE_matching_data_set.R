@@ -5,6 +5,9 @@
 # Modified to run on the cluster
 # Amy Moore
 
+#Package Library Location
+.libPaths("~/Rlibs")
+
   #Load Packages
 library(readr) #Read in Files
 # library(here) # File Locations
