@@ -5,6 +5,9 @@
 # Modified to run on the cluster
 # Amy Moore
 
+#Package Library Location
+.libPaths("~/Rlibs")
+
 library(readr) #Read in Files
 # library(here) # File Locations
 library(lubridate) #Date Objects
