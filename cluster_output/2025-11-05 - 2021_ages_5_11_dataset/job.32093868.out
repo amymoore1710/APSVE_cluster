@@ -1,0 +1,149 @@
+
+   5    6    7    8    9   10   11 
+2006 2281 2328 2294 2267 2298 1728 
+
+    0     1 
+10022  5180 
+   
+       5    6    7    8    9   10   11
+  0 1341 1483 1512 1541 1483 1533 1129
+  1  665  798  816  753  784  765  599
+
+    ANCS Elementary         ANCS Middle                BAMO             Beecher 
+                364                  70                 192                 185 
+            Benteen          BEST MS-HS              Bolton                Boyd 
+                162                  14                 356                 175 
+            Brandon              Bunche             Burgess             Cascade 
+                479                  90                 463                 166 
+         Centennial           Cleveland         Continental            Deerwood 
+                377                 214                 217                 335 
+              Dobbs              Dunbar            E Rivers             Fickett 
+                157                 211                 417                 343 
+              Finch          FL Stanton        Garden Hills             Gideons 
+                212                 116                 297                 156 
+          H Russell    Harper-Archer ES            Heritage              Hollis 
+                 84                 284                 290                 302 
+          Hope-Hill              Howard           Humphries          Hutchinson 
+                235                 221                 189                 228 
+           Invictus  Jackson Elementary               Jones            Kimberly 
+                 67                 286                 287                 272 
+            Kindezi         Kindezi O4W                King   KIPP Soul Primary 
+                218                 253                 155                  58 
+        KIPP STRIVE KIPP STRIVE Primary         KIPP Vision KIPP Vision Primary 
+                 62                 165                  40                  81 
+          KIPP WAYS   KIPP WAYS Primary   KIPP Woodson Park                 Lin 
+                 63                  94                  89                 595 
+               Long               Miles         Morningside            Parkside 
+                 86                 346                 514                 429 
+          Perkerson       Peyton Forest               Scott               Smith 
+                111                 169                 197                 477 
+         Springdale              Sutton              Sylvan              Toomer 
+                626                 291                  71                 366 
+           Tuskegee       Usher-Collier              Wesley          West Manor 
+                300                 223                 359                 175 
+              Young 
+                 76 
+[1] 15202
+[1] 11690
+[1] 7024
+[1] 165318
+[1] 200
+
+   0    1 
+6485  539 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00    7.00   12.00   13.68   22.00   33.00 
+
+   0    1 
+6470  554 
+
+   0    2 
+6730  294 
+[1] 6596
+[1] 109392
+[1] 109392
+[1] 109392
+[1] 6596
+[1] 6596
+        ID prior_infections first_week   vax_date vax_week start_age gender
+1 90000007                0          1       <NA>       NA        11      F
+2 90004540                1          1 2021-11-15       12         5      M
+3 90013608                0          1       <NA>       NA        11      F
+4 90013609                0         22       <NA>       NA        11      F
+5 90013699                0          3 2021-10-23        8        11      M
+6 90013731                0          1 2021-11-16       12        11      M
+                       race  schoolname dir_cert vax_status n_positive
+1 Black or African American ANCS Middle      6.5          0          0
+2                     White  Springdale      6.5          1          1
+3 Black or African American        Long     66.6          0          1
+4 Black or African American    Invictus     68.8          0          0
+5                     White        King     56.5          1          0
+6 Black or African American      Sutton     17.2          1          0
+  positive_week result n_tests start_week
+1            NA      0      25          1
+2            11      1      12         12
+3            19      1      24          1
+4            NA      0      11         22
+5            NA      0      23          8
+6            NA      0      16         12
+[1] 31
+
+  5   6   7   8   9  10  11 
+424 462 509 459 422 417 130 
+
+   0    1 
+1309 1514 
+   
+      5   6   7   8   9  10  11
+  0 188 217 220 220 201 215  48
+  1 236 245 289 239 221 202  82
+
+              BAMO            Beecher            Benteen             Bolton 
+                29                 54                 31                104 
+           Brandon             Bunche            Burgess            Cascade 
+               219                  4                142                 32 
+        Centennial          Cleveland        Continental           Deerwood 
+                46                 51                 47                 88 
+             Dobbs             Dunbar           E Rivers            Fickett 
+                 1                 17                146                 52 
+             Finch         FL Stanton       Garden Hills   Harper-Archer ES 
+                13                  8                 95                 14 
+          Heritage             Hollis          Hope-Hill             Howard 
+                58                 13                 24                 36 
+         Humphries         Hutchinson Jackson Elementary              Jones 
+                43                 60                 80                 11 
+          Kimberly               King                Lin              Miles 
+                51                  6                205                 42 
+       Morningside           Parkside          Perkerson      Peyton Forest 
+                24                247                 14                 28 
+             Scott              Smith         Springdale             Sutton 
+                12                124                196                 46 
+            Toomer           Tuskegee      Usher-Collier         West Manor 
+               185                 20                 33                 63 
+             Young 
+                 9 
+[1] 2823
+[1] 2077
+
+   0    1 
+1309 1514 
+   
+       0    1
+  0 1170  139
+  1 1334  180
+[1] 1492
+[1] 47080
+[1] 45
+
+   0    1 
+1369  123 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00    8.00   15.00   14.92   24.00   33.00 
+
+   0    1 
+1361  131 
+
+   0 
+1492 
+[1] 1492
+[1] 30087
