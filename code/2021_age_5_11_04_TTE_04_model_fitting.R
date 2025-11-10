@@ -42,7 +42,13 @@ if (cluster) {
 ### Model #1 - Simple Regression no covariates
 
 ### Model #4 - Regression Adjusting for Demographic Covariates and Average Testing Behavior
-data <- read_csv(here("cleandata", "2021_age_5_11_matched_data_set.csv"))
+
+if (cluster) {
+  data <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
+} else {
+  data <- read_csv(here("cleandata", "2021_age_5_11_matched_data_set.csv"))
+}
+
 formula <- Surv(time = time_to_event, event = event_occured) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + n_tests + avg_tests_in_28 + avg_tests_in_14 + avg_test_density + avg_adj_test_density + (1 | schoolname)
 method = "TTE_04"
 

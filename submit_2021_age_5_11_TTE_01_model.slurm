@@ -4,7 +4,7 @@
 #SBATCH --mem-per-cpu=1G
 #SBATCH --time=20:00:00
 #SBATCH --partition=day-long-cpu
-#SBATCH --job-name=APSVE_TND_models
+#SBATCH --job-name=APSVE_TTE_01_model
 #SBATCH --error=job.%J.err
 #SBATCH --output=job.%J.out
 #SBATCH --mail-user=amoor53@emory.edu

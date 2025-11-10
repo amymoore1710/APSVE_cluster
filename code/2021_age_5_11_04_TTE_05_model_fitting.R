@@ -42,7 +42,12 @@ if (cluster) {
 
 ### Model #5 - Regression Adjusting for Demographic Covariates and Time-varying Testing Behavior
 
-data <- read_csv(here("cleandata", "2021_age_5_11_matched_TVC.csv"))
+if (cluster) {
+  data <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_TVC.csv")
+} else {
+  data <- read_csv(here("cleandata", "2021_age_5_11_matched_TVC.csv"))
+}
+
 formula <- Surv(time = previous_week, time2 = week, event = result) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname)
 method <- "TTE_05"
 

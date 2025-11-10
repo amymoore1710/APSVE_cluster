@@ -42,7 +42,12 @@ if (cluster) {
 
 ### Model #1 - Simple Regression no covariates
 
-data <- read_csv(here("cleandata", "2021_age_5_11_matched_data_set.csv"))
+if (cluster) {
+  data <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
+} else {
+  data <- read_csv(here("cleandata", "2021_age_5_11_matched_data_set.csv"))
+}
+
 formula <- Surv(time = time_to_event, event = event_occured) ~ vax_status
 method <- "TTE_01"
 
