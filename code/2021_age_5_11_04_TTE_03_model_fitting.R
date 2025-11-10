@@ -47,7 +47,6 @@ if (cluster) {
   data <- read_csv(here("cleandata", "2021_age_5_11_ST_matched_data_set.csv"))
 }
 
-data <- read_csv(here("cleandata", "2021_age_5_11_ST_matched_data_set.csv"))
 formula <- Surv(time = time_to_event, event = event_occured) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname)
 method <- "TTE03"
 
