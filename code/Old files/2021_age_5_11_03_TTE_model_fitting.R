@@ -6,22 +6,34 @@
 # Modified to run on the cluster
 # Amy Moore
 
+#Run Locally?
+# cluster = TRUE
+cluster = FALSE
+
 #Package Library Location
-.libPaths("~/Rlibs")
+if (cluster) {
+  .libPaths("~/Rlibs")
+} else {
+  library(here) # File Locations
+}
+
 
 library(readr) #Read in Files
-# library(here) # File Locations
 library(tidyverse) # Data Manipulation
 library(lubridate) #Dates
-
 # library(ggplot2)
 library(survival) #Cox Model
 library(coxme) #Cox Model w/ RE
 
 
 # Read in Long Form with Missing Data lines Data set
-VScohort.matched <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
-STcohort.matched <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_matched_data_set.csv")
+if (cluster) {
+  VScohort.matched <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
+  STcohort.matched <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_matched_data_set.csv")
+} else {
+  VScohort.matched <- read_csv(here("cleandata", "2021_age_5_11_matched_data_set.csv"))
+  STcohort.matched <- read_csv(here("cleandata", "2021_age_5_11_ST_matched_data_set.csv"))
+}
 
 start_date <- ymd("2021-09-07") #First day of VS testing
 end_date <- ymd("2022-05-26") #Last day of School
@@ -189,10 +201,10 @@ saveRDS(model5, file = "/home/amoor53/APSVE_cluster/models/2021_age_5_11_TTE_05_
 
 nstudents <- length(unique(VScohort.matched.TVC$ID))
 ntests <- nrow(VScohort.matched.TVC)
-log_OR <- summary(model5)$coefficients[1,1]
-VE_est <- 100 * (1 - exp(log_OR))
-log_OR_CI <- log_OR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model5)$coefficients[1,3]
-VE_CI <- 100 * (1 - exp(log_OR_CI))
+log_HR <- summary(model5)$coefficients[1,1]
+VE_est <- 100 * (1 - exp(log_HR))
+log_HR_CI <- log_HR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model5)$coefficients[1,3]
+VE_CI <- 100 * (1 - exp(log_HR_CI))
 pval <- summary(model5)$coefficients[1,5]
 
 
@@ -221,9 +233,9 @@ saveRDS(model6A, file = "/home/amoor53/APSVE_cluster/models/2021_age_5_11_TTE_06
 
 nstudents <- length(unique(VScohort.matched.TVC$ID))
 ntests <- nrow(VScohort.matched.TVC)
-log_OR <- summary(model6A)$coefficients[1,1]
-VE_est <- 100 * (1 - exp(log_OR))
-log_OR_CI <- log_OR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model6A)$coefficients[1,3]
+log_HR <- summary(model6A)$coefficients[1,1]
+VE_est <- 100 * (1 - exp(log_HR))
+log_HR_CI <- log_HR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model6A)$coefficients[1,3]
 VE_CI <- 100 * (1 - exp(log_OR_CI))
 pval <- summary(model6A)$coefficients[1,5]
 
@@ -258,10 +270,10 @@ saveRDS(model6B, file = "/home/amoor53/APSVE_cluster/models/2021_age_5_11_TTE_06
 
 nstudents <- length(unique(VScohort.matched.TVC$ID))
 ntests <- nrow(VScohort.matched.TVC)
-log_OR <- summary(model6B)$coefficients[1,1]
-VE_est <- 100 * (1 - exp(log_OR))
-log_OR_CI <- log_OR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model6B)$coefficients[1,3]
-VE_CI <- 100 * (1 - exp(log_OR_CI))
+log_HR <- summary(model6B)$coefficients[1,1]
+VE_est <- 100 * (1 - exp(log_HR))
+log_HR_CI <- log_HR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model6B)$coefficients[1,3]
+VE_CI <- 100 * (1 - exp(log_HR_CI))
 pval <- summary(model6B)$coefficients[1,5]
 
 

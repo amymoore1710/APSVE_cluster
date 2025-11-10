@@ -1,22 +1,33 @@
 
 # APS VE TTE Matching Data Set
 # 2021-22 Ages 5-11 
-# 2025-11-05
+# 2025-11-10
 # Modified to run on the cluster
 # Amy Moore
 
+#Run Locally?
+# cluster = TRUE
+cluster = FALSE
+
 #Package Library Location
+if (cluster) {
 .libPaths("~/Rlibs")
+} else {
+  library(here) # File Locations
+}
 
   #Load Packages
 library(readr) #Read in Files
-# library(here) # File Locations
 library(lubridate) #Dates
 library(MatchIt) #Matching Pairs
 library(tidyverse)
 
 # Read in Long Form with Missing Data lines Data set
-VScohort.tested <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
+if (cluster) {
+  VScohort.tested <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
+} else {
+  VScohort.tested <- read_csv(here("cleandata", "2021_age_5_11_predicted_propensity_scores.csv"))
+}
 
 start_date <- ymd("2021-09-07") #First day of VS testing
 end_date <- ymd("2022-05-26") #Last day of School
@@ -263,12 +274,13 @@ sum(VScohort.matched$n_tests)
 VScohort.matched$time_to_event <- ifelse(is.na(VScohort.matched$positive_week), VScohort.matched$last_test - VScohort.matched$enrollment_week, VScohort.matched$positive_week - VScohort.matched$enrollment_week)
 VScohort.matched$event_occured <- ifelse(is.na(VScohort.matched$positive_week), 0, 1)
 
-VScohort.simplified <- VScohort.matched %>% select("ID", "start_age", "n_tests", "vax_week", "first_week", "start_week", "enrollment_week", "positive_week", "last_test", "time_to_event", "event_occured")
+# VScohort.simplified <- VScohort.matched %>% select("ID", "start_age", "n_tests", "vax_week", "first_week", "start_week", "enrollment_week", "positive_week", "last_test", "time_to_event", "event_occured")
 
-
-# write.csv(VScohort.matched, here("data", "2021-22 Ages 5-11 Matched Data Set.csv"))
-write.csv(VScohort.tested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
-
+if (cluster) {
+  write.csv(VScohort.matched, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
+} else {
+  write.csv(VScohort.matched, here("cleandata", "2021_age_5_11_matched_data_set.csv"))
+}
 
 
 
@@ -304,44 +316,45 @@ length(unique(VScohort.matched.bytest$ID))
 
 
 
-  #Adding time windows to each test
-VScohort.matched.bytest$previous_week <- NA
+  #Adding time windows to each test for the previous week
+VScohort.matched.bytest$previous_week <- VScohort.matched.bytest$week - 1
 
-for (i in 1:length(VScohort.IDs)) {
-  ID.i <- VScohort.IDs[i]
-  
-  tests <- VScohort.matched.bytest %>% filter(ID == ID.i)
-  
-  enrollment_week <- tests[1,]$enrollment_week
-  
-  for (j in 1:nrow(tests)) {
-    
-    current_week <- tests[j,]$week
-    
-    if (j == 1) {
-        #For first test, interval starts at enrollment
-      VScohort.matched.bytest[which(VScohort.matched.bytest$ID == ID.i & VScohort.matched.bytest$week == current_week),]$previous_week <- enrollment_week
-      
-    } else {
-        #For not first test, interval starts at previous test
-      previous_week <- tests[(j-1),]$week
-      # print(tests[(j-1),]$week)
-      
-      VScohort.matched.bytest[which(VScohort.matched.bytest$ID == ID.i & VScohort.matched.bytest$week == current_week),]$previous_week <- previous_week
-      
-    }
-    
-    
-  }
-  
+
+# for (i in 1:length(VScohort.IDs)) {
+#   ID.i <- VScohort.IDs[i]
+#   
+#   tests <- VScohort.matched.bytest %>% filter(ID == ID.i)
+#   
+#   enrollment_week <- tests[1,]$enrollment_week
+#   
+#   for (j in 1:nrow(tests)) {
+#     
+#     current_week <- tests[j,]$week
+#     
+#     if (j == 1) {
+#         #For first test, interval starts at enrollment
+#       VScohort.matched.bytest[which(VScohort.matched.bytest$ID == ID.i & VScohort.matched.bytest$week == current_week),]$previous_week <- enrollment_week
+#       
+#     } else {
+#         #For not first test, interval starts at previous test
+#       previous_week <- tests[(j-1),]$week
+#       # print(tests[(j-1),]$week)
+#       
+#       VScohort.matched.bytest[which(VScohort.matched.bytest$ID == ID.i & VScohort.matched.bytest$week == current_week),]$previous_week <- previous_week
+#       
+#     }
+#     
+#     
+#   }
+#   
+# }
+
+
+if (cluster) {
+  write.csv(VScohort.matched.bytest, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_TVC.csv")
+} else {
+  write.csv(VScohort.matched.bytest, here("cleandata", "2021_age_5_11_matched_TVC.csv"))
 }
-
-
-
-# write.csv(VScohort.matched.bytest, here("data", "2021-22 Ages 5-11 Matched Data Set TVC.csv"))
-write.csv(VScohort.tested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_TVC.csv")
-
-
 
 
 
@@ -571,12 +584,13 @@ sum(STcohort.matched$n_tests)
 STcohort.matched$time_to_event <- ifelse(is.na(STcohort.matched$positive_week), STcohort.matched$last_test - STcohort.matched$enrollment_week, STcohort.matched$positive_week - STcohort.matched$enrollment_week)
 STcohort.matched$event_occured <- ifelse(is.na(STcohort.matched$positive_week), 0, 1)
 
-STcohort.simplified <- STcohort.matched %>% select("ID", "start_age", "n_tests", "vax_week", "first_week", "start_week", "enrollment_week", "positive_week", "last_test", "time_to_event", "event_occured")
+# STcohort.simplified <- STcohort.matched %>% select("ID", "start_age", "n_tests", "vax_week", "first_week", "start_week", "enrollment_week", "positive_week", "last_test", "time_to_event", "event_occured")
 
-
-# write.csv(STcohort.matched, here("data", "2021-22 Ages 5-11 Super Tester Matched Data Set.csv"))
-write.csv(VScohort.tested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_matched_data_set.csv")
-
+if (cluster) {
+  write.csv(STcohort.matched, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_matched_data_set.csv")
+} else {
+  write.csv(STcohort.matched, here("cleandata", "2021_age_5_11_ST_matched_data_set.csv"))
+}
 
 
 

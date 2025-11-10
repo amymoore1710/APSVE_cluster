@@ -1,0 +1,95 @@
+
+# APS VE TND Model Fitting #4
+# 2021-22 Ages 5-11 
+# 2025-11-10
+# Modified to run on the cluster
+# Amy Moore
+
+#Package Library Location
+.libPaths("~/Rlibs")
+
+library(readr) #Read in Files
+# library(here) # File Locations
+library(lubridate) #Date Objects
+library(tidyverse) # Data Manipulation
+library(lme4) #Fitting GLMMs (for adding random effects)
+library(splines) #Adding Splines to GLMMs
+
+
+# Read in Long Form with Missing Data lines Data set
+VScohort.tested <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
+# VScohort.tested <- read_csv(here("cleandata", "2021_age_5_11_predicted_propensity_scores.csv"))
+
+
+start_date <- ymd("2021-09-07") #First day of VS testing
+end_date <- ymd("2022-05-26") #Last day of School
+first_sunday <- as.numeric(ymd("2021-09-05")) - 7
+
+alpha <- 0.05
+
+VScohort.IDs <- sort(unique(VScohort.tested$ID))
+
+weeks <- sort(unique(VScohort.tested$week))
+
+
+#Select only the weeks/IDs where testing actually occurred
+VScohort.alltested <- VScohort.tested[which(VScohort.tested$tested == 1),]
+
+hist(VScohort.tested$propensity)
+summary(VScohort.tested$propensity)
+
+hist(VScohort.alltested$propensity)
+summary(VScohort.alltested$propensity)
+
+
+results_table <- data.frame(method = c("No Adjustment"), 
+                            nstudents = NA, ntests = NA, VE = NA, pval = NA)
+
+
+##########################
+##### Fitting Models #####
+##########################
+
+
+#Compute Average Testing Behavior
+average_testing_behavior_byID <- VScohort.alltested %>% group_by(ID) %>% 
+  summarize(total_tests = sum(tested), avg_time_since_last = mean(time_since_last), 
+            avg_tests_in_28 = mean(tests_in_28), avg_tests_in_14 = mean(tests_in_14), 
+            avg_test_density = mean(test_density), avg_adj_test_density = mean(adj_test_density))
+
+VScohort.alltested <- merge(x = VScohort.alltested, 
+                            y = average_testing_behavior_byID,
+                            by = "ID",
+                            all.x = TRUE)
+
+#Fit the model
+
+print("Fitting Model 4")
+print(" ")
+print(" ")
+
+model4 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + total_tests + avg_time_since_last + avg_tests_in_28 + avg_tests_in_14 + avg_test_density + avg_adj_test_density,
+                family = binomial,
+                data = VScohort.alltested,
+                control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=10000000)))
+summary(model4)
+
+saveRDS(model4, file = "/home/amoor53/APSVE_cluster/models/2021_age_5_11_TND_04_model.rds")
+
+nstudents <- length(unique(VScohort.alltested$ID))
+ntests <- nrow(VScohort.alltested)
+log_OR <- summary(model4)$coefficients[2,1]
+VE_est <- 100 * (1 - exp(log_OR))
+log_OR_CI <- log_OR + c(-1, 1) * qnorm(1 - alpha/2) * summary(model4)$coefficients[2,2]
+VE_CI <- 100 * (1 - exp(log_OR_CI))
+pval <- summary(model4)$coefficients[2,4]
+
+results_model4 <- data.frame(method = "Average Testing Behavior", 
+                             nstudents = nstudents, 
+                             ntests = ntests, 
+                             VE = paste0(round(VE_est, digits = 2), "% (", 
+                                         round(min(VE_CI), digits = 2), "% to ", 
+                                         round(max(VE_CI), digits = 2), "%)"), 
+                             pval = round(pval, digits = 4))
+
+write.csv(results_model4, "/home/amoor53/APSVE_cluster/results/2021_age_5_11_TND_04_model_fit.csv")
