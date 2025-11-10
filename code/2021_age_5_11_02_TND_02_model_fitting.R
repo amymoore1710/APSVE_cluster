@@ -5,11 +5,19 @@
 # Modified to run on the cluster
 # Amy Moore
 
+#Run Locally?
+cluster = TRUE
+# cluster = FALSE
+
 #Package Library Location
-.libPaths("~/Rlibs")
+if (cluster) {
+  .libPaths("~/Rlibs")
+} else {
+  library(here) # File Locations
+}
+
 
 library(readr) #Read in Files
-# library(here) # File Locations
 library(lubridate) #Date Objects
 library(tidyverse) # Data Manipulation
 library(lme4) #Fitting GLMMs (for adding random effects)
@@ -17,8 +25,11 @@ library(splines) #Adding Splines to GLMMs
 
 
 # Read in Long Form with Missing Data lines Data set
-VScohort.tested <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
-# VScohort.tested <- read_csv(here("cleandata", "2021_age_5_11_predicted_propensity_scores.csv"))
+if (cluster) {
+  VScohort.tested <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
+} else {
+  VScohort.tested <- read_csv(here("cleandata", "2021_age_5_11_predicted_propensity_scores.csv"))
+}
 
 
 start_date <- ymd("2021-09-07") #First day of VS testing
@@ -56,6 +67,7 @@ results_table <- data.frame(method = c("No Adjustment"),
 print("Fitting Model 2")
 print(" ")
 print(" ")
+method <- "TND_02"
 
 model2 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5),
                 family = binomial,
@@ -63,7 +75,12 @@ model2 <- glmer(formula = result ~ vax_status + start_age + gender + race + dir_
                 control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1000000)))
 summary(model2)
 
-saveRDS(model2, file = "/home/amoor53/APSVE_cluster/models/2021_age_5_11_TND_02_model.rds")
+if (cluster) {
+  saveRDS(model1, file = paste0("/home/amoor53/APSVE_cluster/models/2021_age_5_11_", method, "_model.rds"))
+} else {
+  saveRDS(model1, file = here("models", paste0("2021_age_5_11_", method, "_model.rds")))
+}
+
 
 nstudents <- length(unique(VScohort.alltested$ID))
 ntests <- nrow(VScohort.alltested)
@@ -82,4 +99,8 @@ results_model2 <- data.frame(method = "Demographic Covariates",
                                          round(max(VE_CI), digits = 2), "%)"), 
                              pval = round(pval, digits = 4))
 
-write.csv(results_model2, "/home/amoor53/APSVE_cluster/results/2021_age_5_11_TND_02_model_fit.csv")
+if (cluster) {
+  write.csv(results_model1, paste0("/home/amoor53/APSVE_cluster/results/2021_age_5_11_", method, "_model_fit.csv"))
+} else {
+  write.csv(results_model1, here("results", paste0("2021_age_5_11_", method, "_model_fit.csv")))
+}
