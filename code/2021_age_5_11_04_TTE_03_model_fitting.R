@@ -48,7 +48,7 @@ if (cluster) {
 }
 
 formula <- Surv(time = time_to_event, event = event_occured) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname)
-method <- "TTE03"
+method <- "TTE_03"
 
 results <- fit_TTE_model(data = data, 
                          model_formula = formula, 
