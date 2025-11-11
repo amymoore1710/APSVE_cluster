@@ -1,8 +1,6 @@
 
 fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
   
-  # print(length(unique(data$ID)))
-  
     #Standard Cox Model (No random effects)
   if (method == "TTE_01") {
     model <- coxph(formula = model_formula,
@@ -12,7 +10,7 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
 
   }
   
-    #Mixed Effect Cox Model
+    #Mixed Effect Cox Model (Methods 2-5 only vary by dataset and model formula)
   if (method %in% c("TTE_02", "TTE_03", "TTE_04", "TTE_05")) {
     model <- coxme(formula = model_formula,
                    data = data
@@ -21,7 +19,7 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
     
   }
   
-    #Weighted Cox Model
+    #Weighted Cox Model (Method 6)
   if (method == "TTE_06") {
     
     print(method)
@@ -37,12 +35,8 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
     
   }
     
-    if (method %in% c("TTE_01", "TTE_02", "TTE_03", "TTE_04")) {
-      ntests <- sum(data$n_tests)
-    } else { # "TTE_05" & "TTE_06"
-      ntests <- nrow(data)
-    }
-    
+
+      #Summarize the model output
     nstudents <- length(unique(data$ID))
     log_HR <- summary(model)$coefficients[1,1]
     VE_est <- 100 * (1 - exp(log_HR))
@@ -50,7 +44,15 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
     VE_CI <- 100 * (1 - exp(log_HR_CI))
     pval <- summary(model)$coefficients[1,5]
     
-
+      #Ntests is defined differently for the time-varying covariate datasets
+    if (method %in% c("TTE_01", "TTE_02", "TTE_03", "TTE_04")) {
+      ntests <- sum(data$n_tests)
+    } else { # "TTE_05" & "TTE_06"
+      ntests <- nrow(data)
+    }
+    
+    
+    #Save the output as a data frame
   results_model <- data.frame(method = method,
                               nstudents = nstudents,
                               ntests = ntests,
@@ -59,9 +61,8 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
                                           round(max(VE_CI), digits = 2), "%)"),
                               pval = round(pval, digits = 4))
 
-
+    #return the model object and the results data frame
   return_list <- list(model, results_model)
-
   return(return_list)
   
 }
