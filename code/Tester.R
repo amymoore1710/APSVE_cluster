@@ -3,5 +3,5 @@
 
 test <- commandArgs(trailingOnly = TRUE)
 
-print(test)
+print(test[[1]])
 
