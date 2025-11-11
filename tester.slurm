@@ -15,5 +15,5 @@
 
 module load R/4.2.2
 
-Rscript /home/amoor53/APSVE_cluster/code/Tester.R --no-restore --no-save -- quiet
+Rscript /home/amoor53/APSVE_cluster/code/Tester.R $SLURM_ARRAY_TASK_ID --no-restore --no-save -- quiet
 
