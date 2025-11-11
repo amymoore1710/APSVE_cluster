@@ -5,7 +5,7 @@
 #SBATCH --time=20:00:00
 #SBATCH --partition=day-long-cpu
 #SBATCH --job-name=APSVE_dataset_workflow
-#SBATCH --array=1-2
+#SBATCH --array=1-6
 #SBATCH --cores-per-socket=1
 #SBATCH --error=job.%J.err
 #SBATCH --output=job.%J.out
