@@ -12,8 +12,10 @@ if (cluster) {
   library(here) # File Locations
 }
 
-# model_num <- commandArgs(trailingOnly = TRUE)[[1]]
-model_num <- 1
+library(readr) #Read in Files
+
+model_num <- commandArgs(trailingOnly = TRUE)[[1]]
+# model_num <- 1
 
 
 if (cluster) {
