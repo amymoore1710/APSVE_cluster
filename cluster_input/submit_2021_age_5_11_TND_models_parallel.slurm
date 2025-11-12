@@ -7,8 +7,8 @@
 #SBATCH --job-name=APSVE_dataset_workflow
 #SBATCH --array=1-6
 #SBATCH --cores-per-socket=1
-#SBATCH --error=job.%J.err
-#SBATCH --output=job.%J.out
+#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-12 - 2021_ages_5_11_TND_models'/job.%J.err
+#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-12 - 2021_ages_5_11_TND_models'/job.%J.out
 #SBATCH --mail-user=amoor53@emory.edu
 #SBATCH --mail-type=ALL
 
