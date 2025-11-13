@@ -1,5 +1,7 @@
 
-fit_TND_model <- function (data, model_formula, method, alpha = 0.05) {
+fit_TND_model <- function (data, model_formula, method, alpha = 0.05, seed = 582000) {
+  
+  set.seed(58200)
   
   #Standard GLM (No random effects)
   if (method == "TND_01") {

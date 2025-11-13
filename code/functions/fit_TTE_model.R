@@ -1,5 +1,7 @@
 
-fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
+fit_TTE_model <- function (data, model_formula, method, alpha = 0.05, seed = 582000) {
+  
+  set.seed(seed)
   
     #Standard Cox Model (No random effects)
   if (method == "TTE_01") {
