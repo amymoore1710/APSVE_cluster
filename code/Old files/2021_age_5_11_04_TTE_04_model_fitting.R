@@ -39,8 +39,6 @@ if (cluster) {
 
 
 
-### Model #1 - Simple Regression no covariates
-
 ### Model #4 - Regression Adjusting for Demographic Covariates and Average Testing Behavior
 
 if (cluster) {
