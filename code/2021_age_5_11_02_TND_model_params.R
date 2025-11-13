@@ -6,8 +6,8 @@
 # Amy Moore
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Package Library Location
 if (cluster) {
@@ -15,79 +15,6 @@ if (cluster) {
 } else {
   library(here) # File Locations
 }
-
-
-library(readr) #Read in Files
-library(tidyverse) # Data Manipulation
-# library(lubridate) #Dates
-# # library(ggplot2)
-# library(survival) #Cox Model
-# library(coxme) #Cox Model w/ RE
-
-
-
-######################
-##### Load Data ######
-######################
-
-  #VScohort.allweeks - full matrix of ID by week with tested = 0 or 1
-  #VScohort.alltested - subset to VScohort.allweeks with only tested = 1
-  #STcohort.alltested - subset of VScohort.alltested with only high partipcation IDs
-
-
-if (cluster) {
-  VScohort.allweeks <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
-} else {
-  VScohort.allweeks <- read_csv(here("cleandata", "2021_age_5_11_predicted_propensity_scores.csv"))
-}
-
-VScohort.alltested <- VScohort.allweeks %>% filter(tested == 1)
-
-
-  #Defining the Super Tester Cohort
-VScohort.byID <- VScohort.allweeks %>% group_by(ID) %>% summarize(num_tests = sum(tested))
-max_tests <- max(VScohort.byID$num_tests)
-Q3 <- max_tests
-n <- nrow(VScohort.byID)
-
-for (i in seq(max_tests, 3, -1)){
-  n_above <- nrow(VScohort.byID %>% filter(num_tests >= i))
-  perc_above <- round(n_above/n * 100, digits = 2)
-  
-  if (perc_above < 25.00) {
-    Q3 <- i
-  }
-}
-print(Q3)
-
-STcohort.subset.byID <- VScohort.byID %>% filter(num_tests >= Q3)
-Supertester.IDs <- STcohort.subset.byID$ID
-
-STcohort.alltested <- VScohort.alltested %>% filter(ID %in% Supertester.IDs)
-
-
-  #Adding Average Testing Behavior for VScohort.alltested
-average_testing_behavior_byID <- VScohort.alltested %>% group_by(ID) %>% 
-  summarize(total_tests = sum(tested), avg_time_since_last = mean(time_since_last), 
-            avg_tests_in_28 = mean(tests_in_28), avg_tests_in_14 = mean(tests_in_14), 
-            avg_test_density = mean(test_density), avg_adj_test_density = mean(adj_test_density))
-
-VScohort.alltested <- merge(x = VScohort.alltested, 
-                            y = average_testing_behavior_byID,
-                            by = "ID",
-                            all.x = TRUE)
-
-
-# Save Datasets
-if (cluster) {
-  write.csv(VScohort.alltested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_all_tested.csv")
-  write.csv(STcohort.alltested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_all_tested.csv")
-} else {
-  write.csv(VScohort.alltested, file = here("cleandata", "2021_age_5_11_all_tested.csv"))
-  write.csv(STcohort.alltested, file = here("cleandata", "2021_age_5_11_ST_all_tested.csv"))
-}
-
-
 
 
 ####################

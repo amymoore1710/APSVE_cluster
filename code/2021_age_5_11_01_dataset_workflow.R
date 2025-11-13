@@ -6,10 +6,22 @@
 # Modified to run on the cluster
 # Amy Moore
 
-  #Package Library Location
-.libPaths("~/Rlibs")
+#Run Locally?
+# cluster = TRUE
+cluster = FALSE
 
-library(readr) #Read in Files
+#Extra Print outs
+verbose = TRUE
+# verbose = FALSE
+
+#Package Library Location
+if (cluster) {
+  .libPaths("~/Rlibs")
+} else {
+  library(here) # File Locations
+}
+
+# library(readr) #Read in Files
 library(lubridate) #Date Objects
 library(dplyr) #Tidy Data
 library(tidyverse) # Data Manipulation
@@ -17,32 +29,53 @@ library(lme4) #Fitting GLMMs (for adding random effects)
 library(splines) #Adding Splines to GLMMs
 
 
+print("")
+print("")
+print("------------------------------")
+print("Begin File 1: Read in Raw Data")
+print("------------------------------")
+print("")
+print("")
 
 
 ##### Read in Raw Data Files #####
 
 
-  #VS testing results by student ID
-vstests_deid_raw <- read_csv("/home/amoor53/APSVE_cluster/data/vstests_newid_5.6.25.csv")
+if (cluster) {
+    #VS testing results by student ID
+  vstests_deid_raw <- read.csv("/home/amoor53/APSVE_cluster/data/vstests_newid_5.6.25.csv")
+    #Vaccination records by Student ID
+  aps_vax <- read.csv("/home/amoor53/APSVE_cluster/data/aps_vax.csv")
+    #Demographic info by Student ID
+  studentinfo_deid <- read.csv("/home/amoor53/APSVE_cluster/data/studentinfo_newid_5.6.25.csv")
+    #School Enrollment by Student ID
+  enrollment_newid <- read.csv("/home/amoor53/APSVE_cluster/data/enrollment_newid_5.6.25.csv")
+    #Direct Certification
+  Direct_Certification <- read.csv("/home/amoor53/APSVE_cluster/data/2022_directly_certified_school.csv")
+    #Schools by Cluster
+  APS_School_List <- read.csv("/home/amoor53/APSVE_cluster/data/APS School List.csv")
+    #SendSS cases
+  SendSS_tests <- read.csv("/home/amoor53/APSVE_cluster/data/pui_deid.csv")
+} else {
+    #VS testing results by student ID
+  vstests_deid_raw <- read.csv(here("data", "vstests_newid_5.6.25.csv"))
+    #Vaccination records by Student ID
+  aps_vax <- read.csv(here("data", "aps_vax.csv"))
+    #Demographic info by Student ID
+  studentinfo_deid <- read.csv(here("data", "studentinfo_newid_5.6.25.csv"))
+    #School Enrollment by Student ID
+  enrollment_newid <- read.csv(here("data", "enrollment_newid_5.6.25.csv"))
+    #Direct Certification
+  Direct_Certification <- read.csv(here("data", "2022_directly_certified_school.csv"))
+    #Schools by Cluster
+  APS_School_List <- read.csv(here("data", "APS School List.csv"))
+    #SendSS cases
+  SendSS_tests <- read.csv(here("data","pui_deid.csv"))
+}
 
-  #Vaccination records by Student ID
-aps_vax <- read_csv("/home/amoor53/APSVE_cluster/data/aps_vax.csv")
-
-  #Demographic info by Student ID
-studentinfo_deid <- read_csv("/home/amoor53/APSVE_cluster/data/studentinfo_newid_5.6.25.csv")
-
-  #School Enrollment by Student ID
-enrollment_newid <- read_csv("/home/amoor53/APSVE_cluster/data/enrollment_newid_5.6.25.csv")
-
-  #Direct Certification
-Direct_Certification <- read_csv("/home/amoor53/APSVE_cluster/data/2022_directly_certified_school.csv")
-
-  #Schools by Cluster
-APS_School_List <- read_csv("/home/amoor53/APSVE_cluster/data/APS School List.csv")
+  #Fixing a mis-matched symbol
 APS_School_List[which(APS_School_List$School == "BEST MS/HS"),]$School <- "BEST MS-HS"
 
-  #SendSS cases
-SendSS_tests <- read_csv("/home/amoor53/APSVE_cluster/data/pui_deid.csv")
 
 
 
@@ -61,10 +94,24 @@ sample.sizes <- data.frame(raw_data = c(ntests, nIDs),
                            more_than_3_weeks = NA)
 rownames(sample.sizes) <- c("ntests", "nIDs")
 
-sample.sizes
+# sample.sizes
+
+print("------------------------------")
+print("Intial Raw Data")
+print("------------------------------")
+print("")
+
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 ##### Cleaning Step 1: Specific School year and remove missing IDs #####
+
+print("")
+print("------------------------------")
+print("Step 1: Remove NA IDs & Include only 2021-22 School Year")
+print("------------------------------")
+print("")
 
 
 start_date <- ymd("2021-09-07") #First day of VS testing
@@ -72,23 +119,21 @@ end_date <- ymd("2022-05-26") #Last day of School
 first_sunday <- as.numeric(ymd("2021-09-05")) - 7
 
 #Filter out tests not during the specified school year and with missing student IDs
-vstests_deid <- vstests_deid_raw[which(!(is.na(vstests_deid_raw$ID)) & 
-                                         start_date <= vstests_deid_raw$resultdate &
-                                         end_date >= vstests_deid_raw$resultdate),]
-
-ntests <- nrow(vstests_deid) 
-ntests #640094 tests
+vstests_deid <- vstests_deid_raw %>% filter(!is.na(ID) & resultdate >= start_date & resultdate <= end_date)
 
 #Recode result as a binary 0/1 variable instead of characters
 vstests_deid$result <- ifelse(vstests_deid$result == "POSITIVE",
                               1,
                               0)
 
+ntests <- nrow(vstests_deid) 
 VScohort.IDs <- unique(vstests_deid$ID) 
 nIDs <- length(VScohort.IDs) 
-nIDs #25059 students
 
 sample.sizes$school_year_21_22 <- c(ntests, nIDs)
+
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
@@ -96,6 +141,12 @@ sample.sizes$school_year_21_22 <- c(ntests, nIDs)
 
 
 ##### Cleaning Step 2: Merge with Vaccination and Demographic Records #####
+
+print("")
+print("------------------------------")
+print("Step 2: Merge with Vaccination and Demographic Records")
+print("------------------------------")
+print("")
 
 
 #Find Vaccination Records for the students reporting tests
@@ -134,18 +185,25 @@ d3 <- vstests_deid[,c("ID", "schoolname", "result", "resultdate")] #tests --> 63
 
 #merge the 3 datasets --> keep students with missing vax records (assigns them as unvaxed)
 VScohort.merged <- merge(d3,merge(d1,d2, by = "ID", all.y = TRUE), by = "ID") #merged
-print(paste("There are", nrow(VScohort.merged), "tests with matching vaccine and demographic info")) #637497
 
 VScohort.IDs <- unique(VScohort.merged$ID)
+ntests <- nrow(VScohort.merged)
+nIDs <- length(VScohort.IDs)
 
-
-
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
 
 
 ##### Cleaning Step 3 - Only Tests from Primary Enrollment Schools #####
+
+print("")
+print("------------------------------")
+print("Step 3: Only Tests from Primary Enrollment Schools")
+print("------------------------------")
+print("")
 
 
 primary_schools <- unique(enrollment_newid[which(enrollment_newid$servicetype == "P" & !is.na(enrollment_newid$school) & enrollment_newid$ID %in% VScohort.IDs),]$school)
@@ -164,9 +222,8 @@ ntests <- nrow(VScohort.merged)
 nIDs <- length(unique(VScohort.merged$ID))
 sample.sizes$primary_enroll <- c(ntests, nIDs)
 
-print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools")) #635573
-print(paste("There are", nIDs, "unique students reporting tests with matching vaccine and demographic info at primary enrolled schools"))
-
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
@@ -175,6 +232,12 @@ print(paste("There are", nIDs, "unique students reporting tests with matching va
 
 
 ##### Cleaning Step 4 - Only students aged 5-11 #####
+
+print("")
+print("------------------------------")
+print("Step 4: Only students aged 5-11")
+print("------------------------------")
+print("")
 
 
 #vax status is only 1 if the patient is vaccinated before the test date
@@ -191,23 +254,32 @@ ntests <- nrow(VScohort.merged)
 nIDs <- length(unique(VScohort.merged$ID))
 sample.sizes$ages_5_11 <- c(ntests, nIDs)
 
-
-print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools between the ages of 5 and 11"))
-
-ntests #483847
-nIDs #16021
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
 
 
 
-##### Cleaning Step 5 - only schools reporting >10 tests #####
+##### Cleaning Step 5 - Only schools reporting >10 tests #####
 
+print("")
+print("------------------------------")
+print("Step 5: Only schools reporting >10 tests")
+print("------------------------------")
+print("")
 
-table(VScohort.merged$vax_status)
-
-table(VScohort.merged$vax_status, VScohort.merged$result)
+if (verbose) {
+  print("")
+  print("Checking Vaccination status")
+  print("")
+  table(VScohort.merged$vax_status)
+  print("")
+  print("Checking Vaccination Status by Result")
+  print("")
+  table(VScohort.merged$vax_status, VScohort.merged$result)
+}
 
 #Checking positivity of covariate categories
 
@@ -238,7 +310,12 @@ colnames(school.summary) <- c("n tests", "n + tests", "n vaxed", "% vaxed",
                               "n + vaxed", "% + vaxed", "n + unvaxed", "% + unvaxed")
 rownames(school.summary) <- schools
 
-school.summary
+if (verbose) {
+  print("")
+  print("Checking Vaccination by Result by School")
+  print("")
+  school.summary
+}
 
 problems <- rownames(school.summary[which(school.summary$`n tests` < 10 | school.summary$`n tests` == school.summary$`n vaxed` | school.summary$`n + tests` == 0), ])
 
@@ -248,9 +325,8 @@ ntests <- nrow(VScohort.merged)
 nIDs <- length(unique(VScohort.merged$ID))
 sample.sizes$school_sample_size_large <- c(ntests, nIDs)
 
-print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11"))
-print(paste("There are", nIDs, "unique students reporting tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among children between the ages of 5 and 11"))
-
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
@@ -258,25 +334,46 @@ print(paste("There are", nIDs, "unique students reporting tests with matching va
 
 ##### Cleaning Step 6 - Only where covariates have positivity #####
 
+print("")
+print("------------------------------")
+print("Step 6: Only where covariates have positivity")
+print("------------------------------")
+print("")
 
 school.summary2 <- school.summary[which(!(rownames(school.summary) %in% problems)),]
 
-school.summary2
+if (verbose) {
+  school.summary2
+}
 
 #gender
 
+if (verbose) {
 table(VScohort.merged$gender, VScohort.merged$result)
-
+}
+  
 VScohort.merged <- VScohort.merged[which(VScohort.merged$gender != "N"),]
+
+if (verbose) {
+  print("")
+  print("Removed Non-binary Gender")
+  print("")
+  table(VScohort.merged$gender, VScohort.merged$result)
+}
+
 
 ntests <- nrow(VScohort.merged)
 nIDs <- length(unique(VScohort.merged$ID))
 sample.sizes$gender <- c(ntests, nIDs)
 
-print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender"))
-print(paste("There are", nIDs, "tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender"))
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
-table(VScohort.merged$gender, VScohort.merged$result)
+
+
+
+
+
 
 
 #Checking positivity of vaccination by school by ID
@@ -313,17 +410,47 @@ school.vaccination <- school.vaccination[-1,]
 rownames(school.vaccination) <- schools
 colnames(school.vaccination) <- c("num_students", "num_vaxed", "Perc_vaxed", "num_unvaxed")
 
-school.vaccination
+if (verbose) {
+  print("")
+  print("Checking Vaccination by School")
+  print("")
+  school.vaccination
+}
+
 
 # Race
-table(VScohort.merged$race, VScohort.merged$result)
-table(VScohort.merged$race, VScohort.merged$vax_status)
-
-table(VScohort.merged$race, VScohort.merged$vax_status, VScohort.merged$result)
+if (verbose) {
+  print("")
+  print("Checking Race by Result")
+  print("")
+  table(VScohort.merged$race, VScohort.merged$result)
+  
+  print("")
+  print("Checking Race by Vaccination Status")
+  print("")
+  table(VScohort.merged$race, VScohort.merged$vax_status)
+  
+  print("")
+  print("Checking Race by Vaccination Status and Result")
+  print("")
+  table(VScohort.merged$race, VScohort.merged$vax_status, VScohort.merged$result)
+}
 
 # Age
-table(VScohort.merged$start_age, VScohort.merged$result)
-table(VScohort.merged$start_age, VScohort.merged$vax_status)
+
+if (verbose) {
+  print("")
+  print("Checking Age by Result")
+  print("")
+  table(VScohort.merged$start_age, VScohort.merged$result)
+  
+  print("")
+  print("Checking Age by Vaccination Status")
+  print("")
+  table(VScohort.merged$start_age, VScohort.merged$vax_status)
+}
+
+
 
 
 
@@ -335,6 +462,12 @@ table(VScohort.merged$start_age, VScohort.merged$vax_status)
 
 
 ##### Cleaning Step 7 - Create additional covariates #####
+
+print("")
+print("------------------------------")
+print("Step 7: Create additional covariates")
+print("------------------------------")
+print("")
 
 #direct certification
 schools <- unique(VScohort.merged$schoolname)
@@ -350,7 +483,11 @@ for (i in 1:nrow(school.info)){
 
 VScohort.merged <- merge(VScohort.merged, school.info, by = "schoolname")
 
+ntests <- nrow(VScohort.merged)
+nIDs <- length(unique(VScohort.merged$ID))
 
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
@@ -359,10 +496,22 @@ VScohort.merged <- merge(VScohort.merged, school.info, by = "schoolname")
 
 ##### Cleaning Step 8 - Remove Students who reported tests at multiple schools within the same year #####
 
+print("")
+print("------------------------------")
+print("Step 8: No Transfer Students")
+print("------------------------------")
+print("")
+
+
 VScohort.IDs <- unique(VScohort.merged$ID)
 
 non_transfers <- VScohort.merged %>% group_by(ID) %>% summarize(schools = length(unique(schoolname)))
-table(non_transfers$schools)
+if (verbose) {
+  print("")
+  print("Checking Number of Schools per ID")
+  print("")
+  table(non_transfers$schools)
+}
 
 non_transfers <- non_transfers %>% filter(schools == 1)
 non_transferIDS <- non_transfers$ID
@@ -375,9 +524,8 @@ ntests <- nrow(VScohort.merged)
 nIDs <- length(unique(VScohort.merged$ID))
 sample.sizes$no_transfers <- c(ntests, nIDs)
 
-print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school"))
-print(paste("There are", nIDs, "students with tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school"))
-
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
 
 
@@ -387,11 +535,22 @@ print(paste("There are", nIDs, "students with tests with matching vaccine and de
 
 ##### Cleaning Step 9 - Exclude Students with less than 3 tests total reported
 
+print("")
+print("------------------------------")
+print("Step 8: At least 3 tests each")
+print("------------------------------")
+print("")
 
 VScohort.IDs <- unique(VScohort.merged$ID)
 
 number_of_tests <- VScohort.merged %>% group_by(ID) %>% summarize(num_tests = n())
-table(number_of_tests$num_tests)
+if (verbose) {
+  print("")
+  print("Checking Number of tests by ID")
+  print("")
+  table(number_of_tests$num_tests)
+}
+
 
 number_of_tests <- number_of_tests %>% filter(num_tests >= 3)
 tested_enough_IDs <- number_of_tests$ID
@@ -403,28 +562,45 @@ ntests <- nrow(VScohort.merged)
 nIDs <- length(unique(VScohort.merged$ID))
 sample.sizes$more_than_3_tests <- c(ntests, nIDs)
 
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
 
-
-print(paste("There are", ntests, "tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school and reported at least 3 tests"))
-print(paste("There are", nIDs, "students with tests with matching vaccine and demographic info at primary enrolled schools  at schools with more than 10 tests and with some students of both vaccination statuses among chidren between the ages of 5 and 11 and who identify with a binary gender and reported tests at only 1 school and reported at least 3 tests"))
 
 write.csv(VScohort.merged, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_daily_testing_by_ID.csv")
 
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 1: Saving Daily testing by ID")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
 
 
 
 ##### Start of File #2 #####
 
+print("")
+print("")
+print("------------------------------")
+print("Begin File 2: Transition to Weekly Testing Summaries")
+print("------------------------------")
+print("")
+print("")
 
 
+print("")
+print("------------------------------")
+print("Step 1: Assign tests to a week of the school year")
+print("------------------------------")
+print("")
 
-##### Read in Cleaned Data Set #####
 
 VScohort.IDs <- sort(unique(VScohort.merged$ID))
-
-
-
-##### Manipulating into data frame we want #####
 
 VScohort.merged$sunday_before <- ifelse(as.numeric(as.Date(VScohort.merged$resultdate)) %% 7 >= 3,
                                         as.numeric(as.Date(VScohort.merged$resultdate)) - (as.numeric(as.Date(VScohort.merged$resultdate)) %% 7) + 3,
@@ -437,6 +613,12 @@ weeks <- sort(unique(VScohort.merged$week))
 weeks_as_dates <- weeks*7 + first_sunday
 
 
+print("")
+print("------------------------------")
+print("Step 2: Assign Vaccination Date to a week of the school year")
+print("------------------------------")
+print("")
+
 VScohort.merged$sunday_after_vax <- ifelse(is.na(VScohort.merged$vax_date), NA, 
                                            ifelse(as.numeric(as.Date(VScohort.merged$vax_date)) %% 7 >= 3,
                                                   as.numeric(as.Date(VScohort.merged$vax_date)) - (as.numeric(as.Date(VScohort.merged$vax_date)) %% 7) + 10,
@@ -444,6 +626,13 @@ VScohort.merged$sunday_after_vax <- ifelse(is.na(VScohort.merged$vax_date), NA,
 
 #Turning Sunday after vax from random large numbers to week numbers
 VScohort.merged$vax_week <- (VScohort.merged$sunday_after_vax - first_sunday)/7
+
+
+print("")
+print("------------------------------")
+print("Step 3: Recalibrate data for one entry per week")
+print("------------------------------")
+print("")
 
 #Create Empty Data Frame to fill
 VScohort.tests <- data.frame(ID = rep(VScohort.IDs, each = length(weeks)),
@@ -575,6 +764,12 @@ for (ID in VScohort.IDs) {
   
 }
 
+print("")
+print("------------------------------")
+print("Step 4: Recalibrate covariates at weekly scale")
+print("------------------------------")
+print("")
+
 
   #Redefining Vaccination Status and time since vaccination
 
@@ -673,27 +868,59 @@ for (i in 1:nrow(VScohort.positives)) {
   
 }
 
+print("")
+print("------------------------------")
+print("Step 5: Final Confirmations")
+print("------------------------------")
+print("")
 
-#Final Confirmations
 
 ntests <- sum(together$tested)
 nIDs <- length(unique(together$ID))
 sample.sizes$only_1_per_week <- c(ntests, nIDs)
 
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
+
 
 #Double check that all weeks included have multiple tests
 VScohort.byWeek <- together %>% group_by(week) %>% summarize(num_tests = sum(tested))
 
-VScohort.byWeek
+if (verbose) {
+  print("")
+  print("Check tests by week")
+  print("")
+  VScohort.byWeek
+}
+
 
 #Remove week 16 --> only 2 tests
 together <- together %>% filter(week != 16)
 VScohort.byWeek <- together %>% group_by(week) %>% summarize(num_tests = sum(tested))
-VScohort.byWeek
+if (verbose) {
+  print("")
+  print("Removed week 16")
+  print("")
+  print("Recheck tests by week")
+  print("")
+  VScohort.byWeek
+}
+
+
 
 #Checking that all individuals have at least 3 weeks of testing
 VScohort.byID <- together %>% group_by(ID) %>% summarize(num_tests = sum(tested))
-table(VScohort.byID$num_tests)
+if(verbose) {
+  print("")
+  print("Check 3 weeks of tests per ID")
+  print("")
+  table(VScohort.byID$num_tests)
+  print("")
+  print("removing low testers")
+  print("")
+}
+
+
 
 #Removing low testers
 lowTesting <- VScohort.byID %>% filter(num_tests < 3)
@@ -705,11 +932,24 @@ ntests <- sum(together$tested)
 nIDs <- length(unique(together$ID))
 sample.sizes$more_than_3_weeks <- c(ntests, nIDs)
 
+print(paste0("Number of Tests: ", ntests))
+print(paste0("Number of Students: ", nIDs))
+
 #Save Dataset
 write.csv(together, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_weekly_testing_by_ID.csv")
 
 
-
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 2: Saving Weekly testing by ID")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
 
 
 
@@ -720,6 +960,22 @@ write.csv(together, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_weekly_
 
 
 ##### Start of File #3 #####
+
+
+print("")
+print("")
+print("------------------------------")
+print("Begin File 3: Compute Propensity Scores")
+print("------------------------------")
+print("")
+print("")
+
+
+print("")
+print("------------------------------")
+print("Step 1: Fit Propensity Score Model")
+print("------------------------------")
+print("")
 
 VScohort.tested <- together
 
@@ -757,6 +1013,12 @@ reg.fit <-  glmer(formula = tested ~ vax_status + start_age + gender + race + di
 
 summary(reg.fit)
 
+print("")
+print("------------------------------")
+print("Step 2: Save Propensity Score Model")
+print("------------------------------")
+print("")
+
 saveRDS(reg.fit, "/home/amoor53/APSVE_cluster/models/2021_age_5_11_predicted_propensity_scores_model.rds")
 
 
@@ -766,9 +1028,141 @@ propensities <- predict(reg.fit, newdata = VScohort.tested, type = "response")
 VScohort.tested$propensity <- propensities
 
 
+print("")
+print("------------------------------")
+print("Step 3: Save Propensity Score Fitted Values")
+print("------------------------------")
+print("")
+
 #Save Dataset
 write.csv(VScohort.tested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
 
 write.csv(sample.sizes, "/home/amoor53/APSVE_cluster/results/2021_age_5_11_dataset_workflow_sample_sizes.csv")
+
+
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 3: Saving Weekly testing by ID with Propensity Scores")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### File #4 - Creating TND data sets #####
+
+print("")
+print("")
+print("------------------------------")
+print("Begin File 4: Create Model Fitting Data Sets")
+print("------------------------------")
+print("")
+print("")
+
+print("")
+print("------------------------------")
+print("Step 1: Subset to no missing weeks")
+print("------------------------------")
+print("")
+
+VScohort.alltested <- VScohort.tested %>% filter(tested == 1)
+
+print("")
+print("------------------------------")
+print("Step 2: Adding Additional Covariates")
+print("------------------------------")
+print("")
+
+#Adding Average Testing Behavior for VScohort.alltested
+average_testing_behavior_byID <- VScohort.alltested %>% group_by(ID) %>% 
+  summarize(total_tests = sum(tested), avg_time_since_last = mean(time_since_last), 
+            avg_tests_in_28 = mean(tests_in_28), avg_tests_in_14 = mean(tests_in_14), 
+            avg_test_density = mean(test_density), avg_adj_test_density = mean(adj_test_density))
+
+VScohort.alltested <- merge(x = VScohort.alltested, 
+                            y = average_testing_behavior_byID,
+                            by = "ID",
+                            all.x = TRUE)
+
+print("")
+print("------------------------------")
+print("Step 3: Subset to Super Tester Cohort")
+print("------------------------------")
+print("")
+
+#Defining the Super Tester Cohort
+VScohort.byID <- VScohort.tested %>% group_by(ID) %>% summarize(num_tests = sum(tested))
+max_tests <- max(VScohort.byID$num_tests)
+Q3 <- max_tests
+n <- nrow(VScohort.byID)
+
+for (i in seq(max_tests, 3, -1)){
+  n_above <- nrow(VScohort.byID %>% filter(num_tests >= i))
+  perc_above <- round(n_above/n * 100, digits = 2)
+  
+  if (perc_above < 25.00) {
+    Q3 <- i
+  }
+}
+if (verbose) {
+  print(paste0("Super Tester Cut Off:", Q3))
+}
+
+
+STcohort.subset.byID <- VScohort.byID %>% filter(num_tests >= Q3)
+Supertester.IDs <- STcohort.subset.byID$ID
+
+STcohort.alltested <- VScohort.alltested %>% filter(ID %in% Supertester.IDs)
+
+print("")
+print("------------------------------")
+print("Step 4: Save Data Sets")
+print("------------------------------")
+print("")
+
+# Save Datasets
+if (cluster) {
+  write.csv(VScohort.alltested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_all_tested.csv")
+  write.csv(STcohort.alltested, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_all_tested.csv")
+} else {
+  write.csv(VScohort.alltested, file = here("cleandata", "2021_age_5_11_all_tested.csv"))
+  write.csv(STcohort.alltested, file = here("cleandata", "2021_age_5_11_ST_all_tested.csv"))
+}
+
+
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 4: Saving Weekly testing by ID with Propensity Scores Model Ready")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
+
+
+
+
+
+
+
+
 
 
