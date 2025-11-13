@@ -10,10 +10,10 @@
 .libPaths("~/Rlibs")
 
 library(readr) #Read in Files
-library(lubridate) #Date Objects
 library(tidyverse) # Data Manipulation
-library(lme4) #Fitting GLMMs (for adding random effects)
-library(splines) #Adding Splines to GLMMs
+library(lubridate) #Dates
+library(survival) #Cox Model
+library(coxme) #Cox Model w/ RE
 
 #Model fitting function
 source("/home/amoor53/APSVE_cluster/code/functions/fit_TTE_model.R")
