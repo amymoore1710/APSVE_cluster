@@ -22,6 +22,14 @@ library(lubridate) #Dates
 library(MatchIt) #Matching Pairs
 library(tidyverse)
 
+print("")
+print("")
+print("------------------------------")
+print("Begin File: Read in Cleaned Data")
+print("------------------------------")
+print("")
+print("")
+
 # Read in Long Form with Missing Data lines Data set
 if (cluster) {
   VScohort.tested <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_predicted_propensity_scores.csv")
@@ -45,6 +53,12 @@ VScohort.alltests <- VScohort.tested[which(VScohort.tested$tested == 1),]
 #Need to switch back to a student level data set
 
 VScohort.IDs <- unique(VScohort.alltests$ID)
+
+print("")
+print("------------------------------")
+print("Step 2: Adding in Covariates")
+print("------------------------------")
+print("")
 
   #Adding Variables that do not change over time
     #ID
@@ -115,6 +129,13 @@ nrow(VScohort.byStudent) #15202
 estimate_of_match <- table(VScohort.byStudent$schoolname, VScohort.byStudent$vax_status)
 max_n_of_match <- apply(estimate_of_match, 1, max)
 sum(max_n_of_match) #11690
+
+
+print("")
+print("------------------------------")
+print("Step 3: Matching Students")
+print("------------------------------")
+print("")
 
 
 
