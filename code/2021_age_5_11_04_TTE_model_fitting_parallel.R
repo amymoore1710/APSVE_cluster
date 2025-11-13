@@ -32,7 +32,7 @@ model_formula <- as.formula(params$model_formula)
 method <- params$method
 
 
-results <- fit_TND_model(data = data, 
+results <- fit_TTE_model(data = data, 
                          model_formula = model_formula, 
                          method = method)
 
