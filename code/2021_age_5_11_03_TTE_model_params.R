@@ -38,7 +38,7 @@ params_list <- data.frame(data_file = rep(NA, num_models),
 ### Model #1 - Simple Regression no covariates
 
 method <- "TTE_01"
-model_formula <- Surv(time = time_to_event, event = event_occured) ~ vax_status
+model_formula <- "Surv(time = time_to_event, event = event_occured) ~ vax_status"
 data_file <- "2021_age_5_11_matched_data_set.csv"
 
 params_list[1,] <- c(data_file, model_formula, method)
