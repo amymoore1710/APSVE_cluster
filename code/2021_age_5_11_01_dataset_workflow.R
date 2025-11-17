@@ -158,7 +158,7 @@ na_vax.IDs <- VScohort.IDs[which(!(VScohort.IDs %in% unique(VScohort.vax$ID)))]
 # length(na_vax.IDs)
 
 #Vaccination date
-VScohort.vax$vax_date <- as.Date(VScohort.vax$ADMIN_DATE_2_1)
+VScohort.vax$vax_date <- as.Date(VScohort.vax$ADMIN_DATE_2_1, origin = "1970-01-01")
 
 #Find Demographic info for the students reporting tests
 VScohort.demographics <- studentinfo_deid[which(studentinfo_deid$ID %in% VScohort.IDs),]
@@ -166,7 +166,7 @@ length(unique(VScohort.demographics$ID)) #25059
 
 #Creating Age group variable
 #Age as of start date
-VScohort.demographics$start_age <- floor(as.numeric(start_date - as.Date(VScohort.demographics$birthdate))/365.25)
+VScohort.demographics$start_age <- floor(as.numeric(start_date - as.Date(VScohort.demographics$birthdate, origin = "1970-01-01"))/365.25)
 
 #Age group as of start date
 # 0 => under 5
@@ -194,7 +194,7 @@ print(paste0("Number of Tests: ", ntests))
 print(paste0("Number of Students: ", nIDs))
 
   #Changing all dates to be date objects
-VScohort.merged$resultdate <- as.Date(VScohort.merged$resultdate)
+VScohort.merged$resultdate <- as.Date(VScohort.merged$resultdate, origin = "1970-01-01")
 
 ##### Cleaning Step 3 - Only Tests from Primary Enrollment Schools #####
 
@@ -615,9 +615,9 @@ print("")
 
 VScohort.IDs <- sort(unique(VScohort.merged$ID))
 
-VScohort.merged$sunday_before <- ifelse(as.numeric(as.Date(VScohort.merged$resultdate)) %% 7 >= 3,
-                                        as.numeric(as.Date(VScohort.merged$resultdate)) - (as.numeric(as.Date(VScohort.merged$resultdate)) %% 7) + 3,
-                                        as.numeric(as.Date(VScohort.merged$resultdate)) - (as.numeric(as.Date(VScohort.merged$resultdate)) %% 7) - 4)
+VScohort.merged$sunday_before <- ifelse(as.numeric(as.Date(VScohort.merged$resultdate, origin = "1970-01-01")) %% 7 >= 3,
+                                        as.numeric(as.Date(VScohort.merged$resultdate, origin = "1970-01-01")) - (as.numeric(as.Date(VScohort.merged$resultdate, origin = "1970-01-01")) %% 7) + 3,
+                                        as.numeric(as.Date(VScohort.merged$resultdate, origin = "1970-01-01")) - (as.numeric(as.Date(VScohort.merged$resultdate, origin = "1970-01-01")) %% 7) - 4)
 
 #Turning Sunday before from random large numbers to week numbers
 VScohort.merged$week <- (VScohort.merged$sunday_before - first_sunday)/7
@@ -633,9 +633,9 @@ print("------------------------------")
 print("")
 
 VScohort.merged$sunday_after_vax <- ifelse(is.na(VScohort.merged$vax_date), NA, 
-                                           ifelse(as.numeric(as.Date(VScohort.merged$vax_date)) %% 7 >= 3,
-                                                  as.numeric(as.Date(VScohort.merged$vax_date)) - (as.numeric(as.Date(VScohort.merged$vax_date)) %% 7) + 10,
-                                                  as.numeric(as.Date(VScohort.merged$vax_date)) - (as.numeric(as.Date(VScohort.merged$vax_date)) %% 7) + 3))
+                                           ifelse(as.numeric(as.Date(VScohort.merged$vax_date, origin = "1970-01-01")) %% 7 >= 3,
+                                                  as.numeric(as.Date(VScohort.merged$vax_date, origin = "1970-01-01")) - (as.numeric(as.Date(VScohort.merged$vax_date, origin = "1970-01-01")) %% 7) + 10,
+                                                  as.numeric(as.Date(VScohort.merged$vax_date, origin = "1970-01-01")) - (as.numeric(as.Date(VScohort.merged$vax_date, origin = "1970-01-01")) %% 7) + 3))
 
 #Turning Sunday after vax from random large numbers to week numbers
 VScohort.merged$vax_week <- (VScohort.merged$sunday_after_vax - first_sunday)/7
@@ -696,15 +696,15 @@ for (ID in VScohort.IDs) {
       if (k > first_week) {
         previous_tests <- tests[which(tests$week < k),]
         #Creating a fake result date for the lack of test this week
-        pseudo_resultdate <- as.Date(k*7 + first_sunday)
+        pseudo_resultdate <- as.Date(k*7 + first_sunday, origin = "1970-01-01")
         
         no_history <- 0
         num_prev_test <- nrow(previous_tests)
-        time_since_last <- as.numeric(as.Date(pseudo_resultdate) - as.Date(tail(previous_tests, n=1)$resultdate))
+        time_since_last <- as.numeric(as.Date(pseudo_resultdate, origin = "1970-01-01") - as.Date(tail(previous_tests, n=1)$resultdate, origin = "1970-01-01"))
         tests_in_28 <- nrow(previous_tests[which(previous_tests$week >= (k - 4)),])
         tests_in_14 <- nrow(previous_tests[which(previous_tests$week >= (k - 2)),])
-        test_density <- num_prev_test/as.numeric(as.Date(pseudo_resultdate) - as.Date(start_date))
-        adj_test_density <- num_prev_test/as.numeric(as.Date(pseudo_resultdate) - as.Date(tests[1,]$resultdate))
+        test_density <- num_prev_test/as.numeric(as.Date(pseudo_resultdate, origin = "1970-01-01") - as.Date(start_date, origin = "1970-01-01"))
+        adj_test_density <- num_prev_test/as.numeric(as.Date(pseudo_resultdate, origin = "1970-01-01") - as.Date(tests[1,]$resultdate, origin = "1970-01-01"))
         
         
         
@@ -731,7 +731,7 @@ for (ID in VScohort.IDs) {
         test <- test[1,] #Just use the first test that week
       }
       
-      date <- as.Date(test$resultdate)
+      date <- as.Date(test$resultdate, origin = "1970-01-01")
       
       
       
@@ -741,11 +741,11 @@ for (ID in VScohort.IDs) {
         
         no_history <- 0
         num_prev_test <- nrow(previous_tests)
-        time_since_last <- as.numeric(as.Date(date) - as.Date(tail(previous_tests, n=1)$resultdate))
+        time_since_last <- as.numeric(as.Date(date, origin = "1970-01-01") - as.Date(tail(previous_tests, n=1)$resultdate, origin = "1970-01-01"))
         tests_in_28 <- nrow(previous_tests[which(previous_tests$week >= (k - 4)),])
         tests_in_14 <- nrow(previous_tests[which(previous_tests$week >= (k - 2)),])
-        test_density <- num_prev_test/(as.numeric(as.Date(date) - as.Date(start_date)))
-        adj_test_density <- num_prev_test/(as.numeric(as.Date(date) - as.Date(tests[1,]$resultdate)))
+        test_density <- num_prev_test/(as.numeric(as.Date(date, origin = "1970-01-01") - as.Date(start_date, origin = "1970-01-01")))
+        adj_test_density <- num_prev_test/(as.numeric(as.Date(date, origin = "1970-01-01") - as.Date(tests[1,]$resultdate, origin = "1970-01-01")))
         
         
         
@@ -814,9 +814,9 @@ for (i in 1:length(duplicates)) {
   flags <- data.frame(index = which(VScohort.alltests$ID == ID), flag = rep(0, nrow(tests)) )
   
   for (j in 1: (nrow(tests)-1) ) {
-    current_test <- as.Date(tests[j,]$resultdate)
-    next_test <- as.Date(tests[j+1,]$resultdate)
-    if (as.numeric(as.Date(next_test) - as.Date(current_test)) <= 14) {
+    current_test <- as.Date(tests[j,]$resultdate, origin = "1970-01-01")
+    next_test <- as.Date(tests[j+1,]$resultdate, origin = "1970-01-01")
+    if (as.numeric(as.Date(next_test, origin = "1970-01-01") - as.Date(current_test, origin = "1970-01-01")) <= 14) {
       flags[j+1,]$flag <- 1
     } 
   }
