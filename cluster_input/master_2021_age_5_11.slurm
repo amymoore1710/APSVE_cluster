@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=master_submit
-#SBATCH --output=master_%j.out
+#SBATCH --output=/home/amoor53/APVSE_cluster/cluster_output/tester/master_%j.out
+#SBATCH --error=/home/amoor53/APVSE_cluster/cluster_output/tester/master_%j.err
 #SBATCH --time=00:10:00
 #SBATCH --ntasks=1
 
