@@ -573,8 +573,13 @@ sample.sizes$more_than_3_tests <- c(ntests, nIDs)
 print(paste0("Number of Tests: ", ntests))
 print(paste0("Number of Students: ", nIDs))
 
+if(cluster) {
+  write.csv(VScohort.merged, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_daily_testing_by_ID.csv")
+} else {
+  write.csv(VScohort.merged, here("cleandata", "2021_age_5_11_daily_testing_by_ID.csv"))
+}
 
-write.csv(VScohort.merged, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_daily_testing_by_ID.csv")
+# VScohort.merged <- read.csv(here("cleandata", "2021_age_5_11_daily_testing_by_ID.csv"))
 
 print("")
 print("")
@@ -691,15 +696,15 @@ for (ID in VScohort.IDs) {
       if (k > first_week) {
         previous_tests <- tests[which(tests$week < k),]
         #Creating a fake result date for the lack of test this week
-        pseudo_resultdate <- k*7 + first_sunday
+        pseudo_resultdate <- as.Date(k*7 + first_sunday)
         
         no_history <- 0
         num_prev_test <- nrow(previous_tests)
-        time_since_last <- pseudo_resultdate - as.numeric(tail(previous_tests, n=1)$resultdate)
+        time_since_last <- as.numeric(as.Date(pseudo_resultdate) - as.Date(tail(previous_tests, n=1)$resultdate))
         tests_in_28 <- nrow(previous_tests[which(previous_tests$week >= (k - 4)),])
         tests_in_14 <- nrow(previous_tests[which(previous_tests$week >= (k - 2)),])
-        test_density <- num_prev_test/(pseudo_resultdate - as.numeric(start_date))
-        adj_test_density <- num_prev_test/(pseudo_resultdate - as.numeric(tests[1,]$resultdate))
+        test_density <- num_prev_test/as.numeric(as.Date(pseudo_resultdate) - as.Date(start_date))
+        adj_test_density <- num_prev_test/as.numeric(as.Date(pseudo_resultdate) - as.Date(tests[1,]$resultdate))
         
         
         
@@ -726,7 +731,7 @@ for (ID in VScohort.IDs) {
         test <- test[1,] #Just use the first test that week
       }
       
-      date <- test$resultdate
+      date <- as.Date(test$resultdate)
       
       
       
@@ -736,11 +741,11 @@ for (ID in VScohort.IDs) {
         
         no_history <- 0
         num_prev_test <- nrow(previous_tests)
-        time_since_last <- as.numeric(date - tail(previous_tests, n=1)$resultdate)
+        time_since_last <- as.numeric(as.Date(date) - as.Date(tail(previous_tests, n=1)$resultdate))
         tests_in_28 <- nrow(previous_tests[which(previous_tests$week >= (k - 4)),])
         tests_in_14 <- nrow(previous_tests[which(previous_tests$week >= (k - 2)),])
-        test_density <- num_prev_test/(as.numeric(date - start_date))
-        adj_test_density <- num_prev_test/(as.numeric(date - tests[1,]$resultdate))
+        test_density <- num_prev_test/(as.numeric(as.Date(date) - as.Date(start_date)))
+        adj_test_density <- num_prev_test/(as.numeric(as.Date(date) - as.Date(tests[1,]$resultdate)))
         
         
         
@@ -809,9 +814,9 @@ for (i in 1:length(duplicates)) {
   flags <- data.frame(index = which(VScohort.alltests$ID == ID), flag = rep(0, nrow(tests)) )
   
   for (j in 1: (nrow(tests)-1) ) {
-    current_test <- tests[j,]$resultdate
-    next_test <- tests[j+1,]$resultdate
-    if (next_test - current_test <= 14) {
+    current_test <- as.Date(tests[j,]$resultdate)
+    next_test <- as.Date(tests[j+1,]$resultdate)
+    if (as.numeric(as.Date(next_test) - as.Date(current_test)) <= 14) {
       flags[j+1,]$flag <- 1
     } 
   }
