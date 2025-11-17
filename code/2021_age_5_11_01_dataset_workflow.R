@@ -166,7 +166,7 @@ length(unique(VScohort.demographics$ID)) #25059
 
 #Creating Age group variable
 #Age as of start date
-VScohort.demographics$start_age <- floor(as.numeric(start_date - VScohort.demographics$birthdate)/365.25)
+VScohort.demographics$start_age <- floor(as.numeric(start_date - as.Date(VScohort.demographics$birthdate))/365.25)
 
 #Age group as of start date
 # 0 => under 5
