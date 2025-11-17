@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=APSVE_master
-#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/job.%J.err
-#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/job.%J.out
+#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/master.%J.err
+#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/master.%J.out
 #SBATCH --time=00:10:00
 #SBATCH --ntasks=1
 #SBATCH --mail-user=amoor53@emory.edu
