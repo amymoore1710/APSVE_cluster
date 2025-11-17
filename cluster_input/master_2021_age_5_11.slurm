@@ -1,9 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=master_submit
-#SBATCH --output=/home/amoor53/APVSE_cluster/cluster_output/tester/master_%j.out
-#SBATCH --error=/home/amoor53/APVSE_cluster/cluster_output/tester/master_%j.err
+#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/tester/master.%J.err
+#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/tester/master.%J.out
 #SBATCH --time=00:10:00
 #SBATCH --ntasks=1
+#SBATCH --mail-user=amoor53@emory.edu
+#SBATCH --mail-type=ALL
+
 
 echo "Submitting Step 1..."
 JOBID1=$(sbatch --parsable tester2.slurm)
