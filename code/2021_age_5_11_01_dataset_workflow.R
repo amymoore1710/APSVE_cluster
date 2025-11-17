@@ -158,7 +158,7 @@ na_vax.IDs <- VScohort.IDs[which(!(VScohort.IDs %in% unique(VScohort.vax$ID)))]
 # length(na_vax.IDs)
 
 #Vaccination date
-VScohort.vax$vax_date <- VScohort.vax$ADMIN_DATE_2_1
+VScohort.vax$vax_date <- as.Date(VScohort.vax$ADMIN_DATE_2_1)
 
 #Find Demographic info for the students reporting tests
 VScohort.demographics <- studentinfo_deid[which(studentinfo_deid$ID %in% VScohort.IDs),]
@@ -193,9 +193,8 @@ nIDs <- length(VScohort.IDs)
 print(paste0("Number of Tests: ", ntests))
 print(paste0("Number of Students: ", nIDs))
 
-
-
-
+  #Changing all dates to be date objects
+VScohort.merged$resultdate <- as.Date(VScohort.merged$resultdate)
 
 ##### Cleaning Step 3 - Only Tests from Primary Enrollment Schools #####
 
@@ -275,6 +274,9 @@ if (verbose) {
   print("Checking Vaccination status")
   print("")
   table(VScohort.merged$vax_status)
+}
+
+if (verbose) { 
   print("")
   print("Checking Vaccination Status by Result")
   print("")
@@ -343,12 +345,18 @@ print("")
 school.summary2 <- school.summary[which(!(rownames(school.summary) %in% problems)),]
 
 if (verbose) {
+  print("")
+  print("Summary by School Updated")
+  print("")
   school.summary2
 }
 
 #gender
 
 if (verbose) {
+  print("")
+  print("Checking Gender by Result")
+  print("")
 table(VScohort.merged$gender, VScohort.merged$result)
 }
   
@@ -356,7 +364,7 @@ VScohort.merged <- VScohort.merged[which(VScohort.merged$gender != "N"),]
 
 if (verbose) {
   print("")
-  print("Removed Non-binary Gender")
+  print("Removed Non-binary Gender (No Postiives)")
   print("")
   table(VScohort.merged$gender, VScohort.merged$result)
 }
