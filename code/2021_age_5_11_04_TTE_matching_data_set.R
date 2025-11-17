@@ -9,6 +9,10 @@
 cluster = TRUE
 # cluster = FALSE
 
+#Extra Print outs
+verbose = TRUE
+# verbose = FALSE
+
 #Package Library Location
 if (cluster) {
 .libPaths("~/Rlibs")
@@ -25,7 +29,7 @@ library(tidyverse)
 print("")
 print("")
 print("------------------------------")
-print("Begin File: Read in Cleaned Data")
+print("Begin File 1: Read in Cleaned Data")
 print("------------------------------")
 print("")
 print("")
@@ -116,19 +120,42 @@ VScohort.byStudent$start_week <- ifelse(is.na(VScohort.byStudent$vax_week),
                                         pmax(VScohort.byStudent$first_week, VScohort.byStudent$vax_week))
 
 
+if (verbose) {
+    #diagnostics of the prematch dataset
+  print("")
+  print("Checking Age")
+  print("")
+  table(VScohort.byStudent$start_age)
+  
+  print("")
+  print("Checking Vax Status")
+  print("")
+  table(VScohort.byStudent$vax_status)
+  
+  print("")
+  print("Checking Vax Status by Age")
+  print("")
+  table(VScohort.byStudent$vax_status, VScohort.byStudent$start_age)
+  
+  print("")
+  print("Checking by School")
+  print("")
+  table(VScohort.byStudent$schoolname)
+  
+  print("")
+  print("Number of Students")
+  print("")
+  nrow(VScohort.byStudent) #15202
+  
+  print("")
+  print("Checking Max Number of Students that could be matched")
+  print("")
+  estimate_of_match <- table(VScohort.byStudent$schoolname, VScohort.byStudent$vax_status)
+  max_n_of_match <- apply(estimate_of_match, 1, max)
+  sum(max_n_of_match) #11690
+}
 
 
-#diagnostics of the prematch dataset
-table(VScohort.byStudent$start_age)
-table(VScohort.byStudent$vax_status)
-table(VScohort.byStudent$vax_status, VScohort.byStudent$start_age)
-table(VScohort.byStudent$schoolname)
-
-nrow(VScohort.byStudent) #15202
-
-estimate_of_match <- table(VScohort.byStudent$schoolname, VScohort.byStudent$vax_status)
-max_n_of_match <- apply(estimate_of_match, 1, max)
-sum(max_n_of_match) #11690
 
 
 print("")
@@ -153,8 +180,22 @@ VScohort.matched <- match.data(VScohort.match) %>% arrange(subclass, vax_status)
 
 VScohort.matched <- VScohort.matched %>% select(!c("distance", "weights"))
 
-nrow(VScohort.matched)
-sum(VScohort.matched$n_tests)
+if (verbose) {
+  print("")
+  print("Checking Matched Cohort Sample Sizes")
+  print("")
+  ntests <- sum(VScohort.matched$n_tests)
+  nIDs <-   nrow(VScohort.matched)
+  print(paste0("Number of Tests: ", ntests))
+  print(paste0("Number of Students: ", nIDs))
+
+}
+
+print("")
+print("------------------------------")
+print("Step 4: Assigning Enrollment based on Matches")
+print("------------------------------")
+print("")
 
 VScohort.matched$flags <- 0
 VScohort.matched$enrollment_week <- NA
@@ -187,10 +228,19 @@ for (i in seq(1, nrow(VScohort.matched), 2)) {
   
 }
 
+if (verbose) {
+  print("")
+  print("Checking Matched Pairs with Positives before enrollment")
+  print("")
+  sum(VScohort.matched$flags) #198
+  
+  print("")
+  print("Checking total number of positives")
+  print("")
+  table(VScohort.matched$result)
+}
+  
 
-sum(VScohort.matched$flags) #198 (yikes!!!)
-
-table(VScohort.matched$result)
 
 flagged.IDs <- VScohort.matched[which(VScohort.matched$flags == 1),]$ID
 
@@ -216,14 +266,30 @@ for (i in 1:nrow(flagged.positives)) {
   
 }
 
+
+if (verbose) {
   #Confirming that all positive tests occur after enrollment
-Confirmation <- VScohort.matched[which(VScohort.matched$result == 1),c("ID", "enrollment_week", "positive_week")]
-Confirmation$difference <- Confirmation$positive_week - Confirmation$enrollment_week
-summary(Confirmation$difference) #min is non-negative
+  print("")
+  print("Checking that all positive tests occur after enrollment")
+  print("")
+  Confirmation <- VScohort.matched[which(VScohort.matched$result == 1),c("ID", "enrollment_week", "positive_week")]
+  Confirmation$difference <- Confirmation$positive_week - Confirmation$enrollment_week
+  summary(Confirmation$difference) #min is non-negative
+  
+  print("")
+  print("Checking total number of positives")
+  print("")
+  table(VScohort.matched$result)
+}
 
 
 
-table(VScohort.matched$result)
+
+print("")
+print("------------------------------")
+print("Step 5: Creating Average Testing Behavior Variables")
+print("------------------------------")
+print("")
 
 
   #Average Testing Behavior Variables
@@ -278,24 +344,45 @@ for (i in 1:nrow(VScohort.matched)) {
   
 }
 
+if (verbose) {
+  print("")
+  print("Checking individuals with <3 tests after enrollment")
+  print("")
   #flag = 2 implies that a partner does not have >3 tests from enrollment to study end
-    #throw out these matches
-table(VScohort.matched$flags)
+  #throw out these matches
+  table(VScohort.matched$flags)
+}
+
 
 subclass_errors <- unique(as.numeric(VScohort.matched[which(VScohort.matched$flags == 2),]$subclass))
 
 VScohort.matched <- VScohort.matched[which(!(as.numeric(VScohort.matched$subclass) %in% subclass_errors)),]
 
-  #Checking Sample Size
-nrow(VScohort.matched)
-sum(VScohort.matched$n_tests)
+if (verbose) {
+    #Checking Sample Size
+  print("")
+  print("Checking Matched Data Sample Sizes")
+  nIDs <- nrow(VScohort.matched)
+  ntests <- sum(VScohort.matched$n_tests)
+  print(paste0("Number of Tests: ", ntests))
+  print(paste0("Number of Students: ", nIDs))
+}
 
+print("")
+print("------------------------------")
+print("Step 6: Create Time to Event Variables")
+print("------------------------------")
+print("")
 
   #Create Time to event variables
 VScohort.matched$time_to_event <- ifelse(is.na(VScohort.matched$positive_week), VScohort.matched$last_test - VScohort.matched$enrollment_week, VScohort.matched$positive_week - VScohort.matched$enrollment_week)
 VScohort.matched$event_occured <- ifelse(is.na(VScohort.matched$positive_week), 0, 1)
 
-# VScohort.simplified <- VScohort.matched %>% select("ID", "start_age", "n_tests", "vax_week", "first_week", "start_week", "enrollment_week", "positive_week", "last_test", "time_to_event", "event_occured")
+print("")
+print("------------------------------")
+print("Step 7: Save VScohort Matched Time to Event Dataset")
+print("------------------------------")
+print("")
 
 if (cluster) {
   write.csv(VScohort.matched, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_matched_data_set.csv")
@@ -303,11 +390,39 @@ if (cluster) {
   write.csv(VScohort.matched, here("cleandata", "2021_age_5_11_matched_data_set.csv"))
 }
 
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 1: Saving Matched Time to Event")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
 
 
 
 
 
+
+
+
+print("")
+print("")
+print("------------------------------")
+print("Begin File 2: Adding Time Varying Covariates")
+print("------------------------------")
+print("")
+print("")
+
+
+print("")
+print("------------------------------")
+print("Step 1: Define Time Windows of Follow-up time")
+print("------------------------------")
+print("")
 
 #Time-varying Covariate Version of Matched Dataset
 
@@ -324,51 +439,35 @@ VScohort.matched.bytest <- merge(x = VScohort.matched.bytest,
 
 VScohort.matched.bytest <- VScohort.matched.bytest %>% filter(week >= enrollment_week & week <= last_test)
 
-  #The number of tests should precisely match between the ID level number of tests and the tests level number of tests
-nrow(VScohort.matched.bytest)
-sum(VScohort.matched$n_tests)
+if (verbose) {
+  print("")
+  print("Checking that both ways of thinking have the same number of tests")
+    #The number of tests should precisely match between the ID level number of tests and the tests level number of tests
+  print(paste0("One entry per test: ", nrow(VScohort.matched.bytest)))
+  print(paste0("One entry per ID: ", sum(VScohort.matched$n_tests)))
   #N = 109392
-
-
-  #The number of students should match precisely
-nrow(VScohort.matched)
-length(unique(VScohort.matched.bytest$ID))
-
-
-
+  print("")
+  
+  
+  print("")
+  print("Checking that both ways of thinking have the same number of students")
+  #The number of tests should precisely match between the ID level number of tests and the tests level number of tests
+  print(paste0("One entry per test: ", length(unique(VScohort.matched.bytest$ID))))
+  print(paste0("One entry per ID: ", nrow(VScohort.matched)))
+  print("")
+}
 
   #Adding time windows to each test for the previous week
 VScohort.matched.bytest$previous_week <- VScohort.matched.bytest$week - 1
 
+# Note: if a student has tests on week 1, 2, and 5. The first test window is 0 to 1, then 1 to 2, and then 4 to 5. 
+# This means they are considered missing for weeks 2 to 4 since they were not tested in that time. 
 
-# for (i in 1:length(VScohort.IDs)) {
-#   ID.i <- VScohort.IDs[i]
-#   
-#   tests <- VScohort.matched.bytest %>% filter(ID == ID.i)
-#   
-#   enrollment_week <- tests[1,]$enrollment_week
-#   
-#   for (j in 1:nrow(tests)) {
-#     
-#     current_week <- tests[j,]$week
-#     
-#     if (j == 1) {
-#         #For first test, interval starts at enrollment
-#       VScohort.matched.bytest[which(VScohort.matched.bytest$ID == ID.i & VScohort.matched.bytest$week == current_week),]$previous_week <- enrollment_week
-#       
-#     } else {
-#         #For not first test, interval starts at previous test
-#       previous_week <- tests[(j-1),]$week
-#       # print(tests[(j-1),]$week)
-#       
-#       VScohort.matched.bytest[which(VScohort.matched.bytest$ID == ID.i & VScohort.matched.bytest$week == current_week),]$previous_week <- previous_week
-#       
-#     }
-#     
-#     
-#   }
-#   
-# }
+print("")
+print("------------------------------")
+print("Step 2: Save the Time Varying Covariate (TVC) data")
+print("------------------------------")
+print("")
 
 
 if (cluster) {
@@ -378,6 +477,17 @@ if (cluster) {
 }
 
 
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 2: Saving Matched Time to Event with TVC")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
 
 
 
@@ -394,25 +504,26 @@ if (cluster) {
 
 
 
+print("")
+print("")
+print("------------------------------")
+print("Begin File 3: Super tester Matched Cohort")
+print("------------------------------")
+print("")
+print("")
 
+print("")
+print("------------------------------")
+print("Step 1: Define Super Tester Cohort")
+print("------------------------------")
+print("")
 
-
-
-
-
-
-
-
-
-
-
-
-  #############################
-  #####   Super Testers   #####
-  #############################
-
-
-head(VScohort.byStudent)
+if (verbose) {
+  print("")
+  print("Checking what the data looks like")
+  print("")
+  head(VScohort.byStudent)
+}
 total_num_tests <- sum(VScohort.byStudent$n_tests)
 
   #Define Super Testers the same way we did in TND
@@ -434,21 +545,59 @@ print(Q3)
 STcohort.byStudent <- VScohort.byStudent %>% filter(n_tests >= Q3)
 total_num_tests <- sum(STcohort.byStudent$n_tests)
 
+print("")
+print("------------------------------")
+print("Step 2: Check Pre Match Dataset")
+print("------------------------------")
+print("")
 
 #diagnostics of the prematch dataset
-table(STcohort.byStudent$start_age)
-table(STcohort.byStudent$vax_status)
-table(STcohort.byStudent$vax_status, STcohort.byStudent$start_age)
-table(STcohort.byStudent$schoolname)
+if (verbose) {
+  print("")
+  print("Checking by Age")
+  print("")
+  table(STcohort.byStudent$start_age)
+  
+  print("")
+  print("Checking by Vax Status")
+  print("")
+  table(STcohort.byStudent$vax_status)
+  
+  print("")
+  print("Checking by Vax Status by Age")
+  print("")
+  table(STcohort.byStudent$vax_status, STcohort.byStudent$start_age)
+  
+  print("")
+  print("Checking by Vax Status by Result")
+  print("")
+  table(STcohort.byStudent$vax_status, STcohort.byStudent$result)
+  
+  print("")
+  print("Checking by School")
+  print("")
+  table(STcohort.byStudent$schoolname)
+  
+  print("")
+  print("Checking total number of students")
+  print("")
+  nrow(STcohort.byStudent) #2823
+  
+  
+  print("")
+  print("Checking maximum number of matched pairs possible")
+  print("")
+  estimate_of_match <- table(STcohort.byStudent$schoolname, STcohort.byStudent$vax_status)
+  max_n_of_match <- apply(estimate_of_match, 1, max)
+  sum(max_n_of_match) #2077
+}
 
-nrow(STcohort.byStudent) #2823
 
-estimate_of_match <- table(STcohort.byStudent$schoolname, STcohort.byStudent$vax_status)
-max_n_of_match <- apply(estimate_of_match, 1, max)
-sum(max_n_of_match) #2077
-
-table(STcohort.byStudent$vax_status)
-table(STcohort.byStudent$vax_status, STcohort.byStudent$result)
+print("")
+print("------------------------------")
+print("Step 3: Match Super Tester Cohort")
+print("------------------------------")
+print("")
 
 
 STcohort.match <- matchit(formula = vax_status ~ schoolname,
@@ -463,8 +612,21 @@ STcohort.matched <- match.data(STcohort.match) %>% arrange(subclass, vax_status)
 
 STcohort.matched <- STcohort.matched %>% select(!c("distance", "weights"))
 
-nrow(STcohort.matched)
-sum(STcohort.matched$n_tests)
+if (verbose) {
+  print("")
+  print("Checking Sample Size of Match")
+  print("")
+  nIDs <- nrow(STcohort.matched)
+  ntests <- sum(STcohort.matched$n_tests)
+  print(paste0("Number of Tests: ", ntests))
+  print(paste0("Number of Students: ", nIDs))
+}
+
+print("")
+print("------------------------------")
+print("Step 4: Assign Enrollment Dates based on Match")
+print("------------------------------")
+print("")
 
 STcohort.matched$flags <- 0
 STcohort.matched$enrollment_week <- NA
@@ -497,10 +659,25 @@ for (i in seq(1, nrow(STcohort.matched), 2)) {
   
 }
 
+if (verbose) {
+  print("")
+  print("Check number of positives before enrollment")
+  print("")
+  sum(STcohort.matched$flags) #45
+  
+  print("")
+  print("Check total number of positives")
+  print("")
+  table(STcohort.matched$result)
+  
+}
 
-sum(STcohort.matched$flags) #45 (yikes!!!)
+print("")
+print("------------------------------")
+print("Step 5: Fix to only include postives after enrollment")
+print("------------------------------")
+print("")
 
-table(STcohort.matched$result)
 
 flagged.IDs <- STcohort.matched[which(STcohort.matched$flags == 1),]$ID
 
@@ -526,14 +703,26 @@ for (i in 1:nrow(flagged.positives)) {
   
 }
 
-#Confirming that all positive tests occur after enrollment
-Confirmation <- STcohort.matched[which(STcohort.matched$result == 1),c("ID", "enrollment_week", "positive_week")]
-Confirmation$difference <- Confirmation$positive_week - Confirmation$enrollment_week
-summary(Confirmation$difference) #min is non-negative
+if (verbose) {
+  print("")
+  print("Confirming that all positive tests occur after enrollment")
+  print("")
+  #Confirming that all positive tests occur after enrollment
+  Confirmation <- STcohort.matched[which(STcohort.matched$result == 1),c("ID", "enrollment_week", "positive_week")]
+  Confirmation$difference <- Confirmation$positive_week - Confirmation$enrollment_week
+  summary(Confirmation$difference) #min is non-negative
+  
+  print("")
+  print("Check total number of positives")
+  print("")
+  table(STcohort.matched$result)
+}
 
-
-
-table(STcohort.matched$result)
+print("")
+print("------------------------------")
+print("Step 6: Compute Average Testing Behavior Variables")
+print("------------------------------")
+print("")
 
 
 #Average Testing Behavior Variables
@@ -588,17 +777,35 @@ for (i in 1:nrow(STcohort.matched)) {
   
 }
 
-#flag = 2 implies that a partner does not have >3 tests from enrollment to study end
-#throw out these matches
-table(STcohort.matched$flags)
+if (verbose) {
+  print("")
+  print("Checking for students with <3 tests after enrollment")
+  #flag = 2 implies that a partner does not have >3 tests from enrollment to study end
+  #throw out these matches
+  table(STcohort.matched$flags)
+}
+
 
 subclass_errors <- unique(as.numeric(STcohort.matched[which(STcohort.matched$flags == 2),]$subclass))
 
 STcohort.matched <- STcohort.matched[which(!(as.numeric(STcohort.matched$subclass) %in% subclass_errors)),]
 
-#Checking Sample Size
-nrow(STcohort.matched)
-sum(STcohort.matched$n_tests)
+if (verbose) {
+  print("")
+  print("Checking Sample Size")
+  print("")
+  #Checking Sample Size
+  nIDs <- nrow(STcohort.matched)
+  ntests <- sum(STcohort.matched$n_tests)
+  print(paste0("Number of Tests: ", ntests))
+  print(paste0("Number of Students: ", nIDs))
+}
+
+print("")
+print("------------------------------")
+print("Step 7: Compute Time to Event Variables")
+print("------------------------------")
+print("")
 
 
 #Create Time to event variables
@@ -607,12 +814,30 @@ STcohort.matched$event_occured <- ifelse(is.na(STcohort.matched$positive_week), 
 
 # STcohort.simplified <- STcohort.matched %>% select("ID", "start_age", "n_tests", "vax_week", "first_week", "start_week", "enrollment_week", "positive_week", "last_test", "time_to_event", "event_occured")
 
+print("")
+print("------------------------------")
+print("Step 8: Save ST Cohort Time to Event Data")
+print("------------------------------")
+print("")
+
 if (cluster) {
   write.csv(STcohort.matched, "/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_ST_matched_data_set.csv")
 } else {
   write.csv(STcohort.matched, here("cleandata", "2021_age_5_11_ST_matched_data_set.csv"))
 }
 
+
+print("")
+print("")
+print("")
+print("------------------------------")
+print("------------------------------")
+print("End File 3: Saving ST Matched Time to Event")
+print("------------------------------")
+print("------------------------------")
+print("")
+print("")
+print("")
 
 
 
