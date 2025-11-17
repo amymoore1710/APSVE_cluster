@@ -7,8 +7,8 @@
 # Amy Moore
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -485,7 +485,7 @@ school.info$schoolnum <- NA
 school.info$dir_cert <- NA
 
 for (i in 1:nrow(school.info)){
-  school.info[i,]$schoolnum <- as.numeric(APS_School_List[which(APS_School_List$School == school.info[i,]$schoolname),]$`#`)
+  school.info[i,]$schoolnum <- as.numeric(APS_School_List[which(APS_School_List$School == school.info[i,]$schoolname),]$X.)
   school.info[i,]$dir_cert <- Direct_Certification[which(Direct_Certification$SYSTEM_NAME == "Atlanta Public Schools" & Direct_Certification$SCHOOL_ID == school.info[i,]$schoolnum),]$direct_cert_perc
 }
 
