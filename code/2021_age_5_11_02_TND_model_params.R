@@ -6,8 +6,8 @@
 # Amy Moore
 
 #Run Locally?
-# cluster = TRUE
-cluster = FALSE
+cluster = TRUE
+# cluster = FALSE
 
 #Package Library Location
 if (cluster) {
