@@ -5,8 +5,8 @@
 #SBATCH --time=1:00:00
 #SBATCH --partition=day-long-cpu
 #SBATCH --job-name=APSVE_TND_params
-#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/job.%J.err
-#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/job.%J.out
+#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-19 - 2021_ages_5_11'/job.%J.err
+#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-19 - 2021_ages_5_11'/job.%J.out
 #SBATCH --mail-user=amoor53@emory.edu
 #SBATCH --mail-type=ALL
 

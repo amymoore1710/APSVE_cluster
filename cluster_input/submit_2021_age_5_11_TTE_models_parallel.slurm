@@ -7,8 +7,8 @@
 #SBATCH --job-name=APSVE_TTE_models
 #SBATCH --array=1-6
 #SBATCH --cores-per-socket=1
-#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/job.%J.err
-#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-17 - 2021_ages_5_11'/job.%J.out
+#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-19 - 2021_ages_5_11'/job.%J.err
+#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2025-11-19 - 2021_ages_5_11'/job.%J.out
 #SBATCH --mail-user=amoor53@emory.edu
 #SBATCH --mail-type=ALL
 
