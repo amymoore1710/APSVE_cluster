@@ -7,8 +7,8 @@
 # Amy Moore
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -796,6 +796,7 @@ together$weeks_since_vax <- ifelse(is.na(together$vax_week), 0,
   #Defining Prior Infections
 VScohort.alltests <- SendSS_tests[which(SendSS_tests$ID %in% VScohort.IDs), c("ID", "result_date")]
 VScohort.alltests <- rename(VScohort.alltests, resultdate = result_date)
+VScohort.alltests$resultdate <- as.Date(VScohort.alltests$resultdate)
 
 VSpositives <- VScohort.merged[which(VScohort.merged$result == 1), c("ID", "resultdate")]
 
