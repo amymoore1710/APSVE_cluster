@@ -26,6 +26,15 @@ params_list <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_TTE
 #select only the parameters for this model_num index
 params <- params_list[model_num,]
 
+print("")
+print("")
+print("------------------------------")
+print("Begin File: Fit Models")
+print("------------------------------")
+print("")
+print("")
+print(params)
+
 #convert the parameter strings into objects (load the specified data set, convert to formula, leave as is)
 data <- read_csv(paste0("/home/amoor53/APSVE_cluster/cleandata/", params$data_file))
 model_formula <- as.formula(params$model_formula)
@@ -39,5 +48,11 @@ results <- fit_TTE_model(data = data,
 saveRDS(results, file = paste0("/home/amoor53/APSVE_cluster/models/2021_age_5_11_", method, "_model.rds"))
 write.csv(results[[2]], paste0("/home/amoor53/APSVE_cluster/results/2021_age_5_11_", method, "_model_fit.csv"))
 
-
+print("")
+print("")
+print("------------------------------")
+print("End File: Model Fit and Saved")
+print("------------------------------")
+print("")
+print("")
 

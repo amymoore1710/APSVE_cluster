@@ -29,6 +29,14 @@ library(tidyverse) # Data Manipulation
 #### Param Sets ####
 ####################
 
+print("")
+print("")
+print("------------------------------")
+print("Begin File: Create Param Sets")
+print("------------------------------")
+print("")
+print("")
+
 num_models <- 6
 
 params_list <- data.frame(data_file = rep(NA, num_models),
@@ -95,5 +103,13 @@ if (cluster) {
 } else {
   write.csv(params_list, file = here("cleandata", "2021_age_5_11_TTE_params.csv"))
 }
+
+print("")
+print("")
+print("------------------------------")
+print("End File: Save Param Sets")
+print("------------------------------")
+print("")
+print("")
 
 
