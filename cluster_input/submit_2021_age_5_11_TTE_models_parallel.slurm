@@ -15,5 +15,5 @@
 
 module load R/4.2.2
 
-Rscript /home/amoor53/APSVE_cluster/code/2021_age_5_11_04_TTE_model_fitting_parallel.R $SLURM_ARRAY_TASK_ID --no-restore --no-save -- quiet
+Rscript /home/amoor53/APSVE_cluster/code/2021_age_5_11_06_TTE_model_fitting_parallel.R $SLURM_ARRAY_TASK_ID --no-restore --no-save -- quiet
 
