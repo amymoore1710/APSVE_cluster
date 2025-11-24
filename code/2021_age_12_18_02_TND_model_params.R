@@ -93,7 +93,7 @@ params_list[6,] <- c(data_file, model_formula, method)
 
 
 if (cluster) {
-  write.csv(params_list, paste0("/home/amoor53/APSVE_cluster/cleandata/", year, "_age_", "_TND_params.csv"))
+  write.csv(params_list, paste0("/home/amoor53/APSVE_cluster/cleandata/", year, "_age_", age, "_TND_params.csv"))
 } else {
   write.csv(params_list, file = here("cleandata", paste0(year, "_age_", age, "_TND_params.csv")))
 }
