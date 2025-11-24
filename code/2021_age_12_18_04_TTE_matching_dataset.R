@@ -1,6 +1,6 @@
 
 # APS VE TTE Matching Data Set
-# 2021-22 Ages 5-11 
+# 2021-22 Ages 12-18 
 # 2025-11-24
 # Modified to run on the cluster
 # Amy Moore
@@ -35,7 +35,7 @@ print("")
 print("")
 
 year <- "2021"
-age <- "5_11"
+age <- "12_18"
 
 # Read in Long Form with Missing Data lines Data set
 if (cluster) {

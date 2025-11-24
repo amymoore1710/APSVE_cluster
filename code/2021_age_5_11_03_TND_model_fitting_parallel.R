@@ -1,7 +1,7 @@
 
 # APS VE TND Model Fitting Parallel
 # 2021-22 Ages 5-11 
-# 2025-11-11
+# 2025-11-24
 # Modified to run on the cluster
 # Amy Moore
 
@@ -15,13 +15,16 @@ library(tidyverse) # Data Manipulation
 library(lme4) #Fitting GLMMs (for adding random effects)
 library(splines) #Adding Splines to GLMMs
 
+year <- "2021"
+age <- "5_11"
+
   #Model fitting function
 source("/home/amoor53/APSVE_cluster/code/functions/fit_TND_model.R")
 
 model_num <- commandArgs(trailingOnly = TRUE)[[1]]
 
   #Read in the list of parameters
-params_list <- read_csv("/home/amoor53/APSVE_cluster/cleandata/2021_age_5_11_TND_params.csv")
+params_list <- read_csv(paste0("/home/amoor53/APSVE_cluster/cleandata/", year, "_age_", age, "_TND_params.csv"))
 
   #select only the parameters for this model_num index
 params <- params_list[model_num,]
@@ -45,8 +48,8 @@ results <- fit_TND_model(data = data,
                          model_formula = model_formula, 
                          method = method)
 
-saveRDS(results, file = paste0("/home/amoor53/APSVE_cluster/models/2021_age_5_11_", method, "_model.rds"))
-write.csv(results[[2]], paste0("/home/amoor53/APSVE_cluster/results/2021_age_5_11_", method, "_model_fit.csv"))
+saveRDS(results, file = paste0("/home/amoor53/APSVE_cluster/models/", year, "_age_", age, "_", method, "_model.rds"))
+write.csv(results[[2]], paste0("/home/amoor53/APSVE_cluster/results/", year, "_age_", age, "_", method, "_model_fit.csv"))
 
 
 print("")
