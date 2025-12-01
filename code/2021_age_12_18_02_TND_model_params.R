@@ -51,7 +51,7 @@ params_list[1,] <- c(data_file, model_formula, method)
 
 method <- "TND_02"
 model_formula <- "result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5)"
-data_file <- paste0(year, "_age_", "_all_tested.csv")
+data_file <- paste0(year, "_age_", age, "_all_tested.csv")
 
 params_list[2,] <- c(data_file, model_formula, method)
 
