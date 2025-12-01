@@ -1,0 +1,577 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 1: Read in Raw Data"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Intial Raw Data"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1299989"
+[1] "Number of Students: 28912"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Remove NA IDs & Include only 2021-22 School Year"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 640094"
+[1] "Number of Students: 25059"
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Merge with Vaccination and Demographic Records"
+[1] "------------------------------"
+[1] ""
+[1] 25039
+[1] 25059
+[1] "Number of Tests: 640094"
+[1] "Number of Students: 25059"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Only Tests from Primary Enrollment Schools"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 638168"
+[1] "Number of Students: 24875"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Only students aged 12-18"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 127434"
+[1] "Number of Students: 8001"
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Only schools reporting >10 tests"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Vaccination status"
+[1] ""
+
+    0     1 
+57345 70089 
+[1] ""
+[1] "Checking Vaccination Status by Result"
+[1] ""
+   
+        0     1
+  0 57146   199
+  1 69872   217
+[1] ""
+[1] "Checking Vaccination by Result by School"
+[1] ""
+                  n tests n + tests n vaxed     % vaxed n + vaxed   % + vaxed
+Carver Early         1665         4     536 0.321921922         2 0.003731343
+Midtown             11838        30   10055 0.849383342        27 0.002685231
+Jackson High        11940        45    7910 0.662479062        30 0.003792668
+South Atlanta        1576         7     345 0.218908629         1 0.002898551
+BEST MS-HS           2299         8    1042 0.453240539         4 0.003838772
+Washington           1468        32     347 0.236376022        10 0.028818444
+Mays                 1923         8     774 0.402496100         2 0.002583979
+Therrell             3465        10    1379 0.397979798         3 0.002175489
+KIPP Collegiate       661         2     289 0.437216339         0 0.000000000
+Drew Secondary         36         0      23 0.638888889         0 0.000000000
+Douglass             1344         0     451 0.335565476         0 0.000000000
+North Atlanta        9804        42    7144 0.728682171        30 0.004199328
+CSK                  3923         4    1524 0.388478205         2 0.001312336
+Carver STEAM            5         0       2 0.400000000         0 0.000000000
+Hank Aaron            334         0       1 0.002994012         0 0.000000000
+Sylvan               3430         7     856 0.249562682         3 0.003504673
+Invictus             4165         8     921 0.221128451         0 0.000000000
+Long                 3270        12     737 0.225382263         1 0.001356852
+H Russell            5535         9    1137 0.205420054         3 0.002638522
+Howard              15198        47   12203 0.802934597        35 0.002868147
+KIPP Woodson Park      81         0      13 0.160493827         0 0.000000000
+Wesley               3415        12    2208 0.646559297         7 0.003170290
+Young                3308         8     882 0.266626360         1 0.001133787
+Sutton              11105        40    7292 0.656641153        23 0.003154142
+Classical               4         0       0 0.000000000         0         NaN
+Centennial           3496        15    1287 0.368135011         4 0.003108003
+Hollis               1610         3     514 0.319254658         1 0.001945525
+ANCS Middle          5173        10    4244 0.820413686         8 0.001885014
+King                 8551        34    3886 0.454449772        12 0.003088008
+Bunche               4105        10    1346 0.327892814         4 0.002971768
+Kindezi O4W           751         1     188 0.250332889         0 0.000000000
+KIPP Vision           204         1      62 0.303921569         1 0.016129032
+KIPP STRIVE           336         2     138 0.410714286         1 0.007246377
+KIPP WAYS             279         3      96 0.344086022         1 0.010416667
+Kindezi               629         1     184 0.292527822         1 0.005434783
+KIPP Soul             155         0      41 0.264516129         0 0.000000000
+Price                   1         0       0 0.000000000         0         NaN
+Harper-Archer ES       25         0       0 0.000000000         0         NaN
+Toomer                 43         0      32 0.744186047         0 0.000000000
+Scott                  11         0       0 0.000000000         0         NaN
+Tuskegee               30         0       0 0.000000000         0         NaN
+Burgess                83         1       0 0.000000000         0         NaN
+Peyton Forest          19         0       0 0.000000000         0         NaN
+Deerwood               69         0       0 0.000000000         0         NaN
+Heritage               41         0       0 0.000000000         0         NaN
+Finch                  31         0       0 0.000000000         0         NaN
+                  n + unvaxed  % + unvaxed
+Carver Early                2 0.0017714792
+Midtown                     3 0.0016825575
+Jackson High               15 0.0037220844
+South Atlanta               6 0.0048740861
+BEST MS-HS                  4 0.0031821798
+Washington                 22 0.0196253345
+Mays                        6 0.0052219321
+Therrell                    7 0.0033557047
+KIPP Collegiate             2 0.0053763441
+Drew Secondary              0 0.0000000000
+Douglass                    0 0.0000000000
+North Atlanta              12 0.0045112782
+CSK                         2 0.0008336807
+Carver STEAM                0 0.0000000000
+Hank Aaron                  0 0.0000000000
+Sylvan                      4 0.0015540016
+Invictus                    8 0.0024660912
+Long                       11 0.0043426767
+H Russell                   6 0.0013642565
+Howard                     12 0.0040066778
+KIPP Woodson Park           0 0.0000000000
+Wesley                      5 0.0041425021
+Young                       7 0.0028854081
+Sutton                     17 0.0044584317
+Classical                   0 0.0000000000
+Centennial                 11 0.0049796288
+Hollis                      2 0.0018248175
+ANCS Middle                 2 0.0021528525
+King                       22 0.0047159700
+Bunche                      6 0.0021747010
+Kindezi O4W                 1 0.0017761989
+KIPP Vision                 0 0.0000000000
+KIPP STRIVE                 1 0.0050505051
+KIPP WAYS                   2 0.0109289617
+Kindezi                     0 0.0000000000
+KIPP Soul                   0 0.0000000000
+Price                       0 0.0000000000
+Harper-Archer ES            0 0.0000000000
+Toomer                      0 0.0000000000
+Scott                       0 0.0000000000
+Tuskegee                    0 0.0000000000
+Burgess                     1 0.0120481928
+Peyton Forest               0 0.0000000000
+Deerwood                    0 0.0000000000
+Heritage                    0 0.0000000000
+Finch                       0 0.0000000000
+[1] "Number of Tests: 125122"
+[1] "Number of Students: 7637"
+[1] ""
+[1] "------------------------------"
+[1] "Step 6: Only where covariates have positivity"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Summary by School Updated"
+[1] ""
+                n tests n + tests n vaxed   % vaxed n + vaxed   % + vaxed
+Carver Early       1665         4     536 0.3219219         2 0.003731343
+Midtown           11838        30   10055 0.8493833        27 0.002685231
+Jackson High      11940        45    7910 0.6624791        30 0.003792668
+South Atlanta      1576         7     345 0.2189086         1 0.002898551
+BEST MS-HS         2299         8    1042 0.4532405         4 0.003838772
+Washington         1468        32     347 0.2363760        10 0.028818444
+Mays               1923         8     774 0.4024961         2 0.002583979
+Therrell           3465        10    1379 0.3979798         3 0.002175489
+KIPP Collegiate     661         2     289 0.4372163         0 0.000000000
+North Atlanta      9804        42    7144 0.7286822        30 0.004199328
+CSK                3923         4    1524 0.3884782         2 0.001312336
+Sylvan             3430         7     856 0.2495627         3 0.003504673
+Invictus           4165         8     921 0.2211285         0 0.000000000
+Long               3270        12     737 0.2253823         1 0.001356852
+H Russell          5535         9    1137 0.2054201         3 0.002638522
+Howard            15198        47   12203 0.8029346        35 0.002868147
+Wesley             3415        12    2208 0.6465593         7 0.003170290
+Young              3308         8     882 0.2666264         1 0.001133787
+Sutton            11105        40    7292 0.6566412        23 0.003154142
+Centennial         3496        15    1287 0.3681350         4 0.003108003
+Hollis             1610         3     514 0.3192547         1 0.001945525
+ANCS Middle        5173        10    4244 0.8204137         8 0.001885014
+King               8551        34    3886 0.4544498        12 0.003088008
+Bunche             4105        10    1346 0.3278928         4 0.002971768
+Kindezi O4W         751         1     188 0.2503329         0 0.000000000
+KIPP Vision         204         1      62 0.3039216         1 0.016129032
+KIPP STRIVE         336         2     138 0.4107143         1 0.007246377
+KIPP WAYS           279         3      96 0.3440860         1 0.010416667
+Kindezi             629         1     184 0.2925278         1 0.005434783
+                n + unvaxed  % + unvaxed
+Carver Early              2 0.0017714792
+Midtown                   3 0.0016825575
+Jackson High             15 0.0037220844
+South Atlanta             6 0.0048740861
+BEST MS-HS                4 0.0031821798
+Washington               22 0.0196253345
+Mays                      6 0.0052219321
+Therrell                  7 0.0033557047
+KIPP Collegiate           2 0.0053763441
+North Atlanta            12 0.0045112782
+CSK                       2 0.0008336807
+Sylvan                    4 0.0015540016
+Invictus                  8 0.0024660912
+Long                     11 0.0043426767
+H Russell                 6 0.0013642565
+Howard                   12 0.0040066778
+Wesley                    5 0.0041425021
+Young                     7 0.0028854081
+Sutton                   17 0.0044584317
+Centennial               11 0.0049796288
+Hollis                    2 0.0018248175
+ANCS Middle               2 0.0021528525
+King                     22 0.0047159700
+Bunche                    6 0.0021747010
+Kindezi O4W               1 0.0017761989
+KIPP Vision               0 0.0000000000
+KIPP STRIVE               1 0.0050505051
+KIPP WAYS                 2 0.0109289617
+Kindezi                   0 0.0000000000
+[1] ""
+[1] "Checking Gender by Result"
+[1] ""
+   
+        0     1
+  F 66806   217
+  M 57697   198
+  N   204     0
+[1] ""
+[1] "Removed Non-binary Gender (No Postiives)"
+[1] ""
+   
+        0     1
+  F 66806   217
+  M 57697   198
+[1] "Number of Tests: 124918"
+[1] "Number of Students: 7631"
+[1] ""
+[1] "Checking Vaccination by School"
+[1] ""
+                num_students num_vaxed Perc_vaxed num_unvaxed
+Carver Early             130        43  0.3307692          87
+Midtown                  847       705  0.8323495         142
+Jackson High             694       407  0.5864553         287
+South Atlanta            216        56  0.2592593         160
+BEST MS-HS               123        52  0.4227642          71
+Washington               227        59  0.2599119         168
+Mays                     227        83  0.3656388         144
+Therrell                 325       119  0.3661538         206
+KIPP Collegiate          249       103  0.4136546         146
+North Atlanta           1059       741  0.6997167         318
+CSK                      182        70  0.3846154         112
+Sylvan                   180        42  0.2333333         138
+Invictus                 248        57  0.2298387         191
+Long                     201        49  0.2437811         152
+H Russell                190        41  0.2157895         149
+Howard                   513       407  0.7933723         106
+Wesley                   133        84  0.6315789          49
+Young                    159        40  0.2515723         119
+Sutton                   517       334  0.6460348         183
+Centennial               109        36  0.3302752          73
+Hollis                    65        18  0.2769231          47
+ANCS Middle              156       128  0.8205128          28
+King                     339       140  0.4129794         199
+Bunche                   195        67  0.3435897         128
+Kindezi O4W               69        17  0.2463768          52
+KIPP Vision               59        19  0.3220339          40
+KIPP STRIVE               97        39  0.4020619          58
+KIPP WAYS                 80        27  0.3375000          53
+Kindezi                   61        19  0.3114754          42
+[1] ""
+[1] "Checking Race by Result"
+[1] ""
+[1] ""
+[1] "Checking Race by Vaccination Status"
+[1] ""
+[1] ""
+[1] "Checking Race by Vaccination Status and Result"
+[1] ""
+, ,  = 0
+
+                           
+                                0     1
+  Asian                       155  1621
+  Black or African American 44031 27029
+  Hispanic/Latino            6102  4736
+  Other                      1242  3522
+  White                      3857 32208
+
+, ,  = 1
+
+                           
+                                0     1
+  Asian                         0     2
+  Black or African American   160    87
+  Hispanic/Latino              23    18
+  Other                         3     5
+  White                        12   105
+
+[1] ""
+[1] "Checking Age by Result"
+[1] ""
+    
+         0     1
+  12 38310   122
+  13 34628    93
+  14 17992    65
+  15 13860    61
+  16 10061    41
+  17  8716    29
+  18   936     4
+[1] ""
+[1] "Checking Age by Vaccination Status"
+[1] ""
+    
+         0     1
+  12 18549 19883
+  13 17068 17653
+  14  7664 10393
+  15  5595  8326
+  16  3568  6534
+  17  2791  5954
+  18   350   590
+[1] ""
+[1] "------------------------------"
+[1] "Step 7: Create additional covariates"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 124918"
+[1] "Number of Students: 7631"
+[1] ""
+[1] "------------------------------"
+[1] "Step 8: No Transfer Students"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Number of Schools per ID"
+[1] ""
+
+   1    2 
+7612   19 
+[1] "Number of Tests: 124600"
+[1] "Number of Students: 7612"
+[1] ""
+[1] "------------------------------"
+[1] "Step 8: At least 3 tests each"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Number of tests by ID"
+[1] ""
+
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+767 380 320 359 257 191 214 233 238 214 194 209 194 145 138 170 141 154 140 126 
+ 21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
+143 142 137 154 180 147 130 181 142 159 139 147 134 143 110 104 109  77  74  76 
+ 41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56 
+ 64  43  36  12  10   2   3   4   2   4   7   5   2   2   3   1 
+[1] "Number of Tests: 123073"
+[1] "Number of Students: 6465"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 1: Saving Daily testing by ID"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 2: Transition to Weekly Testing Summaries"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Assign tests to a week of the school year"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Assign Vaccination Date to a week of the school year"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Recalibrate data for one entry per week"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Recalibrate covariates at weekly scale"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Final Confirmations"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 97160"
+[1] "Number of Students: 6465"
+[1] ""
+[1] "Check tests by week"
+[1] ""
+# A tibble: 34 × 2
+    week num_tests
+   <dbl>     <dbl>
+ 1     1      1851
+ 2     2      2471
+ 3     3      2647
+ 4     4      2590
+ 5     5      1486
+ 6     6      2417
+ 7     7      2880
+ 8     8      2764
+ 9     9      1209
+10    10      2730
+# ℹ 24 more rows
+[1] ""
+[1] "Check 3 weeks of tests per ID"
+[1] ""
+[1] ""
+[1] "removing low testers"
+[1] ""
+[1] "Number of Tests: 97076"
+[1] "Number of Students: 6423"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 2: Saving Weekly testing by ID"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 3: Compute Propensity Scores"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Propensity Score Model"
+[1] "------------------------------"
+[1] ""
+[1] "Fitting Model Now"
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: tested ~ vax_status + start_age + gender + race + dir_cert +  
+    prior_infections + (1 | schoolname) + (1 | ID) + ns(week,  
+    df = 5) + num_prev_test + time_since_last + tests_in_28 +  
+    tests_in_14 + test_density + adj_test_density + no_history
+   Data: VScohort.tested
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+ 209770.3  210017.3 -104861.1  209722.3    218358 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.4108 -0.5248 -0.2027  0.6031 11.7328 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ID         (Intercept) 0.1620   0.4025  
+ schoolname (Intercept) 0.2818   0.5309  
+Number of obs: 218382, groups:  ID, 6423; schoolname, 29
+
+Fixed effects:
+                                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                    3.431e+00  3.264e-01  10.513  < 2e-16 ***
+vax_status                     1.114e-01  1.709e-02   6.518 7.12e-11 ***
+start_age                     -9.776e-02  7.820e-03 -12.502  < 2e-16 ***
+genderM                       -7.441e-02  1.545e-02  -4.818 1.45e-06 ***
+raceBlack or African American -1.212e-01  6.879e-02  -1.762    0.078 .  
+raceHispanic/Latino           -3.354e-02  7.162e-02  -0.468    0.640    
+raceOther                     -1.949e-02  7.756e-02  -0.251    0.802    
+raceWhite                      5.524e-03  6.802e-02   0.081    0.935    
+dir_cert                       3.306e-04  5.706e-03   0.058    0.954    
+prior_infections              -9.327e-02  1.983e-02  -4.702 2.57e-06 ***
+ns(week, df = 5)1             -9.388e-01  3.799e-02 -24.708  < 2e-16 ***
+ns(week, df = 5)2             -2.176e+00  5.052e-02 -43.062  < 2e-16 ***
+ns(week, df = 5)3             -1.845e+00  4.622e-02 -39.913  < 2e-16 ***
+ns(week, df = 5)4             -5.700e+00  7.751e-02 -73.543  < 2e-16 ***
+ns(week, df = 5)5             -2.484e+00  5.159e-02 -48.144  < 2e-16 ***
+num_prev_test                  5.840e-02  2.096e-03  27.860  < 2e-16 ***
+time_since_last               -1.229e-02  4.299e-04 -28.585  < 2e-16 ***
+tests_in_28                    3.130e-01  6.796e-03  46.052  < 2e-16 ***
+tests_in_14                    2.971e-01  9.959e-03  29.836  < 2e-16 ***
+test_density                  -1.284e+01  4.025e-01 -31.908  < 2e-16 ***
+adj_test_density              -2.952e+00  1.392e-01 -21.200  < 2e-16 ***
+no_history                    -2.883e+00  3.869e-02 -74.525  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 3.13251 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Save Propensity Score Model"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Save Propensity Score Fitted Values"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 3: Saving Weekly testing by ID with Propensity Scores"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 4: Create Model Fitting Data Sets"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Subset to no missing weeks"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Adding Additional Covariates"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Subset to Super Tester Cohort"
+[1] "------------------------------"
+[1] ""
+[1] "Super Tester Cut Off:24"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Save Data Sets"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 4: Saving Weekly testing by ID with Propensity Scores Model Ready"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

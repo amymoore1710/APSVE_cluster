@@ -1,0 +1,11 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File: Fit Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+# A tibble: 1 × 4
+   ...1 data_file                model_formula                            method
+  <dbl> <chr>                    <chr>                                    <chr> 
+1     2 2021_age__all_tested.csv result ~ vax_status + start_age + gende… TND_02
