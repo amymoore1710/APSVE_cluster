@@ -1,7 +1,7 @@
 
 # APS VE TTE Model parameter sets
-# 2022-23 Ages 5-11 
-# 2025-12-01
+# 2022-23 Ages 12-18 
+# 2025-12-03
 # Modified to run on the cluster
 # Amy Moore
 
@@ -17,7 +17,7 @@ if (cluster) {
 }
 
 year <- "2022"
-age <- "5_11"
+age <- "12_18"
 
 
 library(readr) #Read in Files
