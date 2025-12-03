@@ -1,0 +1,18 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File: Fit Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+# A tibble: 1 × 4
+   ...1 data_file                             model_formula               method
+  <dbl> <chr>                                 <chr>                       <chr> 
+1     3 2022_age_5_11_ST_matched_data_set.csv Surv(time = time_to_event,… TTE_03
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "End File: Model Fit and Saved"
+[1] "------------------------------"
+[1] ""
+[1] ""

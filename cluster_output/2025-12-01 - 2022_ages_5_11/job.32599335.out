@@ -1,0 +1,709 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 1: Read in Raw Data"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Intial Raw Data"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1299989"
+[1] "Number of Students: 28912"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Remove NA IDs & Include only 2022-23 School Year"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 633412"
+[1] "Number of Students: 18590"
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Merge with Vaccination and Demographic Records"
+[1] "------------------------------"
+[1] ""
+[1] 18580
+[1] 18590
+[1] "Number of Tests: 633412"
+[1] "Number of Students: 18590"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Only Tests from Primary Enrollment Schools"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 632560"
+[1] "Number of Students: 18491"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Only students aged 5-11"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 530683"
+[1] "Number of Students: 13762"
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Only schools reporting >10 tests"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Vaccination status"
+[1] ""
+
+     0      1 
+339117 191566 
+[1] ""
+[1] "Checking Vaccination Status by Result"
+[1] ""
+   
+         0      1
+  0 338392    725
+  1 191162    404
+[1] ""
+[1] "Checking Vaccination by Result by School"
+[1] ""
+                    n tests n + tests n vaxed    % vaxed n + vaxed    % + vaxed
+Centennial             7291         7    1618 0.22191743         2 0.0012360939
+Howard                 8991        21    6928 0.77054833        16 0.0023094688
+Invictus               2233         6     247 0.11061352         0 0.0000000000
+Long                   2395         5     112 0.04676409         0 0.0000000000
+Parkside              22731        48   12052 0.53020105        28 0.0023232658
+Sutton                 6891        17    3714 0.53896387         6 0.0016155089
+Smith                 13465        45    7223 0.53642778        31 0.0042918455
+H Russell              3418        12     301 0.08806319         0 0.0000000000
+King                   6089        15    2349 0.38577763         3 0.0012771392
+ANCS Middle            2485         3    2050 0.82494970         1 0.0004878049
+Young                  3137        12     438 0.13962384         1 0.0022831050
+Hollis                10019        22     996 0.09941112         0 0.0000000000
+Bunche                 2336         5     440 0.18835616         1 0.0022727273
+Peyton Forest          4876        15     518 0.10623462         2 0.0038610039
+Sylvan                  632         1      73 0.11550633         0 0.0000000000
+Finch                  9240        17    1323 0.14318182         3 0.0022675737
+Boyd                   5429         8     536 0.09872905         0 0.0000000000
+Harper-Archer ES      11617        26    1380 0.11879143         6 0.0043478261
+BAMO                   6017        11     667 0.11085258         0 0.0000000000
+Burgess               24280        52   16211 0.66766886        32 0.0019739683
+ANCS Elementary       10570        26    8647 0.81807001        23 0.0026598820
+Humphries              8581        10     684 0.07971099         2 0.0029239766
+E Rivers              14656        29    8588 0.58597162        16 0.0018630647
+Garden Hills          11109        23    3856 0.34710595         9 0.0023340249
+Kimberly               9361        42     895 0.09560944         2 0.0022346369
+Jones                  9588        17    1458 0.15206508         2 0.0013717421
+Cleveland              8412        19    1122 0.13338088         4 0.0035650624
+Bolton                13286        31    7742 0.58271865        20 0.0025833118
+Wesley                 3698         9    1631 0.44104922         3 0.0018393624
+Drew Secondary            2         0       1 0.50000000         0 0.0000000000
+Benteen                8995        19    2882 0.32040022         7 0.0024288688
+Beecher               10356        16    3668 0.35419081         7 0.0019083969
+BEST MS-HS             1361         4     393 0.28875827         1 0.0025445293
+CSK                     433         0     141 0.32563510         0 0.0000000000
+Hope-Hill             12031        31    2777 0.23082038         8 0.0028808066
+Toomer                15701        43    6841 0.43570473        13 0.0019003070
+West Manor            11128        25    2013 0.18089504         6 0.0029806259
+Fickett               15482        18    2457 0.15870043         0 0.0000000000
+Heritage              11232        22    1319 0.11743234         3 0.0022744503
+Lin                   28165        36   23778 0.84423930        24 0.0010093364
+Brandon               13238        40    7970 0.60205469        27 0.0033877039
+FL Stanton             4190         9     615 0.14677804         0 0.0000000000
+KIPP WAYS                 2         0       0 0.00000000         0          NaN
+Hutchinson             8924        22     485 0.05434783         0 0.0000000000
+Scott                  8219        14     530 0.06448473         2 0.0037735849
+Jackson Elementary     8255        22    4842 0.58655360        14 0.0028913672
+Tuskegee              15557        24    1408 0.09050588         4 0.0028409091
+Perkerson              6032         9    1194 0.19794430         3 0.0025125628
+Dobbs                  9059        17    1177 0.12992604         2 0.0016992353
+Morningside            7878        24    6390 0.81111957        16 0.0025039124
+Continental            9464        15     722 0.07628910         4 0.0055401662
+Cascade                7028        17     791 0.11254980         4 0.0050568900
+Deerwood              17395        30    3461 0.19896522         5 0.0014446692
+Kindezi                   3         0       2 0.66666667         0 0.0000000000
+Springdale            26731        59   18484 0.69148180        38 0.0020558321
+Dunbar                10049        13     940 0.09354165         0 0.0000000000
+Usher-Collier         10533        26    1092 0.10367417         2 0.0018315018
+Miles                 10393        19    1394 0.13412874         1 0.0007173601
+KIPP Soul                 2         0       0 0.00000000         0          NaN
+Hank Aaron                1         0       0 0.00000000         0          NaN
+KIPP Vision               1         0       0 0.00000000         0          NaN
+KIPP STRIVE Primary       5         1       0 0.00000000         0          NaN
+KIPP Vision Primary       1         0       0 0.00000000         0          NaN
+KIPP WAYS Primary         1         0       0 0.00000000         0          NaN
+KIPP Soul Primary         2         0       0 0.00000000         0          NaN
+Kindezi O4W               1         0       0 0.00000000         0          NaN
+                    n + unvaxed  % + unvaxed
+Centennial                    5 0.0008813679
+Howard                        5 0.0024236549
+Invictus                      6 0.0030211480
+Long                          5 0.0021901007
+Parkside                     20 0.0018728345
+Sutton                       11 0.0034623859
+Smith                        14 0.0022428709
+H Russell                    12 0.0038498556
+King                         12 0.0032085561
+ANCS Middle                   2 0.0045977011
+Young                        11 0.0040755835
+Hollis                       22 0.0024382135
+Bunche                        4 0.0021097046
+Peyton Forest                13 0.0029830197
+Sylvan                        1 0.0017889088
+Finch                        14 0.0017683466
+Boyd                          8 0.0016349888
+Harper-Archer ES             20 0.0019536974
+BAMO                         11 0.0020560748
+Burgess                      20 0.0024786219
+ANCS Elementary               3 0.0015600624
+Humphries                     8 0.0010130429
+E Rivers                     13 0.0021423863
+Garden Hills                 14 0.0019302358
+Kimberly                     40 0.0047247815
+Jones                        15 0.0018450185
+Cleveland                    15 0.0020576132
+Bolton                       11 0.0019841270
+Wesley                        6 0.0029027576
+Drew Secondary                0 0.0000000000
+Benteen                      12 0.0019630296
+Beecher                       9 0.0013456938
+BEST MS-HS                    3 0.0030991736
+CSK                           0 0.0000000000
+Hope-Hill                    23 0.0024854117
+Toomer                       30 0.0033860045
+West Manor                   19 0.0020844761
+Fickett                      18 0.0013819578
+Heritage                     19 0.0019166751
+Lin                          12 0.0027353545
+Brandon                      13 0.0024677297
+FL Stanton                    9 0.0025174825
+KIPP WAYS                     0 0.0000000000
+Hutchinson                   22 0.0026069440
+Scott                        12 0.0015606711
+Jackson Elementary            8 0.0023439789
+Tuskegee                     20 0.0014135275
+Perkerson                     6 0.0012401819
+Dobbs                        15 0.0019030703
+Morningside                   8 0.0053763441
+Continental                  11 0.0012582933
+Cascade                      13 0.0020843354
+Deerwood                     25 0.0017941725
+Kindezi                       0 0.0000000000
+Springdale                   21 0.0025463805
+Dunbar                       13 0.0014271600
+Usher-Collier                24 0.0025421036
+Miles                        18 0.0020002222
+KIPP Soul                     0 0.0000000000
+Hank Aaron                    0 0.0000000000
+KIPP Vision                   0 0.0000000000
+KIPP STRIVE Primary           1 0.2000000000
+KIPP Vision Primary           0 0.0000000000
+KIPP WAYS Primary             0 0.0000000000
+KIPP Soul Primary             0 0.0000000000
+Kindezi O4W                   0 0.0000000000
+[1] "Number of Tests: 530229"
+[1] "Number of Students: 13722"
+[1] ""
+[1] "------------------------------"
+[1] "Step 6: Only where covariates have positivity"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Summary by School Updated"
+[1] ""
+                   n tests n + tests n vaxed    % vaxed n + vaxed    % + vaxed
+Centennial            7291         7    1618 0.22191743         2 0.0012360939
+Howard                8991        21    6928 0.77054833        16 0.0023094688
+Invictus              2233         6     247 0.11061352         0 0.0000000000
+Long                  2395         5     112 0.04676409         0 0.0000000000
+Parkside             22731        48   12052 0.53020105        28 0.0023232658
+Sutton                6891        17    3714 0.53896387         6 0.0016155089
+Smith                13465        45    7223 0.53642778        31 0.0042918455
+H Russell             3418        12     301 0.08806319         0 0.0000000000
+King                  6089        15    2349 0.38577763         3 0.0012771392
+ANCS Middle           2485         3    2050 0.82494970         1 0.0004878049
+Young                 3137        12     438 0.13962384         1 0.0022831050
+Hollis               10019        22     996 0.09941112         0 0.0000000000
+Bunche                2336         5     440 0.18835616         1 0.0022727273
+Peyton Forest         4876        15     518 0.10623462         2 0.0038610039
+Sylvan                 632         1      73 0.11550633         0 0.0000000000
+Finch                 9240        17    1323 0.14318182         3 0.0022675737
+Boyd                  5429         8     536 0.09872905         0 0.0000000000
+Harper-Archer ES     11617        26    1380 0.11879143         6 0.0043478261
+BAMO                  6017        11     667 0.11085258         0 0.0000000000
+Burgess              24280        52   16211 0.66766886        32 0.0019739683
+ANCS Elementary      10570        26    8647 0.81807001        23 0.0026598820
+Humphries             8581        10     684 0.07971099         2 0.0029239766
+E Rivers             14656        29    8588 0.58597162        16 0.0018630647
+Garden Hills         11109        23    3856 0.34710595         9 0.0023340249
+Kimberly              9361        42     895 0.09560944         2 0.0022346369
+Jones                 9588        17    1458 0.15206508         2 0.0013717421
+Cleveland             8412        19    1122 0.13338088         4 0.0035650624
+Bolton               13286        31    7742 0.58271865        20 0.0025833118
+Wesley                3698         9    1631 0.44104922         3 0.0018393624
+Benteen               8995        19    2882 0.32040022         7 0.0024288688
+Beecher              10356        16    3668 0.35419081         7 0.0019083969
+BEST MS-HS            1361         4     393 0.28875827         1 0.0025445293
+Hope-Hill            12031        31    2777 0.23082038         8 0.0028808066
+Toomer               15701        43    6841 0.43570473        13 0.0019003070
+West Manor           11128        25    2013 0.18089504         6 0.0029806259
+Fickett              15482        18    2457 0.15870043         0 0.0000000000
+Heritage             11232        22    1319 0.11743234         3 0.0022744503
+Lin                  28165        36   23778 0.84423930        24 0.0010093364
+Brandon              13238        40    7970 0.60205469        27 0.0033877039
+FL Stanton            4190         9     615 0.14677804         0 0.0000000000
+Hutchinson            8924        22     485 0.05434783         0 0.0000000000
+Scott                 8219        14     530 0.06448473         2 0.0037735849
+Jackson Elementary    8255        22    4842 0.58655360        14 0.0028913672
+Tuskegee             15557        24    1408 0.09050588         4 0.0028409091
+Perkerson             6032         9    1194 0.19794430         3 0.0025125628
+Dobbs                 9059        17    1177 0.12992604         2 0.0016992353
+Morningside           7878        24    6390 0.81111957        16 0.0025039124
+Continental           9464        15     722 0.07628910         4 0.0055401662
+Cascade               7028        17     791 0.11254980         4 0.0050568900
+Deerwood             17395        30    3461 0.19896522         5 0.0014446692
+Springdale           26731        59   18484 0.69148180        38 0.0020558321
+Dunbar               10049        13     940 0.09354165         0 0.0000000000
+Usher-Collier        10533        26    1092 0.10367417         2 0.0018315018
+Miles                10393        19    1394 0.13412874         1 0.0007173601
+                   n + unvaxed  % + unvaxed
+Centennial                   5 0.0008813679
+Howard                       5 0.0024236549
+Invictus                     6 0.0030211480
+Long                         5 0.0021901007
+Parkside                    20 0.0018728345
+Sutton                      11 0.0034623859
+Smith                       14 0.0022428709
+H Russell                   12 0.0038498556
+King                        12 0.0032085561
+ANCS Middle                  2 0.0045977011
+Young                       11 0.0040755835
+Hollis                      22 0.0024382135
+Bunche                       4 0.0021097046
+Peyton Forest               13 0.0029830197
+Sylvan                       1 0.0017889088
+Finch                       14 0.0017683466
+Boyd                         8 0.0016349888
+Harper-Archer ES            20 0.0019536974
+BAMO                        11 0.0020560748
+Burgess                     20 0.0024786219
+ANCS Elementary              3 0.0015600624
+Humphries                    8 0.0010130429
+E Rivers                    13 0.0021423863
+Garden Hills                14 0.0019302358
+Kimberly                    40 0.0047247815
+Jones                       15 0.0018450185
+Cleveland                   15 0.0020576132
+Bolton                      11 0.0019841270
+Wesley                       6 0.0029027576
+Benteen                     12 0.0019630296
+Beecher                      9 0.0013456938
+BEST MS-HS                   3 0.0030991736
+Hope-Hill                   23 0.0024854117
+Toomer                      30 0.0033860045
+West Manor                  19 0.0020844761
+Fickett                     18 0.0013819578
+Heritage                    19 0.0019166751
+Lin                         12 0.0027353545
+Brandon                     13 0.0024677297
+FL Stanton                   9 0.0025174825
+Hutchinson                  22 0.0026069440
+Scott                       12 0.0015606711
+Jackson Elementary           8 0.0023439789
+Tuskegee                    20 0.0014135275
+Perkerson                    6 0.0012401819
+Dobbs                       15 0.0019030703
+Morningside                  8 0.0053763441
+Continental                 11 0.0012582933
+Cascade                     13 0.0020843354
+Deerwood                    25 0.0017941725
+Springdale                  21 0.0025463805
+Dunbar                      13 0.0014271600
+Usher-Collier               24 0.0025421036
+Miles                       18 0.0020002222
+[1] ""
+[1] "Checking Gender by Result"
+[1] ""
+   
+         0      1
+  F 268332    570
+  M 260522    558
+  N    247      0
+[1] ""
+[1] "Removed Non-binary Gender (No Postiives)"
+[1] ""
+   
+         0      1
+  F 268332    570
+  M 260522    558
+[1] "Number of Tests: 529982"
+[1] "Number of Students: 13718"
+[1] ""
+[1] "Checking Vaccination by School"
+[1] ""
+                   num_students num_vaxed Perc_vaxed num_unvaxed
+Centennial                  352        70 0.19886364         282
+Howard                      254       184 0.72440945          70
+Invictus                     94        11 0.11702128          83
+Long                        111         6 0.05405405         105
+Parkside                    465       219 0.47096774         246
+Sutton                      312       160 0.51282051         152
+Smith                       384       186 0.48437500         198
+H Russell                    96        16 0.16666667          80
+King                        213        72 0.33802817         141
+ANCS Middle                  78        63 0.80769231          15
+Young                       118        16 0.13559322         102
+Hollis                      299        34 0.11371237         265
+Bunche                      138        26 0.18840580         112
+Peyton Forest               145        13 0.08965517         132
+Sylvan                       70         8 0.11428571          62
+Finch                       242        33 0.13636364         209
+Boyd                        178        14 0.07865169         164
+Harper-Archer ES            320        33 0.10312500         287
+BAMO                        185        20 0.10810811         165
+Burgess                     443       277 0.62528217         166
+ANCS Elementary             356       284 0.79775281          72
+Humphries                   228        24 0.10526316         204
+E Rivers                    337       195 0.57863501         142
+Garden Hills                278        87 0.31294964         191
+Kimberly                    258        26 0.10077519         232
+Jones                       243        38 0.15637860         205
+Cleveland                   219        25 0.11415525         194
+Bolton                      310       169 0.54516129         141
+Wesley                      315       130 0.41269841         185
+Benteen                     203        55 0.27093596         148
+Beecher                     197        61 0.30964467         136
+BEST MS-HS                   35         9 0.25714286          26
+Hope-Hill                   273        54 0.19780220         219
+Toomer                      365       128 0.35068493         237
+West Manor                  236        43 0.18220339         193
+Fickett                     345        49 0.14202899         296
+Heritage                    309        29 0.09385113         280
+Lin                         552       464 0.84057971          88
+Brandon                     379       240 0.63324538         139
+FL Stanton                  117        13 0.11111111         104
+Hutchinson                  203        13 0.06403941         190
+Scott                       235        14 0.05957447         221
+Jackson Elementary          197       109 0.55329949          88
+Tuskegee                    347        30 0.08645533         317
+Perkerson                   163        34 0.20858896         129
+Dobbs                       221        31 0.14027149         190
+Morningside                 416       328 0.78846154          88
+Continental                 244        17 0.06967213         227
+Cascade                     187        17 0.09090909         170
+Deerwood                    363        59 0.16253444         304
+Springdale                  552       372 0.67391304         180
+Dunbar                      248        20 0.08064516         228
+Usher-Collier               261        26 0.09961686         235
+Miles                       273        32 0.11721612         241
+[1] ""
+[1] "Checking Race by Result"
+[1] ""
+                           
+                                 0      1
+  Asian                       8519     21
+  Black or African American 336577    699
+  Hispanic/Latino            45386    118
+  Other                      26091     53
+  White                     112281    237
+[1] ""
+[1] "Checking Race by Vaccination Status"
+[1] ""
+                           
+                                 0      1
+  Asian                       2437   6103
+  Black or African American 275398  61878
+  Hispanic/Latino            32536  12968
+  Other                       8703  17441
+  White                      19733  92785
+[1] ""
+[1] "Checking Race by Vaccination Status and Result"
+[1] ""
+, ,  = 0
+
+                           
+                                 0      1
+  Asian                       2428   6091
+  Black or African American 274840  61737
+  Hispanic/Latino            32445  12941
+  Other                       8686  17405
+  White                      19684  92597
+
+, ,  = 1
+
+                           
+                                 0      1
+  Asian                          9     12
+  Black or African American    558    141
+  Hispanic/Latino               91     27
+  Other                         17     36
+  White                         49    188
+
+[1] ""
+[1] "Checking Age by Result"
+[1] ""
+    
+         0     1
+  5  73271   137
+  6  80476   161
+  7  87119   178
+  8  87872   196
+  9  80745   173
+  10 75419   180
+  11 43952   103
+[1] ""
+[1] "Checking Age by Vaccination Status"
+[1] ""
+    
+         0     1
+  5  49780 23628
+  6  50937 29700
+  7  55865 31432
+  8  54797 33271
+  9  52578 28340
+  10 47884 27715
+  11 26966 17089
+[1] ""
+[1] "------------------------------"
+[1] "Step 7: Create additional covariates"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 529982"
+[1] "Number of Students: 13718"
+[1] ""
+[1] "------------------------------"
+[1] "Step 8: No Transfer Students"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Number of Schools per ID"
+[1] ""
+
+    1     2     3 
+13478   236     4 
+[1] "Number of Tests: 520632"
+[1] "Number of Students: 13478"
+[1] ""
+[1] "------------------------------"
+[1] "Step 8: At least 3 tests each"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Number of tests by ID"
+[1] ""
+
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+265 198 221 285 311 306 400 360 175 142 130 102 114  90 123 118 110 124  88 102 
+ 21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
+ 71 100  95  92 122 123 121 163 202 201 205 200 176 207 159 134 114  87  63  74 
+ 41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60 
+ 86  88  92 112 116 117 124 122 135 171 170 199 223 237 262 271 340 331 395 412 
+ 61  62  63  64  65  66  67  68  69  70  71  72 
+429 441 441 408 369 344 267 154 104  33  10   2 
+[1] "Number of Tests: 519971"
+[1] "Number of Students: 13015"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 1: Saving Daily testing by ID"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 2: Transition to Weekly Testing Summaries"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Assign tests to a week of the school year"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Assign Vaccination Date to a week of the school year"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Recalibrate data for one entry per week"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Recalibrate covariates at weekly scale"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Final Confirmations"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 323653"
+[1] "Number of Students: 13015"
+[1] ""
+[1] "Check tests by week"
+[1] ""
+# A tibble: 37 × 2
+    week num_tests
+   <dbl>     <dbl>
+ 1     0      9413
+ 2     1     10645
+ 3     2     10950
+ 4     3     10928
+ 5     4      9093
+ 6     5      8858
+ 7     6      9604
+ 8     7      9568
+ 9     8      9389
+10     9      9439
+# ℹ 27 more rows
+[1] ""
+[1] "Check 3 weeks of tests per ID"
+[1] ""
+[1] ""
+[1] "removing low testers"
+[1] ""
+[1] "Number of Tests: 323373"
+[1] "Number of Students: 12875"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 2: Saving Weekly testing by ID"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 3: Compute Propensity Scores"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Propensity Score Model"
+[1] "------------------------------"
+[1] ""
+[1] "Fitting Model Now"
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: tested ~ vax_status + start_age + gender + race + dir_cert +  
+    prior_infections + (1 | schoolname) + (1 | ID) + ns(week,  
+    df = 5) + num_prev_test + time_since_last + tests_in_28 +  
+    tests_in_14 + test_density + adj_test_density + no_history
+   Data: VScohort.tested
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+ 282269.0  282534.8 -141110.5  282221.0    476351 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-12.822  -0.060   0.181   0.324 262.596 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ID         (Intercept) 0.9657   0.9827  
+ schoolname (Intercept) 0.1585   0.3981  
+Number of obs: 476375, groups:  ID, 12875; schoolname, 54
+
+Fixed effects:
+                                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                    4.501e+00  1.670e-01  26.958  < 2e-16 ***
+vax_status                     3.774e-01  2.699e-02  13.984  < 2e-16 ***
+start_age                     -4.272e-02  6.359e-03  -6.719 1.83e-11 ***
+genderM                       -7.322e-02  2.053e-02  -3.566 0.000363 ***
+raceBlack or African American -1.103e-01  8.600e-02  -1.282 0.199754    
+raceHispanic/Latino            2.262e-02  9.009e-02   0.251 0.801733    
+raceOther                      4.756e-02  9.467e-02   0.502 0.615425    
+raceWhite                      9.536e-03  8.484e-02   0.112 0.910514    
+dir_cert                      -1.656e-03  2.068e-03  -0.801 0.423071    
+prior_infections              -1.389e-01  2.014e-02  -6.894 5.42e-12 ***
+ns(week, df = 5)1             -9.410e-01  4.121e-02 -22.835  < 2e-16 ***
+ns(week, df = 5)2             -4.099e+00  5.210e-02 -78.691  < 2e-16 ***
+ns(week, df = 5)3             -1.526e+00  5.090e-02 -29.986  < 2e-16 ***
+ns(week, df = 5)4             -8.363e+00  8.895e-02 -94.017  < 2e-16 ***
+ns(week, df = 5)5             -3.071e+00  5.538e-02 -55.457  < 2e-16 ***
+num_prev_test                  3.954e-02  1.244e-03  31.784  < 2e-16 ***
+time_since_last               -3.305e-02  4.142e-04 -79.796  < 2e-16 ***
+tests_in_28                    4.155e-01  5.046e-03  82.346  < 2e-16 ***
+tests_in_14                    2.353e-01  6.853e-03  34.329  < 2e-16 ***
+test_density                  -1.417e+01  2.586e-01 -54.793  < 2e-16 ***
+adj_test_density               2.220e+00  2.001e-01  11.095  < 2e-16 ***
+no_history                    -3.022e+00  4.643e-02 -65.088  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 4 (failure to converge in 10000 evaluations)
+Model failed to converge with max|grad| = 31.0606 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+failure to converge in 10000 evaluations
+
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Save Propensity Score Model"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Save Propensity Score Fitted Values"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 3: Saving Weekly testing by ID with Propensity Scores"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 4: Create Model Fitting Data Sets"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Subset to no missing weeks"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Adding Additional Covariates"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Subset to Super Tester Cohort"
+[1] "------------------------------"
+[1] ""
+[1] "Super Tester Cut Off:36"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Save Data Sets"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 4: Saving Weekly testing by ID with Propensity Scores Model Ready"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

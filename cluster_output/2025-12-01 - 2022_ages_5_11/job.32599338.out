@@ -1,0 +1,316 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 1: Read in Cleaned Data"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Adding in Covariates"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Age"
+[1] ""
+
+   5    6    7    8    9   10   11 
+1556 1908 2040 2057 1960 1887 1467 
+[1] ""
+[1] "Checking Vax Status"
+[1] ""
+
+   0    1 
+8455 4420 
+[1] ""
+[1] "Checking Vax Status by Age"
+[1] ""
+   
+       5    6    7    8    9   10   11
+  0 1095 1244 1331 1322 1304 1219  940
+  1  461  664  709  735  656  668  527
+[1] ""
+[1] "Checking by School"
+[1] ""
+
+   ANCS Elementary        ANCS Middle               BAMO            Beecher 
+               350                 78                160                187 
+           Benteen         BEST MS-HS             Bolton               Boyd 
+               188                 33                298                168 
+           Brandon             Bunche            Burgess            Cascade 
+               345                121                431                167 
+        Centennial          Cleveland        Continental           Deerwood 
+               333                208                229                340 
+             Dobbs             Dunbar           E Rivers            Fickett 
+               204                234                315                325 
+             Finch         FL Stanton       Garden Hills          H Russell 
+               214                104                262                 91 
+  Harper-Archer ES           Heritage             Hollis          Hope-Hill 
+               282                286                272                250 
+            Howard          Humphries         Hutchinson           Invictus 
+               236                210                192                 75 
+Jackson Elementary              Jones           Kimberly               King 
+               173                228                234                187 
+               Lin               Long              Miles        Morningside 
+               531                 97                239                394 
+          Parkside          Perkerson      Peyton Forest              Scott 
+               435                147                138                207 
+             Smith         Springdale             Sutton             Sylvan 
+               364                533                233                 51 
+            Toomer           Tuskegee      Usher-Collier             Wesley 
+               340                320                249                269 
+        West Manor              Young 
+               212                106 
+[1] ""
+[1] "Number of Students"
+[1] ""
+[1] 12875
+[1] ""
+[1] "Checking Max Number of Students that could be matched"
+[1] ""
+[1] 9916
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Matching Students"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Matched Cohort Sample Sizes"
+[1] ""
+[1] "Number of Tests: 161130"
+[1] "Number of Students: 5918"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Assigning Enrollment based on Matches"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Matched Pairs with Positives before enrollment"
+[1] ""
+[1] ""
+[1] "Checking total number of positives"
+[1] ""
+
+   0    1 
+5393  525 
+[1] ""
+[1] "Checking that all positive tests occur after enrollment"
+[1] ""
+[1] ""
+[1] "Checking total number of positives"
+[1] ""
+
+   0    1 
+5393  525 
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Creating Average Testing Behavior Variables"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking individuals with <3 tests after enrollment"
+[1] ""
+
+   0    2 
+5847   71 
+[1] ""
+[1] "Checking Matched Data Sample Sizes"
+[1] "Number of Tests: 149349"
+[1] "Number of Students: 5798"
+[1] ""
+[1] "------------------------------"
+[1] "Step 6: Create Time to Event Variables"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 7: Save VScohort Matched Time to Event Dataset"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 1: Saving Matched Time to Event"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 2: Adding Time Varying Covariates"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Define Time Windows of Follow-up time"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking that both ways of thinking have the same number of tests"
+[1] "One entry per test: 149349"
+[1] "One entry per ID: 149349"
+[1] ""
+[1] ""
+[1] "Checking that both ways of thinking have the same number of students"
+[1] "One entry per test: 5798"
+[1] "One entry per ID: 5798"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Save the Time Varying Covariate (TVC) data"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 2: Saving Matched Time to Event with TVC"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 3: Super tester Matched Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Define Super Tester Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking what the data looks like"
+[1] ""
+        ID prior_infections first_week   vax_date vax_week start_age gender
+1 90015809                0          0       <NA>       NA         5      M
+2 90017379                0          0       <NA>       NA        11      M
+3 90017480                0          2       <NA>       NA        11      F
+4 90017622                0          0       <NA>       NA        11      M
+5 90017623                1          0 2021-12-30        0        11      M
+6 90017626                0          0 2022-04-13        0         5      M
+                       race schoolname dir_cert vax_status n_positive
+1 Black or African American Centennial     58.3          0          0
+2 Black or African American     Howard     20.3          0          0
+3 Black or African American   Invictus     79.4          0          0
+4           Hispanic/Latino       Long     74.5          0          0
+5                     Other       Long     74.5          1          0
+6                     White   Parkside     38.4          1          0
+  positive_week result n_tests start_week
+1            NA      0      30          0
+2            NA      0      12          0
+3            NA      0      32          2
+4            NA      0      28          0
+5            NA      0      34          0
+6            NA      0      36          0
+[1] 36
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Check Pre Match Dataset"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking by Age"
+[1] ""
+[1] ""
+[1] "Checking by Vax Status"
+[1] ""
+[1] ""
+[1] "Checking by Vax Status by Age"
+[1] ""
+[1] ""
+[1] "Checking by Vax Status by Result"
+[1] ""
+[1] ""
+[1] "Checking by School"
+[1] ""
+[1] ""
+[1] "Checking total number of students"
+[1] ""
+[1] ""
+[1] "Checking maximum number of matched pairs possible"
+[1] ""
+[1] 2095
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Match Super Tester Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Sample Size of Match"
+[1] ""
+[1] "Number of Tests: 45221"
+[1] "Number of Students: 1238"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: Assign Enrollment Dates based on Match"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Check number of positives before enrollment"
+[1] ""
+[1] ""
+[1] "Check total number of positives"
+[1] ""
+
+   0    1 
+1119  119 
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Fix to only include postives after enrollment"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Confirming that all positive tests occur after enrollment"
+[1] ""
+[1] ""
+[1] "Check total number of positives"
+[1] ""
+
+   0    1 
+1119  119 
+[1] ""
+[1] "------------------------------"
+[1] "Step 6: Compute Average Testing Behavior Variables"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking for students with <3 tests after enrollment"
+
+   0 
+1238 
+[1] ""
+[1] "Checking Sample Size"
+[1] ""
+[1] "Number of Tests: 42231"
+[1] "Number of Students: 1238"
+[1] ""
+[1] "------------------------------"
+[1] "Step 7: Compute Time to Event Variables"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 8: Save ST Cohort Time to Event Data"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 3: Saving ST Matched Time to Event"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
