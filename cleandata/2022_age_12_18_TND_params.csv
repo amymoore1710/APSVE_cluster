@@ -1,0 +1,7 @@
+"","data_file","model_formula","method"
+"1","2022_age_12_18_all_tested.csv","result ~ vax_status","TND_01"
+"2","2022_age_12_18_all_tested.csv","result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5)","TND_02"
+"3","2022_age_12_18_ST_all_tested.csv","result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5)","TND_03"
+"4","2022_age_12_18_all_tested.csv","result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + total_tests + avg_time_since_last + avg_tests_in_28 + avg_tests_in_14 + avg_test_density + avg_adj_test_density","TND_04"
+"5","2022_age_12_18_all_tested.csv","result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + no_history","TND_05"
+"6","2022_age_12_18_all_tested.csv","result ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + no_history","TND_06"

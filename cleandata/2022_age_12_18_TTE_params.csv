@@ -1,0 +1,7 @@
+"","data_file","model_formula","method"
+"1","2022_age_12_18_matched_data_set.csv","Surv(time = time_to_event, event = event_occured) ~ vax_status","TTE_01"
+"2","2022_age_12_18_matched_data_set.csv","Surv(time = time_to_event, event = event_occured) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname)","TTE_02"
+"3","2022_age_12_18_ST_matched_data_set.csv","Surv(time = time_to_event, event = event_occured) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname)","TTE_03"
+"4","2022_age_12_18_matched_data_set.csv","Surv(time = time_to_event, event = event_occured) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + n_tests + avg_tests_in_28 + avg_tests_in_14 + avg_test_density + avg_adj_test_density + (1 | schoolname)","TTE_04"
+"5","2022_age_12_18_matched_TVC.csv","Surv(time = previous_week, time2 = week, event = result) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + no_history + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + (1 | schoolname)","TTE_05"
+"6","2022_age_12_18_matched_TVC.csv","Surv(time = previous_week, time2 = week, event = result) ~ vax_status + start_age + gender + race + dir_cert + prior_infections + no_history + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + (1 | schoolname)","TTE_06"
