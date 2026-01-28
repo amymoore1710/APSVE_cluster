@@ -1,6 +1,6 @@
 
 # APS VE Table 1
-# 2025-12-18
+# 2026-01-26
 # Run Locally
 # Amy Moore
 
@@ -34,7 +34,7 @@ table1_summary <- function(data) {
               result = max(result),
               race = first(race),
               gender = first(gender),
-              prior_infections = max(prior_infections))
+              prior_infections = min(prior_infections))
   
   overall <- testing_by_ID %>%
     summarize(n = n()) 
@@ -66,7 +66,7 @@ table1_summary <- function(data) {
     mutate(percent = (n/sum(n)) *100)
 
   prior_infections <- testing_by_ID %>%
-    group_by(prior_infections > 1) %>%
+    group_by(prior_infections >= 1) %>%
     summarize(n = n()) %>%
     mutate(percent = (n/sum(n)) *100)
 
