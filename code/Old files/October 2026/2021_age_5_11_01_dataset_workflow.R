@@ -7,8 +7,8 @@
 # Amy Moore
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -1020,12 +1020,34 @@ print("Fitting Model Now")
 #                     data = VScohort.tested,
 #                     control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1000000), tolPwrss = 1e-3))
 
+start_time <- Sys.time()
+
 reg.fit <-  glmer(formula = tested ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + num_prev_test + time_since_last + tests_in_28 + tests_in_14 + test_density + adj_test_density + no_history,
                   family = binomial,
                   data = VScohort.tested)
 
+end_time <- Sys.time()
+elapsed_time <- end_time - start_time
+
+print(elapsed_time)
+
 
 summary(reg.fit)
+
+
+start_time <- Sys.time()
+
+reg.fit2 <-  glmer(formula = tested ~ vax_status + start_age + gender + race + dir_cert + prior_infections + (1 | schoolname) + (1 | ID) + ns(week, df = 5) + time_since_last + tests_in_14 + adj_test_density + no_history,
+                  family = binomial,
+                  data = VScohort.tested)
+
+end_time <- Sys.time()
+elapsed_time <- end_time - start_time
+
+print(elapsed_time)
+
+
+summary(reg.fit2)
 
 print("")
 print("------------------------------")

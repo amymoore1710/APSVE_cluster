@@ -9,20 +9,18 @@ library(dplyr)
 
 # Making a dataframe to fill out:
 
-table1 <- data.frame(summary_2021_age_5_11 = rep(NA, 27),
-                     summary_2022_age_5_11 = rep(NA, 27),
-                     blank = c(rep("", 7), "Age", "     12", "     13", "     14", 
-                               "     15", "     16", "     17", "     18", rep("",12)),
-                     summary_2021_age_12_18 = rep(NA, 27),
-                     summary_2022_age_12_18 = rep(NA, 27))
+table1 <- data.frame(summary_2021_age_5_11 = rep(NA, 20),
+                     summary_2022_age_5_11 = rep(NA, 20),
+                     summary_2021_age_12_18 = rep(NA, 20),
+                     summary_2022_age_12_18 = rep(NA, 20))
 rownames(table1) <- c("Overall", 
-                      "Vaccination Status", "Vaccinated", "Unvaccinated", 
-                      "Test Result", "Positive", "Negative",
-                      "Age", "5", "6", "7", "8", "9", "10", "11",
+                      "Age - mean (sd)", 
                       "Race", "Black or African American", "White", 
                       "Asian", "Hispanic/Latino", "Other",
                       "Gender", "Female", "Male",
-                      "Prior Infections", "None", "At least one")
+                      "Prior Infections", "None", "At least one",
+                      "Vaccination Status", "Vaccinated", "Unvaccinated", 
+                      "Test Result", "Positive", "Negative")
 
 
 table1_summary <- function(data) {
@@ -50,10 +48,14 @@ table1_summary <- function(data) {
     summarize(n = n()) %>%
     mutate(percent = (n/sum(n)) *100)
 
+  # age <- testing_by_ID %>%
+  #   group_by(age) %>%
+  #   summarize(n = n()) %>%
+  #   mutate(percent = (n/sum(n)) *100)
+  
   age <- testing_by_ID %>%
-    group_by(age) %>%
-    summarize(n = n()) %>%
-    mutate(percent = (n/sum(n)) *100)
+    summarize(mean_age = mean(age),
+           sd_age = sd(age))
 
   race <- testing_by_ID %>%
     group_by(race) %>%
@@ -73,32 +75,26 @@ table1_summary <- function(data) {
 
 
   summary <- c(paste0(overall$n),
+               paste0(format(round(age$mean_age[1], 1), nsmall = 1), " (", format(round(age$sd_age[1], 1), nsmall = 1), ")"),
                "",
-               paste0(vax_status$n[2], " (", format(round(vax_status$percent[2], 2), nsmall = 2), "%)"),
-               paste0(vax_status$n[1], " (", format(round(vax_status$percent[1], 2), nsmall = 2), "%)"),
+               paste0(race$n[2], " (", format(round(race$percent[2], 1), nsmall = 1), "%)"), 
+               paste0(race$n[5], " (", format(round(race$percent[5], 1), nsmall = 1), "%)"),
+               paste0(race$n[1], " (", format(round(race$percent[1], 1), nsmall = 1), "%)"),
+               paste0(race$n[3], " (", format(round(race$percent[3], 1), nsmall = 1), "%)"),
+               paste0(race$n[4], " (", format(round(race$percent[4], 1), nsmall = 1), "%)"),
                "",
-               paste0(test_results$n[2], " (", format(round(test_results$percent[2], 2), nsmall = 2), "%)"), 
-               paste0(test_results$n[1], " (", format(round(test_results$percent[1], 2), nsmall = 2), "%)"), 
+               paste0(gender$n[1], " (", format(round(gender$percent[1], 1), nsmall = 1), "%)"),
+               paste0(gender$n[2], " (", format(round(gender$percent[2], 1), nsmall = 1), "%)"),
                "",
-               paste0(age$n[1], " (", format(round(age$percent[1], 2), nsmall = 2), "%)"), 
-               paste0(age$n[2], " (", format(round(age$percent[2], 2), nsmall = 2), "%)"), 
-               paste0(age$n[3], " (", format(round(age$percent[3], 2), nsmall = 2), "%)"), 
-               paste0(age$n[4], " (", format(round(age$percent[4], 2), nsmall = 2), "%)"), 
-               paste0(age$n[5], " (", format(round(age$percent[5], 2), nsmall = 2), "%)"), 
-               paste0(age$n[6], " (", format(round(age$percent[6], 2), nsmall = 2), "%)"), 
-               paste0(age$n[7], " (", format(round(age$percent[7], 2), nsmall = 2), "%)"), 
+               paste0(prior_infections$n[1], " (", format(round(prior_infections$percent[1], 1), nsmall = 1),"%)"),
+               paste0(prior_infections$n[2], " (", format(round(prior_infections$percent[2], 1), nsmall = 1), "%)"),
                "",
-               paste0(race$n[2], " (", format(round(race$percent[2], 2), nsmall = 2), "%)"), 
-               paste0(race$n[5], " (", format(round(race$percent[5], 2), nsmall = 2), "%)"),
-               paste0(race$n[1], " (", format(round(race$percent[1], 2), nsmall = 2), "%)"),
-               paste0(race$n[3], " (", format(round(race$percent[3], 2), nsmall = 2), "%)"),
-               paste0(race$n[4], " (", format(round(race$percent[4], 2), nsmall = 2), "%)"),
+               paste0(vax_status$n[2], " (", format(round(vax_status$percent[2], 1), nsmall = 1), "%)"),
+               paste0(vax_status$n[1], " (", format(round(vax_status$percent[1], 1), nsmall = 1), "%)"),
                "",
-               paste0(gender$n[1], " (", format(round(gender$percent[1], 2), nsmall = 2), "%)"),
-               paste0(gender$n[2], " (", format(round(gender$percent[2], 2), nsmall = 2), "%)"),
-               "",
-               paste0(prior_infections$n[1], " (", format(round(prior_infections$percent[1], 2), nsmall = 2),"%)"),
-               paste0(prior_infections$n[2], " (", format(round(prior_infections$percent[2], 2), nsmall = 2), "%)"))
+               paste0(test_results$n[2], " (", format(round(test_results$percent[2], 1), nsmall = 1), "%)"), 
+               paste0(test_results$n[1], " (", format(round(test_results$percent[1], 1), nsmall = 1), "%)")
+               )
   
   return(summary)
 }
