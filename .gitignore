@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 models/Old Versions/2021_age_5_11_predicted_propensity_scores_model.rds
+models/2021_age_5_11_predicted_propensity_scores_model.rds
 cleandata/All_cohort_daily_testing_by_ID.csv
 cleandata/All_cohort_weekly_testing_by_ID.csv
 
