@@ -1,6 +1,5 @@
 
 # APS VE TTE Model Fitting Parallel
-# 2021-22 Ages 5-11 
 # 2026-11-03
 # Modified to run on the cluster
 # Amy Moore
