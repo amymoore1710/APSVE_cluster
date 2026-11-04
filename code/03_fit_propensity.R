@@ -62,12 +62,12 @@ print("")
 # 
 # table(VScohort_by_ID_by_school$schoolname)
 
-  #Testing with Small Subset --> Just two Schools
-if(task$subcohort %in% c("2021_5_11", "2022_5_11")) {
-  VScohort_weekly <- VScohort_weekly %>% filter(schoolname %in% c("Smith", "Burgess"))
-} else if (task$subcohort %in% c("2021_12_18", "2022_12_18")) {
-  VScohort_weekly <- VScohort_weekly %>% filter(schoolname %in% c("Howard", "Jackson High"))
-}
+#   #Testing with Small Subset --> Just two Schools
+# if(task$subcohort %in% c("2021_5_11", "2022_5_11")) {
+#   VScohort_weekly <- VScohort_weekly %>% filter(schoolname %in% c("Smith", "Burgess"))
+# } else if (task$subcohort %in% c("2021_12_18", "2022_12_18")) {
+#   VScohort_weekly <- VScohort_weekly %>% filter(schoolname %in% c("Howard", "Jackson High"))
+# }
 
 
 start_time <- Sys.time()

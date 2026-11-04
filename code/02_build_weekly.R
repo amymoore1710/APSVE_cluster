@@ -287,7 +287,7 @@ print("")
 ntests <- sum(VScohort_weekly$num_tests)
 print(paste("Number of tests:", ntests))
 nIDs <- length(unique(VScohort_weekly$ID))
-print(paste("Number of tests:", nIDs))
+print(paste("Number of IDs:", nIDs))
 
 print("Testing by week by subcohort 0 = missing, 1 = tested")
 

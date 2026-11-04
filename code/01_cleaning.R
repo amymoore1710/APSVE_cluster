@@ -191,10 +191,9 @@ VScohort_vax <- aps_vax %>%
   rename(ID = ID.x) %>%
   filter(ID %in% VScohort_IDs) %>%
   select(ID, vax_date = all_of(dose_col)) %>%
-  mutate(vax_date = as.Date(vax_date, origin = "1970-01-01")) 
-length(unique(VScohort_vax$ID)) 
+  mutate(vax_date = as.Date(vax_date, origin = "1970-01-01"))
 
-
+print(paste("Number of Vaccination Records:", length(unique(VScohort_vax$ID))))
 
 #Find Demographic info for the students reporting tests
 VScohort_demographics <- studentinfo_deid %>%
@@ -211,7 +210,10 @@ VScohort_demographics <- studentinfo_deid %>%
     birthdate = as.Date(birthdate, origin = "1970-01-01")
     ) %>%
   select(ID, race, gender, birthdate, zip_most_recent)
-length(unique(VScohort_demographics$ID)) 
+print(paste("Number of Demographic Records: ", length(unique(VScohort_demographics$ID)))) 
+
+print("")
+print("")
 
 #merge the 3 datasets --> keep students with missing vax records (assigns them as unvaxed --> vax_date = NA)
 VScohort_merged <- merge(vstests_deid,
