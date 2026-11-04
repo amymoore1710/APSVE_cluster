@@ -1,0 +1,108 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 4: Super Tester Subset and Matching"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2021_5_11 full"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Create a by ID dataset"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Match Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Age"
+[1] ""
+
+  5   6   7   8   9  10  11 
+138 163 158 162 165 142  13 
+[1] ""
+[1] "Checking Vax Status"
+[1] ""
+
+  0   1 
+453 488 
+[1] ""
+[1] "Checking Vax Status by Age"
+[1] ""
+   
+     5  6  7  8  9 10 11
+  0 69 72 70 78 80 78  6
+  1 69 91 88 84 85 64  7
+[1] ""
+[1] "Checking by School"
+[1] ""
+
+Burgess   Smith 
+    462     479 
+[1] ""
+[1] "Number of Students"
+[1] ""
+[1] 941
+[1] ""
+[1] "Checking Max Number of Students that could be matched"
+[1] ""
+[1] "Maximum Number of IDs in Matched data: 864"
+[1] ""
+[1] "Checking Matched Cohort Sample Sizes"
+[1] ""
+[1] "Number of Tests: 22533"
+[1] "Number of Students: 864"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Assigning Enrollment based on Matches"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to only include matched data"
+[1] ""
+[1] ""
+[1] "Check #1 - # of matches missing partners: 0"
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to censor before enrollment and remove weeks when testing did not occur"
+[1] ""
+[1] ""
+[1] "Check #2 - # matches with a partner with 0 tests post enrollment: 17"
+[1] ""
+[1] ""
+[1] "Final Matching Summary: "
+# A tibble: 6 × 27
+        ID subcohort        school_year age_group schoolname gender race     age
+     <dbl> <chr>            <chr>       <chr>     <chr>      <chr>  <chr>  <dbl>
+1 90017688 2021-22 Age 5-11 2021-22     5-11      Smith      M      Hispa…    10
+2 90017688 2021-22 Age 5-11 2021-22     5-11      Smith      M      Hispa…    10
+3 90017688 2021-22 Age 5-11 2021-22     5-11      Smith      M      Hispa…    10
+4 90017688 2021-22 Age 5-11 2021-22     5-11      Smith      M      Hispa…    10
+5 90017688 2021-22 Age 5-11 2021-22     5-11      Smith      M      Hispa…    10
+6 90017688 2021-22 Age 5-11 2021-22     5-11      Smith      M      Hispa…    10
+# ℹ 19 more variables: continuous_age <dbl>, dir_cert <dbl>,
+#   prior_infections <int>, subclass <fct>, vax_status <dbl>, vax_date <date>,
+#   enrollment_date <date>, prior_week <dbl>, week <dbl>,
+#   week_start_date <date>, avail_index <int>, num_tests <int>, tested <int>,
+#   positive <int>, weeks_since_last_test <dbl>, tests_last_4weeks <dbl>,
+#   test_density <dbl>, first_test_indicator <int>, propensity <dbl>
+[1] "Number of Matches: 415"
+[1] "Number of IDs: 830"
+[1] "Number of Tests: 22255"
+[1] "Number of Test x Weeks Observed: 14645"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 4: Saving Matched Data"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

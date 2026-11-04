@@ -1,0 +1,48 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 5: Fit VE Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2022_12_18 full Standard"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Model Formula: Surv(time = prior_week, time2 = week, event = positive) ~ vax_status + continuous_age + gender + race + dir_cert + prior_infections + (1 | schoolname)"
+Mixed effects coxme model
+ Formula: model_formula 
+    Data: data 
+
+  events, n = 31, 5695
+
+Random effects:
+       group  variable         sd     variance
+1 schoolname Intercept 0.01996965 0.0003987869
+                  Chisq df      p    AIC    BIC
+Integrated loglik  5.82  9 0.7577 -12.18 -25.08
+ Penalized loglik  5.83  8 0.6665 -10.17 -21.64
+
+Fixed effects:
+                      coef exp(coef)  se(coef)     z     p
+vax_status        0.264107  1.302268  0.409193  0.65 0.519
+continuous_age   -0.003498  0.996508  0.207013 -0.02 0.987
+genderM          -0.508184  0.601587  0.396223 -1.28 0.200
+raceHispanic      0.658316  1.931537  0.583677  1.13 0.259
+raceOther         0.111344  1.117780  0.783122  0.14 0.887
+raceWhite        -0.089975  0.913954  0.448036 -0.20 0.841
+dir_cert          0.010396  1.010451  0.031350  0.33 0.740
+prior_infections -0.535887  0.585150  0.498362 -1.08 0.282
+    method nstudents npositives    VE_est  VE_lower VE_upper      pval
+1 Standard       428         31 -30.22676 -190.4065 41.60251 0.5186464
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "End File: Model Fit and Saved"
+[1] "------------------------------"
+[1] ""
+[1] ""

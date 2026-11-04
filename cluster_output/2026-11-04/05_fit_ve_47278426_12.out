@@ -1,0 +1,52 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 5: Fit VE Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2022_12_18 full Weighted"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Model Formula: Surv(time = prior_week, time2 = week, event = positive) ~ vax_status + continuous_age + gender + race + dir_cert + prior_infections + first_test_indicator + weeks_since_last_test + tests_last_4weeks + test_density + (1 | schoolname)"
+Mixed effects coxme model
+ Formula: model_formula 
+    Data: data 
+
+  events, n = 31, 5695
+
+Random effects:
+       group  variable          sd     variance
+1 schoolname Intercept 0.008984893 8.072831e-05
+                  Chisq df p   AIC   BIC
+Integrated loglik 130.7 13 0 104.7 86.06
+ Penalized loglik 130.7 12 0 106.7 89.50
+
+Fixed effects:
+                           coef exp(coef)  se(coef)     z        p
+vax_status            -0.600340  0.548625  0.304369 -1.97  0.04856
+continuous_age         0.524118  1.688969  0.122257  4.29 1.81e-05
+genderM               -0.916559  0.399893  0.301539 -3.04  0.00237
+raceHispanic           0.290743  1.337420  0.451899  0.64  0.51998
+raceOther             -0.001542  0.998460  0.610040  0.00  0.99798
+raceWhite              0.248166  1.281672  0.340117  0.73  0.46561
+dir_cert              -0.046687  0.954386  0.023301 -2.00  0.04511
+prior_infections      -0.856769  0.424532  0.391074 -2.19  0.02847
+first_test_indicator   0.171906  1.187566  0.674329  0.25  0.79878
+weeks_since_last_test -0.185571  0.830630  0.040658 -4.56 5.01e-06
+tests_last_4weeks     -0.217635  0.804419  0.126907 -1.71  0.08636
+test_density           0.366777  1.443076  0.407066  0.90  0.36757
+    method nstudents npositives   VE_est  VE_lower VE_upper       pval
+1 Weighted       428         31 45.13748 0.3780146 69.78683 0.04856315
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "End File: Model Fit and Saved"
+[1] "------------------------------"
+[1] ""
+[1] ""

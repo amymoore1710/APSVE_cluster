@@ -1,0 +1,66 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 3: Compute Propensity Scores"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2022_5_11"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Propensity Score Model"
+[1] "------------------------------"
+[1] ""
+Time difference of 22.06188 mins
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: tested ~ vax_status + continuous_age + gender + race + dir_cert +  
+    prior_infections + first_test_indicator + weeks_since_last_test +  
+    tests_last_4weeks + test_density + week + (1 | schoolname) +      (1 | ID)
+   Data: VScohort_weekly
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  12497.5   12638.6   -6231.7   12463.5     29842 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+  -8.95    0.00    0.14    0.23 1257.76 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ID         (Intercept) 1.012    1.006   
+ schoolname (Intercept) 0.000    0.000   
+Number of obs: 29859, groups:  ID, 807; schoolname, 2
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           -9.2169513  1.1828534  -7.792 6.59e-15 ***
+vax_status             0.5600845  0.0972375   5.760 8.41e-09 ***
+continuous_age        -0.0417174  0.0287753  -1.450 0.147124    
+genderM               -0.1071426  0.0909774  -1.178 0.238923    
+raceBlack             -0.0002202  0.2299659  -0.001 0.999236    
+raceHispanic           0.0598232  0.2442146   0.245 0.806486    
+raceOther              0.3988734  0.2672564   1.492 0.135575    
+raceWhite              0.2617366  0.2269505   1.153 0.248797    
+dir_cert               0.5377412  0.0551184   9.756  < 2e-16 ***
+prior_infections      -0.2886814  0.0863050  -3.345 0.000823 ***
+first_test_indicator  -0.6827968  0.1616534  -4.224 2.40e-05 ***
+weeks_since_last_test -0.6207030  0.0314491 -19.737  < 2e-16 ***
+tests_last_4weeks      0.4811589  0.0222105  21.664  < 2e-16 ***
+test_density          -0.3439521  0.0852386  -4.035 5.46e-05 ***
+week                  -0.0056033  0.0024458  -2.291 0.021966 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 3: Saving Weekly testing by ID with Propensity Scores"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

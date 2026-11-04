@@ -1,0 +1,53 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 5: Fit VE Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2021_5_11 full Weighted"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Model Formula: Surv(time = prior_week, time2 = week, event = positive) ~ vax_status + continuous_age + gender + race + dir_cert + prior_infections + first_test_indicator + weeks_since_last_test + tests_last_4weeks + test_density + (1 | schoolname)"
+Mixed effects coxme model
+ Formula: model_formula 
+    Data: data 
+
+  events, n = 109, 14645
+
+Random effects:
+       group  variable          sd    variance
+1 schoolname Intercept 0.008886332 7.89669e-05
+                  Chisq df         p  AIC    BIC
+Integrated loglik 35.25 14 0.0013484 7.25 -30.43
+ Penalized loglik 35.26 13 0.0007728 9.26 -25.73
+
+Fixed effects:
+                           coef exp(coef)  se(coef)     z       p
+vax_status            -0.293941  0.745321  0.204977 -1.43 0.15157
+continuous_age        -0.099767  0.905048  0.054467 -1.83 0.06700
+genderM               -0.114784  0.891559  0.179623 -0.64 0.52280
+raceBlack              0.322725  1.380885  0.538722  0.60 0.54913
+raceHispanic           0.132683  1.141888  0.561459  0.24 0.81319
+raceOther             -0.065945  0.936182  0.633625 -0.10 0.91711
+raceWhite              0.466582  1.594535  0.527940  0.88 0.37682
+dir_cert              -0.008673  0.991364  0.021877 -0.40 0.69176
+prior_infections      -0.967875  0.379889  0.351110 -2.76 0.00584
+first_test_indicator  -0.954811  0.384885  0.544420 -1.75 0.07946
+weeks_since_last_test -0.205176  0.814504  0.093182 -2.20 0.02767
+tests_last_4weeks     -0.243553  0.783838  0.108364 -2.25 0.02461
+test_density           0.047978  1.049147  0.500019  0.10 0.92356
+    method nstudents npositives   VE_est  VE_lower VE_upper      pval
+1 Weighted       830        109 25.46792 -11.38319 50.12685 0.1515666
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "End File: Model Fit and Saved"
+[1] "------------------------------"
+[1] ""
+[1] ""
