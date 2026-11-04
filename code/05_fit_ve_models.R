@@ -4,6 +4,8 @@
 # Modified to run on the cluster
 # Amy Moore
 
+#update to play with git
+
 print("")
 print("")
 print("------------------------------")
