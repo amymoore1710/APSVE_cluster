@@ -14,8 +14,8 @@ print("")
 
 
 #Run Locally?
-# cluster = TRUE
-cluster = FALSE
+cluster = TRUE
+# cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
