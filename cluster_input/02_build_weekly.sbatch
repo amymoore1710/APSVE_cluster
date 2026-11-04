@@ -5,8 +5,8 @@
 #SBATCH --time=20:00:00
 #SBATCH --partition=day-long-cpu
 #SBATCH --job-name=APSVE_02_weekly
-#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2026-11-03'/02_weekly.%J.out
-#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2026-11-03'/02_weekly.%J.err
+#SBATCH --output=/home/amoor53/APSVE_cluster/cluster_output/'2026-11-04'/02_weekly.%J.out
+#SBATCH --error=/home/amoor53/APSVE_cluster/cluster_output/'2026-11-04'/02_weekly.%J.err
 #SBATCH --mail-user=amoor53@emory.edu
 #SBATCH --mail-type=ALL
 
