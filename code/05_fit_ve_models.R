@@ -85,7 +85,7 @@ if (cluster) {
   saveRDS(model_fit_list[[1]], 
           file = paste0("/home/amoor53/APSVE_cluster/models/", task$subcohort, "_", task$cohort_type, "_", task$model_method,"_VE_model.rds"))
   saveRDS(model_fit_list[[2]], 
-          file = paste0("/home/amoor53/APSVE_cluster/results", task$subcohort, "_", task$cohort_type, "_", task$model_method,"_VE_model_summary.rds"))
+          file = paste0("/home/amoor53/APSVE_cluster/results/", task$subcohort, "_", task$cohort_type, "_", task$model_method,"_VE_model_summary.rds"))
 } else {
   saveRDS(model_fit_list[[1]], 
           file = here("models", paste0(task$subcohort, "_", task$cohort_type, "_", task$model_method,"_VE_model.rds")))
