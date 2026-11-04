@@ -89,12 +89,12 @@ if (task$cohort_type == "super_tester") {
   ST_cutoff <- cfg$supertester_cutoff
   
   #Select IDs that meet super tester completeness rating
-  STcohort_by_ID <- VScohort_by_ID %>%
+  VScohort_by_ID <- VScohort_by_ID %>%
     filter(testing_completeness >= 1 - ST_cutoff)
   
   #Select Weekly testing data from Super Tester IDs
   VScohort_weekly <- VScohort_weekly %>%
-    filter(ID %in% STcohort_by_ID$ID)
+    filter(ID %in% VScohort_by_ID$ID)
   
   if (cluster) {
     saveRDS(VScohort_weekly,
