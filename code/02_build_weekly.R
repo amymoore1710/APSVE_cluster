@@ -277,6 +277,22 @@ if(cluster) {
 }
 
 
+print("File Summary")
+
+print(head(VScohort_weekly))
+
+print("")
+print("")
+
+ntests <- sum(VScohort_weekly$num_tests)
+print(paste("Number of tests:", ntests))
+nIDs <- length(unique(VScohort_weekly$ID))
+print(paste("Number of tests:", nIDs))
+
+print("Testing by week by subcohort 0 = missing, 1 = tested")
+
+print(table(VScohort_weekly$week, VScohort_weekly$subcohort, VScohort_weekly$tested))
+
 print("")
 print("------------------------------")
 print("File Complete")

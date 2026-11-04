@@ -631,6 +631,10 @@ if(cluster) {
   saveRDS(testing_numbers, here("results", "cleaning_testing_numbers.rds"))
 }
 
+print(head(VScohort_merged))
+print(sample_sizes)
+print(testing_numbers)
+
 print("")
 print("------------------------------")
 print("File Complete")

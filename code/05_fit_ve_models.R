@@ -50,6 +50,8 @@ if(cluster){
   VScohort_weekly_match_observed <- readRDS(here("cleandata", paste0(task$subcohort, "_", task$cohort_type, "_matched.rds")))
 }
 
+print(paste("Task:", task$subcohort, task$cohort_type, task$model_method))
+
 print("")
 print("")
 print("------------------------------")
@@ -68,10 +70,16 @@ if(task$cohort_type == "full" & task$model_method == "Standard") {
   model_formula <- "Error"
 }
 
+print(paste("Model Formula:", model_formula))
+
 
 model_fit_list <- fit_TTE_model(data = VScohort_weekly_match_observed,
                                 model_formula = as.formula(model_formula),
                                 method = task$model_method)
+
+print(summary(model_fit_list[[1]]))
+
+print(model_fit_list[[2]])
 
 if (cluster) {
   saveRDS(model_fit_list[[1]], 

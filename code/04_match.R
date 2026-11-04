@@ -47,6 +47,9 @@ if(cluster){
   VScohort_weekly <- readRDS(here("cleandata", paste0(task$subcohort, "_weekly_propensity.rds")))
 }
 
+print(paste("Task:", task$subcohort, task$cohort_type))
+
+
 print("")
 print("------------------------------")
 print("Step 1: Create a by ID dataset")
@@ -120,34 +123,34 @@ if (verbose) {
   print("")
   print("Checking Age")
   print("")
-  table(VScohort_by_ID$age)
+  print(table(VScohort_by_ID$age))
   
   print("")
   print("Checking Vax Status")
   print("")
-  table(VScohort_by_ID$vax_status)
+  print(table(VScohort_by_ID$vax_status))
   
   print("")
   print("Checking Vax Status by Age")
   print("")
-  table(VScohort_by_ID$vax_status, VScohort_by_ID$age)
+  print(table(VScohort_by_ID$vax_status, VScohort_by_ID$age))
   
   print("")
   print("Checking by School")
   print("")
-  table(VScohort_by_ID$schoolname)
+  print(table(VScohort_by_ID$schoolname))
   
   print("")
   print("Number of Students")
   print("")
-  nrow(VScohort_by_ID)
+  print(nrow(VScohort_by_ID))
   
   print("")
   print("Checking Max Number of Students that could be matched")
   print("")
   estimate_of_match <- table(VScohort_by_ID$schoolname, VScohort_by_ID$vax_status)
   max_n_of_match <- apply(estimate_of_match, 1, min)
-  2*sum(max_n_of_match)
+  print(paste("Maximum Number of IDs in Matched data:", 2*sum(max_n_of_match)))
 }
 
 VScohort_match_raw <- matchit(formula = vax_status ~ schoolname + first_test_week,
@@ -199,6 +202,14 @@ VScohort_match_simple <- VScohort_match %>%
   left_join(VScohort_enrollment_date, by = "subclass") %>%
   select(ID, subclass, enrollment_date)
 
+print("")
+print("")
+
+print("Reduce Weekly test data to only include matched data")
+
+print("")
+print("")
+
   #Reduce Weekly test data to only include matched data 
     #Merge in match and enroll date
     #Exclude unmatched IDs
@@ -208,7 +219,15 @@ VScohort_weekly_match <- VScohort_weekly %>%
 
 #Checking that both matches have tests
 checking <- VScohort_weekly_match %>% group_by(subclass) %>% summarize(n_IDs = length(unique(ID))) %>% filter(n_IDs < 2)
-nrow(checking)
+print(paste("Check #1 - # of matches missing partners:", nrow(checking)))
+
+print("")
+print("")
+
+print("Reduce Weekly test data to censor before enrollment and remove weeks when testing did not occur")
+
+print("")
+print("")
 
   #Reduce Weekly test data to only include eligible tests
     #Exclude weeks from before enrollment
@@ -222,7 +241,8 @@ VScohort_weekly_match_observed <- VScohort_weekly_match %>%
 
   #Checking that both matches have tests
 checking <- VScohort_weekly_match_observed %>% group_by(subclass) %>% summarize(n_IDs = length(unique(ID))) %>% filter(n_IDs < 2)
-nrow(checking)
+print(paste("Check #2 - # matches with a partner with 0 tests post enrollment:", nrow(checking)))
+
 
   #Removing matched pairs where one member has no tests after enrollment
 VScohort_weekly_match_observed <- VScohort_weekly_match_observed %>%
@@ -260,6 +280,29 @@ if (cluster) {
   saveRDS(VScohort_weekly_match_observed,
           file = here("cleandata", paste0(task$subcohort, "_", task$cohort_type, "_matched.rds")))
 }
+
+print("")
+print("")
+
+print("Final Matching Summary: ")
+
+print(head(VScohort_weekly_match_observed))
+
+nMatches <- length(unique(VScohort_weekly_match_observed$subclass))
+print(paste("Number of Matches:", nMatches))
+nIDs <- length(unique(VScohort_weekly_match_observed$ID))
+print(paste("Number of IDs:", nIDs))
+
+nTests <- sum(VScohort_weekly_match_observed$num_tests)
+print(paste("Number of Tests:", nTests))
+
+nWeeks <- sum(VScohort_weekly_match_observed$tested)
+print(paste("Number of Test x Weeks Observed:", nWeeks))
+
+print("")
+print("")
+
+
 
 print("")
 print("")

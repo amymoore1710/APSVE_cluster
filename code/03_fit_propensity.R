@@ -47,6 +47,8 @@ if(cluster){
   
 }
 
+print(paste("Task:", task$subcohort))
+
 
 print("")
 print("------------------------------")

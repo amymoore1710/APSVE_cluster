@@ -7,7 +7,7 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
   if(method == "Standard") {
     model <- coxme(formula = model_formula,
                    data = data)
-    summary(model)
+    # summary(model)
   }
   
     #Weighted
@@ -20,7 +20,7 @@ fit_TTE_model <- function (data, model_formula, method, alpha = 0.05) {
                    data = data,
                    weights = IPS_weights
     )
-    summary(model)
+    # summary(model)
   }
   
   
