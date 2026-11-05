@@ -10,8 +10,8 @@ print("")
 
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -63,6 +63,8 @@ VScohort_by_ID <- VScohort_weekly %>%
   group_by(ID) %>%
   summarize(n_weeks_available = n(),
             n_weeks_tested = sum(tested),
+            ever_positive = ifelse(sum(positive) >= 1, 1, 0),
+            prior_infection = ifelse(min(prior_infections) == 0, 0, 1),
             testing_completeness = n_weeks_tested/n_weeks_available,
             first_test_week = sum(first_test_indicator))
 
@@ -106,6 +108,14 @@ if (task$cohort_type == "super_tester") {
     saveRDS(VScohort_weekly,
             file = here("cleandata", paste0(task$subcohort, "_ST_weekly_propensity.rds")))
   }
+}
+
+if (cluster) {
+  saveRDS(VScohort_by_ID,
+          file = paste0("/home/amoor53/APSVE_cluster/cleandata/", task$subcohort, "_", task$cohort_type, "_by_ID.rds"))
+} else {
+  saveRDS(VScohort_by_ID,
+          file = here("cleandata", paste0(task$subcohort, "_", task$cohort_type, "_by_ID.rds")))
 }
 
 
