@@ -1,0 +1,140 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 4: Super Tester Subset and Matching"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2021_5_11 full"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Create a by ID dataset"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Match Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Age"
+[1] ""
+
+   5    6    7    8    9   10   11 
+2008 2281 2333 2295 2271 2299 1746 
+[1] ""
+[1] "Checking Vax Status"
+[1] ""
+
+    0     1 
+10214  5019 
+[1] ""
+[1] "Checking Vax Status by Age"
+[1] ""
+   
+       5    6    7    8    9   10   11
+  0 1363 1513 1539 1564 1512 1563 1160
+  1  645  768  794  731  759  736  586
+[1] ""
+[1] "Checking by School"
+[1] ""
+
+    ANCS Elementary         ANCS Middle                BAMO             Beecher 
+                363                  70                 192                 187 
+            Benteen              Bolton                Boyd             Brandon 
+                162                 355                 175                 481 
+             Bunche             Burgess             Cascade          Centennial 
+                 90                 462                 163                 377 
+          Cleveland         Continental                 CSK            Deerwood 
+                214                 217                  28                 336 
+              Dobbs              Dunbar            E Rivers             Fickett 
+                157                 211                 417                 343 
+              Finch          FL Stanton        Garden Hills             Gideons 
+                214                 117                 297                 156 
+          H Russell    Harper-Archer ES            Heritage              Hollis 
+                 84                 284                 290                 302 
+          Hope-Hill              Howard           Humphries          Hutchinson 
+                235                 221                 189                 229 
+           Invictus  Jackson Elementary               Jones            Kimberly 
+                 67                 295                 287                 272 
+            Kindezi         Kindezi O4W                King   KIPP Soul Primary 
+                219                 249                 155                  58 
+        KIPP STRIVE KIPP STRIVE Primary         KIPP Vision KIPP Vision Primary 
+                 62                 163                  37                  80 
+          KIPP WAYS   KIPP WAYS Primary   KIPP Woodson Park                 Lin 
+                 63                  94                  89                 594 
+               Long               Miles         Morningside            Parkside 
+                 86                 348                 517                 429 
+          Perkerson       Peyton Forest               Scott               Smith 
+                111                 169                 197                 479 
+         Springdale              Sutton              Sylvan              Toomer 
+                628                 299                  70                 366 
+           Tuskegee       Usher-Collier              Wesley          West Manor 
+                299                 223                 359                 175 
+              Young 
+                 76 
+[1] ""
+[1] "Number of Students"
+[1] ""
+[1] 15233
+[1] ""
+[1] "Checking Max Number of Students that could be matched"
+[1] ""
+[1] "Maximum Number of IDs in Matched data: 6830"
+[1] ""
+[1] "Checking Matched Cohort Sample Sizes"
+[1] ""
+[1] "Number of Tests: 169597"
+[1] "Number of Students: 6830"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Assigning Enrollment based on Matches"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to only include matched data"
+[1] ""
+[1] ""
+[1] "Check #1 - # of matches missing partners: 0"
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to censor before enrollment and remove weeks when testing did not occur"
+[1] ""
+[1] ""
+[1] "Check #2 - # matches with a partner with 0 tests post enrollment: 122"
+[1] ""
+[1] ""
+[1] "Final Matching Summary: "
+# A tibble: 6 × 27
+        ID subcohort        school_year age_group schoolname  gender race    age
+     <dbl> <chr>            <chr>       <chr>     <chr>       <chr>  <chr> <dbl>
+1 90000007 2021-22 Age 5-11 2021-22     5-11      ANCS Middle F      Black    11
+2 90000007 2021-22 Age 5-11 2021-22     5-11      ANCS Middle F      Black    11
+3 90000007 2021-22 Age 5-11 2021-22     5-11      ANCS Middle F      Black    11
+4 90000007 2021-22 Age 5-11 2021-22     5-11      ANCS Middle F      Black    11
+5 90000007 2021-22 Age 5-11 2021-22     5-11      ANCS Middle F      Black    11
+6 90000007 2021-22 Age 5-11 2021-22     5-11      ANCS Middle F      Black    11
+# ℹ 19 more variables: continuous_age <dbl>, dir_cert <dbl>,
+#   prior_infections <int>, subclass <fct>, vax_status <dbl>, vax_date <date>,
+#   enrollment_date <date>, prior_week <dbl>, week <dbl>,
+#   week_start_date <date>, avail_index <int>, num_tests <int>, tested <int>,
+#   positive <int>, weeks_since_last_test <dbl>, tests_last_4weeks <dbl>,
+#   test_density <dbl>, first_test_indicator <int>, propensity <dbl>
+[1] "Number of Matches: 3293"
+[1] "Number of IDs: 6586"
+[1] "Number of Tests: 165417"
+[1] "Number of Test x Weeks Observed: 108814"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 4: Saving Matched Data"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

@@ -1,0 +1,53 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 5: Fit VE Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2021_12_18 full Weighted"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Models"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Model Formula: Surv(time = prior_week, time2 = week, event = positive) ~ vax_status + continuous_age + gender + race + dir_cert + prior_infections + first_test_indicator + weeks_since_last_test + tests_last_4weeks + test_density + (1 | schoolname)"
+Mixed effects coxme model
+ Formula: model_formula 
+    Data: data 
+
+  events, n = 216, 56198
+
+Random effects:
+       group  variable        sd  variance
+1 schoolname Intercept 0.7776738 0.6047766
+                  Chisq    df p   AIC   BIC
+Integrated loglik 344.8 14.00 0 316.8 269.5
+ Penalized loglik 427.4 36.24 0 355.0 232.6
+
+Fixed effects:
+                            coef  exp(coef)   se(coef)     z        p
+vax_status            -9.539e-02  9.090e-01  9.639e-02 -0.99   0.3224
+continuous_age        -2.768e-01  7.582e-01  4.498e-02 -6.15 7.54e-10
+genderM               -3.320e-02  9.673e-01  9.355e-02 -0.35   0.7226
+raceBlack              2.046e+01  7.698e+08  1.037e+04  0.00   0.9984
+raceHispanic           2.034e+01  6.790e+08  1.037e+04  0.00   0.9984
+raceOther              2.037e+01  7.052e+08  1.037e+04  0.00   0.9984
+raceWhite              2.023e+01  6.137e+08  1.037e+04  0.00   0.9984
+dir_cert              -1.498e-02  9.851e-01  8.920e-03 -1.68   0.0932
+prior_infections      -1.023e+00  3.596e-01  2.151e-01 -4.76 1.98e-06
+first_test_indicator  -2.112e-01  8.096e-01  2.344e-01 -0.90   0.3677
+weeks_since_last_test -2.482e-01  7.802e-01  3.914e-02 -6.34 2.27e-10
+tests_last_4weeks      4.988e-03  1.005e+00  6.437e-02  0.08   0.9382
+test_density           4.177e-01  1.519e+00  2.671e-01  1.56   0.1179
+    method nstudents npositives   VE_est  VE_lower VE_upper      pval
+1 Weighted      3892        216 9.097886 -9.804915 24.74659 0.3223756
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "End File: Model Fit and Saved"
+[1] "------------------------------"
+[1] ""
+[1] ""

@@ -1,0 +1,120 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 4: Super Tester Subset and Matching"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2021_12_18 full"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Create a by ID dataset"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Match Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Age"
+[1] ""
+
+  12   13   14   15   16   17   18 
+1574 1495 1073  930  760  699   78 
+[1] ""
+[1] "Checking Vax Status"
+[1] ""
+
+   0    1 
+3079 3530 
+[1] ""
+[1] "Checking Vax Status by Age"
+[1] ""
+   
+     12  13  14  15  16  17  18
+  0 817 801 484 409 293 245  30
+  1 757 694 589 521 467 454  48
+[1] ""
+[1] "Checking by School"
+[1] ""
+
+    ANCS Middle      BEST MS-HS          Bunche    Carver Early      Centennial 
+            156             113             179              96             100 
+            CSK        Douglass       H Russell          Hollis          Howard 
+            172             129             183              63             485 
+       Invictus    Jackson High         Kindezi     Kindezi O4W            King 
+            225             598              59              64             322 
+KIPP Collegiate       KIPP Soul     KIPP STRIVE     KIPP Vision       KIPP WAYS 
+            118              36              82              45              62 
+           Long            Mays         Midtown   North Atlanta   South Atlanta 
+            179             161             737             816             128 
+         Sutton          Sylvan        Therrell      Washington          Wesley 
+            467             162             261             144             128 
+          Young 
+            139 
+[1] ""
+[1] "Number of Students"
+[1] ""
+[1] 6609
+[1] ""
+[1] "Checking Max Number of Students that could be matched"
+[1] ""
+[1] "Maximum Number of IDs in Matched data: 3910"
+[1] ""
+[1] "Checking Matched Cohort Sample Sizes"
+[1] ""
+[1] "Number of Tests: 61554"
+[1] "Number of Students: 3910"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Assigning Enrollment based on Matches"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to only include matched data"
+[1] ""
+[1] ""
+[1] "Check #1 - # of matches missing partners: 0"
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to censor before enrollment and remove weeks when testing did not occur"
+[1] ""
+[1] ""
+[1] "Check #2 - # matches with a partner with 0 tests post enrollment: 9"
+[1] ""
+[1] ""
+[1] "Final Matching Summary: "
+# A tibble: 6 × 27
+        ID subcohort         school_year age_group schoolname gender race    age
+     <dbl> <chr>             <chr>       <chr>     <chr>      <chr>  <chr> <dbl>
+1 90000052 2021-22 Age 12-18 2021-22     12-18     Carver Ea… F      Black    18
+2 90000052 2021-22 Age 12-18 2021-22     12-18     Carver Ea… F      Black    18
+3 90000052 2021-22 Age 12-18 2021-22     12-18     Carver Ea… F      Black    18
+4 90000052 2021-22 Age 12-18 2021-22     12-18     Carver Ea… F      Black    18
+5 90000052 2021-22 Age 12-18 2021-22     12-18     Carver Ea… F      Black    18
+6 90000052 2021-22 Age 12-18 2021-22     12-18     Carver Ea… F      Black    18
+# ℹ 19 more variables: continuous_age <dbl>, dir_cert <dbl>,
+#   prior_infections <int>, subclass <fct>, vax_status <dbl>, vax_date <date>,
+#   enrollment_date <date>, prior_week <dbl>, week <dbl>,
+#   week_start_date <date>, avail_index <int>, num_tests <int>, tested <int>,
+#   positive <int>, weeks_since_last_test <dbl>, tests_last_4weeks <dbl>,
+#   test_density <dbl>, first_test_indicator <int>, propensity <dbl>
+[1] "Number of Matches: 1946"
+[1] "Number of IDs: 3892"
+[1] "Number of Tests: 70470"
+[1] "Number of Test x Weeks Observed: 56198"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 4: Saving Matched Data"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

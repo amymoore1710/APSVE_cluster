@@ -1,0 +1,137 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 4: Super Tester Subset and Matching"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2022_5_11 super_tester"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Create a by ID dataset"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 1b: Subset to Super Tester Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Match Cohort"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Checking Age"
+[1] ""
+
+   5    6    7    8    9   10   11 
+ 899  982 1039 1036  965  866  384 
+[1] ""
+[1] "Checking Vax Status"
+[1] ""
+
+   0    1 
+3664 2507 
+[1] ""
+[1] "Checking Vax Status by Age"
+[1] ""
+   
+      5   6   7   8   9  10  11
+  0 562 576 629 598 582 521 196
+  1 337 406 410 438 383 345 188
+[1] ""
+[1] "Checking by School"
+[1] ""
+
+   ANCS Elementary        ANCS Middle               BAMO            Beecher 
+               185                 40                 76                142 
+           Benteen         BEST MS-HS             Bolton               Boyd 
+               103                 12                170                 47 
+           Brandon             Bunche            Burgess            Cascade 
+               164                 16                317                 72 
+        Centennial          Cleveland        Continental           Deerwood 
+                53                 98                 99                216 
+             Dobbs             Dunbar           E Rivers            Fickett 
+               105                102                186                206 
+             Finch         FL Stanton       Garden Hills          H Russell 
+               109                 48                126                 37 
+  Harper-Archer ES           Heritage             Hollis          Hope-Hill 
+               130                102                 90                148 
+            Howard          Humphries         Hutchinson           Invictus 
+               102                 88                120                 15 
+Jackson Elementary              Jones           Kimberly               King 
+                99                106                100                 56 
+               Lin               Long              Miles           Parkside 
+               391                  7                116                312 
+         Perkerson      Peyton Forest              Scott              Smith 
+                60                 54                 89                151 
+        Springdale             Sutton             Sylvan             Toomer 
+               372                 49                  1                214 
+          Tuskegee      Usher-Collier         West Manor              Young 
+               180                125                143                 22 
+[1] ""
+[1] "Number of Students"
+[1] ""
+[1] 6171
+[1] ""
+[1] "Checking Max Number of Students that could be matched"
+[1] ""
+[1] "Maximum Number of IDs in Matched data: 3010"
+[1] ""
+[1] "Checking Matched Cohort Sample Sizes"
+[1] ""
+[1] "Number of Tests: 105656"
+[1] "Number of Students: 3010"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Assigning Enrollment based on Matches"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to only include matched data"
+[1] ""
+[1] ""
+[1] "Check #1 - # of matches missing partners: 0"
+[1] ""
+[1] ""
+[1] "Reduce Weekly test data to censor before enrollment and remove weeks when testing did not occur"
+[1] ""
+[1] ""
+[1] "Check #2 - # matches with a partner with 0 tests post enrollment: 0"
+[1] ""
+[1] ""
+[1] "Final Matching Summary: "
+# A tibble: 6 × 27
+        ID subcohort        school_year age_group schoolname gender race    age
+     <dbl> <chr>            <chr>       <chr>     <chr>      <chr>  <chr> <dbl>
+1 90017480 2022-23 Age 5-11 2022-23     5-11      Invictus   F      Black    11
+2 90017480 2022-23 Age 5-11 2022-23     5-11      Invictus   F      Black    11
+3 90017480 2022-23 Age 5-11 2022-23     5-11      Invictus   F      Black    11
+4 90017480 2022-23 Age 5-11 2022-23     5-11      Invictus   F      Black    11
+5 90017480 2022-23 Age 5-11 2022-23     5-11      Invictus   F      Black    11
+6 90017480 2022-23 Age 5-11 2022-23     5-11      Invictus   F      Black    11
+# ℹ 19 more variables: continuous_age <dbl>, dir_cert <dbl>,
+#   prior_infections <int>, subclass <fct>, vax_status <dbl>, vax_date <date>,
+#   enrollment_date <date>, prior_week <dbl>, week <dbl>,
+#   week_start_date <date>, avail_index <int>, num_tests <int>, tested <int>,
+#   positive <int>, weeks_since_last_test <dbl>, tests_last_4weeks <dbl>,
+#   test_density <dbl>, first_test_indicator <int>, propensity <dbl>
+[1] "Number of Matches: 1505"
+[1] "Number of IDs: 3010"
+[1] "Number of Tests: 162907"
+[1] "Number of Test x Weeks Observed: 96146"
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 4: Saving Matched Data"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""

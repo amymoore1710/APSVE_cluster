@@ -1,0 +1,162 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 1: Read in Raw Data"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Intial Raw Data"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1299989"
+[1] "Number of Students: 28912"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Remove NA IDs & Summer Break testing"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1273506"
+[1] "Number of Students: 28863"
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Merge with Vaccination and Demographic Records"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Vaccination Records: 28842"
+[1] "Number of Demographic Records:  28863"
+[1] ""
+[1] ""
+[1] "Number of Tests: 1272292"
+[1] "Number of Students: 28848"
+[1] ""
+[1] "------------------------------"
+[1] "Step 3: Only Tests from Primary Enrollment Schools"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1269520"
+[1] "Number of Students: 28655"
+[1] ""
+[1] "------------------------------"
+[1] "Step 4: No Transfer Students"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1251413"
+[1] "Number of Students: 28494"
+[1] ""
+[1] "------------------------------"
+[1] "Step 5: Add in Age Group to subdivide subcohorts"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1193304"
+[1] "Number of Students: 27585"
+[1] ""
+[1] "------------------------------"
+[1] "Step 6: At least 3 tests per student"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1188925"
+[1] "Number of Students: 25598"
+[1] ""
+[1] "------------------------------"
+[1] "Step 7: Only School With Active Participation"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1187494"
+[1] "Number of Students: 25528"
+[1] ""
+[1] "------------------------------"
+[1] "Step 8: Only where covariates have positivity"
+[1] "------------------------------"
+[1] ""
+# A tibble: 4 × 5
+  covariate level subcohort         Vaccinated Unvaccinated
+  <chr>     <chr> <chr>                  <int>        <int>
+1 gender    N     2021-22 Age 12-18          6            0
+2 gender    N     2021-22 Age 5-11           4            0
+3 gender    N     2022-23 Age 12-18          2            0
+4 gender    N     2022-23 Age 5-11           4            0
+[1] "Number of Tests: 1186866"
+[1] "Number of Students: 25518"
+[1] ""
+[1] "------------------------------"
+[1] "Step 9: Merge in Direct Certification Covariate"
+[1] "------------------------------"
+[1] ""
+[1] "Number of Tests: 1186866"
+[1] "Number of Students: 25518"
+[1] ""
+[1] "------------------------------"
+[1] "Saving Final Dataset & Sample Size Table"
+[1] "------------------------------"
+[1] ""
+        ID  birthdate gender  race  schoolname school_year resultdate result
+1 90000007 2010-07-05      F Black ANCS Middle     2022-23 2022-09-13      0
+2 90000007 2010-07-05      F Black ANCS Middle     2022-23 2023-01-20      0
+3 90000007 2010-07-05      F Black ANCS Middle     2022-23 2023-01-06      0
+4 90000007 2010-07-05      F Black ANCS Middle     2021-22 2022-05-03      0
+5 90000007 2010-07-05      F Black ANCS Middle     2021-22 2021-10-22      0
+6 90000007 2010-07-05      F Black ANCS Middle     2021-22 2021-11-30      0
+  vax_date zip_most_recent age age_group vax_status ever_vax_status
+1     <NA>           30316  12     12-18          0               0
+2     <NA>           30316  12     12-18          0               0
+3     <NA>           30316  12     12-18          0               0
+4     <NA>           30316  11      5-11          0               0
+5     <NA>           30316  11      5-11          0               0
+6     <NA>           30316  11      5-11          0               0
+          subcohort  final_group censor_post_vax censor_pre_vax school_num
+1 2022-23 Age 12-18 Unvaccinated               0              0        206
+2 2022-23 Age 12-18 Unvaccinated               0              0        206
+3 2022-23 Age 12-18 Unvaccinated               0              0        206
+4  2021-22 Age 5-11 Unvaccinated               0              0        206
+5  2021-22 Age 5-11 Unvaccinated               0              0        206
+6  2021-22 Age 5-11 Unvaccinated               0              0        206
+  dir_cert
+1      5.2
+2      5.2
+3      5.2
+4      6.5
+5      6.5
+6      6.5
+                           cohort precleaning eligible school_year age_group
+1    2021-22 Age 5-11 Full Cohort       28912    25518       21842     15233
+2  2021-22 Age 5-11 Super Testers       28912    25518       21842     15233
+3   2021-22 Age 12-18 Full Cohort       28912    25518       21842      6609
+4 2021-22 Age 12-18 Super Testers       28912    25518       21842      6609
+5    2022-23 Age 5-11 Full Cohort       28912    25518       16136     13034
+6  2022-23 Age 5-11 Super Testers       28912    25518       16136     13034
+7   2022-23 Age 12-18 Full Cohort       28912    25518       16136      3102
+8 2022-23 Age 12-18 Super Testers       28912    25518       16136      3102
+  super_testers matched
+1            NA      NA
+2            NA      NA
+3            NA      NA
+4            NA      NA
+5            NA      NA
+6            NA      NA
+7            NA      NA
+8            NA      NA
+                           cohort precleaning eligible school_year age_group
+1    2021-22 Age 5-11 Full Cohort     1299989  1186866      599429    475181
+2  2021-22 Age 5-11 Super Testers     1299989  1186866      599429    475181
+3   2021-22 Age 12-18 Full Cohort     1299989  1186866      599429    124248
+4 2021-22 Age 12-18 Super Testers     1299989  1186866      599429    124248
+5    2022-23 Age 5-11 Full Cohort     1299989  1186866      587437    520159
+6  2022-23 Age 5-11 Super Testers     1299989  1186866      587437    520159
+7   2022-23 Age 12-18 Full Cohort     1299989  1186866      587437     67278
+8 2022-23 Age 12-18 Super Testers     1299989  1186866      587437     67278
+  super_testers matched
+1            NA      NA
+2            NA      NA
+3            NA      NA
+4            NA      NA
+5            NA      NA
+6            NA      NA
+7            NA      NA
+8            NA      NA
+[1] ""
+[1] "------------------------------"
+[1] "File Complete"
+[1] "------------------------------"
+[1] ""
