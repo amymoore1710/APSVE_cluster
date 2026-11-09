@@ -14,8 +14,8 @@ print("")
 
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -239,14 +239,17 @@ VScohort_weekly <- VScohort_weekly %>%
        .direction = "down") %>%
   ungroup()
 
-  #Remove weeks with no testing available & fix time varying NAs
-VScohort_weekly <- VScohort_weekly  %>%
-  filter(is_available == TRUE) %>%
+  # fix time varying NAs
+VScohort_weekly <- VScohort_weekly %>%
   mutate(weeks_since_last_test = coalesce(weeks_since_last_test, 0),
          test_density = coalesce(test_density, 0),
          continuous_age = as.numeric(week_start_date - birthdate) / 365.25,
          vax_status = ifelse(is.na(vax_date), 0,
                              ifelse(as.numeric(week_start_date - vax_date) > 0, 1, 0)))
+
+  # Remove weeks with no testing available
+VScohort_weekly_clean <- VScohort_weekly %>%
+  filter(is_available == TRUE)
 
 print("")
 print("------------------------------")
@@ -254,6 +257,11 @@ print("Step 3: Split into Subcohorts")
 print("------------------------------")
 print("")
 
+
+VScohort_weekly_clean_2021_5to11 <- VScohort_weekly_clean %>% filter(subcohort == "2021-22 Age 5-11")
+VScohort_weekly_clean_2021_12to18 <- VScohort_weekly_clean %>% filter(subcohort == "2021-22 Age 12-18")
+VScohort_weekly_clean_2022_5to11 <- VScohort_weekly_clean %>% filter(subcohort == "2022-23 Age 5-11")
+VScohort_weekly_clean_2022_12to18 <- VScohort_weekly_clean %>% filter(subcohort == "2022-23 Age 12-18")
 
 VScohort_weekly_2021_5to11 <- VScohort_weekly %>% filter(subcohort == "2021-22 Age 5-11")
 VScohort_weekly_2021_12to18 <- VScohort_weekly %>% filter(subcohort == "2021-22 Age 12-18")
@@ -263,17 +271,30 @@ VScohort_weekly_2022_12to18 <- VScohort_weekly %>% filter(subcohort == "2022-23 
 
 #Save Dataset
 if(cluster) {
-  saveRDS(VScohort_weekly, "/home/amoor53/APSVE_cluster/cleandata/All_cohort_weekly_testing_by_ID.rds")
-  saveRDS(VScohort_weekly_2021_5to11, "/home/amoor53/APSVE_cluster/cleandata/2021_5_11_weekly_testing_by_ID.rds")
-  saveRDS(VScohort_weekly_2021_12to18, "/home/amoor53/APSVE_cluster/cleandata/2021_12_18_weekly_testing_by_ID.rds")
-  saveRDS(VScohort_weekly_2022_5to11, "/home/amoor53/APSVE_cluster/cleandata/2022_5_11_weekly_testing_by_ID.rds")
-  saveRDS(VScohort_weekly_2022_12to18, "/home/amoor53/APSVE_cluster/cleandata/2022_12_18_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_clean, "/home/amoor53/APSVE_cluster/cleandata/All_cohort_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_clean_2021_5to11, "/home/amoor53/APSVE_cluster/cleandata/2021_5_11_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_clean_2021_12to18, "/home/amoor53/APSVE_cluster/cleandata/2021_12_18_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_clean_2022_5to11, "/home/amoor53/APSVE_cluster/cleandata/2022_5_11_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_clean_2022_12to18, "/home/amoor53/APSVE_cluster/cleandata/2022_12_18_weekly_testing_by_ID.rds")
+  
+  saveRDS(VScohort_weekly, "/home/amoor53/APSVE_cluster/cleandata/All_cohort_all_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_2021_5to11, "/home/amoor53/APSVE_cluster/cleandata/2021_5_11_all_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_2021_12to18, "/home/amoor53/APSVE_cluster/cleandata/2021_12_18_all_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_2022_5to11, "/home/amoor53/APSVE_cluster/cleandata/2022_5_11_all_weekly_testing_by_ID.rds")
+  saveRDS(VScohort_weekly_2022_12to18, "/home/amoor53/APSVE_cluster/cleandata/2022_12_18_all_weekly_testing_by_ID.rds")
+  
 } else {
-  saveRDS(VScohort_weekly, here("cleandata", "All_cohort_weekly_testing_by_ID.rds"))
-  saveRDS(VScohort_weekly_2021_5to11, here("cleandata", "2021_5_11_weekly_testing_by_ID.rds"))
-  saveRDS(VScohort_weekly_2021_12to18, here("cleandata", "2021_12_18_weekly_testing_by_ID.rds"))
-  saveRDS(VScohort_weekly_2022_5to11, here("cleandata", "2022_5_11_weekly_testing_by_ID.rds"))
-  saveRDS(VScohort_weekly_2022_12to18, here("cleandata", "2022_12_18_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_clean, here("cleandata", "All_cohort_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_clean_2021_5to11, here("cleandata", "2021_5_11_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_clean_2021_12to18, here("cleandata", "2021_12_18_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_clean_2022_5to11, here("cleandata", "2022_5_11_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_clean_2022_12to18, here("cleandata", "2022_12_18_weekly_testing_by_ID.rds"))
+  
+  saveRDS(VScohort_weekly, here("cleandata", "All_cohort_all_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_2021_5to11, here("cleandata", "2021_5_11_all_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_2021_12to18, here("cleandata", "2021_12_18_all_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_2022_5to11, here("cleandata", "2022_5_11_all_weekly_testing_by_ID.rds"))
+  saveRDS(VScohort_weekly_2022_12to18, here("cleandata", "2022_12_18_all_weekly_testing_by_ID.rds"))
 }
 
 

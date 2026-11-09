@@ -1,0 +1,5 @@
+,row,Age 5-11,Age 12-18
+1,Full cohort (n),"15,233","6,609"
+2,"Full cohort, % completeness, median (IQR)",76.5% (47.1-88.2%),41.2% (20.6-67.6%)
+3,Super tester cohort (n),"5,727",333
+4,"Super tester cohort, % completeness, median (IQR)",88.2% (88.2-91.2%),88.2% (85.3-88.2%)
