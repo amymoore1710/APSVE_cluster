@@ -721,3 +721,55 @@ ggplot(summ, aes(x = level, y = p, color = shape_group, shape = shape_group)) +
 if (saving) {
   ggsave(here("results", "tab and figs", "figure3.png"), width = 10, height = 4.5, dpi = 300)
 }
+
+
+  ##### Table 3: Propensity Score Model OR Estimates #####
+
+propensity_model_2021_5_11 <- readRDS(here("models", "2021_5_11_propensity_model.RDS"))
+# summary(propensity_model_2021_5_11)
+
+propensity_model_basic_2021_5_11 <- readRDS(here("models", "2021_5_11_propensity_model_basic.RDS"))
+# summary(propensity_model_basic_2021_5_11)
+
+propensity_model_2021_12_18 <- readRDS(here("models", "2021_12_18_propensity_model.RDS"))
+# summary(propensity_model_2021_5_11)
+
+propensity_model_basic_2021_12_18 <- readRDS(here("models", "2021_12_18_propensity_model_basic.RDS"))
+# summary(propensity_model_basic_2021_12_18)
+
+
+# ---- Pull Summaries from Models  ---------------------------------------------
+make_CIs <- function(model, alpha = 0.05) {
+  
+  coefs <- summary(model)$coefficients[,1]
+  SEs <- summary(model)$coefficients[,2]
+  
+  CI_upper <- coefs + qnorm(1 - alpha/2) * SEs
+  CI_lower <- coefs + qnorm(alpha/2) * SEs
+  
+  CI_statement <- data.frame(Covariate = names(coefs),
+                             CIs = paste0(round(coefs, digits = 2), " (",
+                                          round(CI_lower, digits = 2), ", ",
+                                          round(CI_upper, digits = 2), ")"))
+  
+  return(CI_statement)
+  
+}
+
+column_2021_5_11_basic_model <- make_CIs(propensity_model_basic_2021_5_11) %>% rename(basic_5_11 = CIs)
+column_2021_5_11_full_model <- make_CIs(propensity_model_2021_5_11) %>% rename(full_5_11 = CIs)
+column_2021_12_18_basic_model <- make_CIs(propensity_model_basic_2021_12_18) %>% rename(basic_12_18 = CIs)
+column_2021_12_18_full_model <- make_CIs(propensity_model_2021_12_18) %>% rename(full_12_18 = CIs)
+
+combine_colums_list <- list(column_2021_5_11_basic_model,
+                            column_2021_5_11_full_model,
+                            column_2021_12_18_basic_model,
+                            column_2021_12_18_full_model)
+
+table3_data <- combine_colums_list %>% reduce(full_join, by = "Covariate")
+
+# ---- Save to .csv file -------------------------------------------------------
+if (saving) {
+  write.csv(table3_data,
+            file = here("results", "tab and figs", "table3.csv"))
+}
