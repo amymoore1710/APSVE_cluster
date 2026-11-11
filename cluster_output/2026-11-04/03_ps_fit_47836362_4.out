@@ -1,0 +1,132 @@
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "Begin File 3: Compute Propensity Scores"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] "Task: 2022_12_18"
+[1] ""
+[1] "------------------------------"
+[1] "Step 1: Fit Propensity Score Model with No Testing Behavior Covariates"
+[1] "------------------------------"
+[1] ""
+Time difference of 26.76548 mins
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: tested ~ vax_status + continuous_age + gender + race + dir_cert +  
+    prior_infections + week + (1 | schoolname) + (1 | ID)
+   Data: VScohort_weekly
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+ 109016.7  109142.1  -54495.3  108990.7    114761 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5360 -0.5010 -0.2015  0.5271  8.0053 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ID         (Intercept) 2.4978   1.5805  
+ schoolname (Intercept) 0.6265   0.7915  
+Number of obs: 114774, groups:  ID, 3102; schoolname, 25
+
+Fixed effects:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)       2.6505803  0.7232553   3.665 0.000248 ***
+vax_status        0.1670092  0.0653692   2.555 0.010623 *  
+continuous_age   -0.0823753  0.0337183  -2.443 0.014564 *  
+genderM          -0.0297139  0.0617331  -0.481 0.630283    
+raceBlack        -0.4394283  0.3053690  -1.439 0.150148    
+raceHispanic     -0.5014682  0.3189576  -1.572 0.115902    
+raceOther        -0.4650561  0.3380965  -1.376 0.168972    
+raceWhite        -0.1745479  0.3064824  -0.570 0.569003    
+dir_cert         -0.0029849  0.0076704  -0.389 0.697165    
+prior_infections -0.0946771  0.0527236  -1.796 0.072538 .  
+week             -0.0716707  0.0009316 -76.933  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) vx_stt cntns_ gendrM rcBlck rcHspn rcOthr racWht dr_crt
+vax_status  -0.050                                                        
+continuos_g -0.662 -0.066                                                 
+genderM     -0.065  0.009  0.011                                          
+raceBlack   -0.401  0.104 -0.010  0.037                                   
+raceHispanc -0.389  0.100 -0.008  0.033  0.928                            
+raceOther   -0.369  0.040  0.000  0.045  0.869  0.828                     
+raceWhite   -0.405  0.010 -0.005  0.036  0.948  0.908  0.861              
+dir_cert    -0.583  0.034  0.013  0.006 -0.022 -0.002 -0.001  0.011       
+prir_nfctns -0.019 -0.056  0.023  0.015 -0.029 -0.025 -0.023 -0.022  0.001
+week         0.446  0.026 -0.691 -0.009  0.010  0.008  0.003  0.006 -0.009
+            prr_nf
+vax_status        
+continuos_g       
+genderM           
+raceBlack         
+raceHispanc       
+raceOther         
+raceWhite         
+dir_cert          
+prir_nfctns       
+week        -0.096
+[1] ""
+[1] "------------------------------"
+[1] "Step 2: Fit Propensity Score Model with Testing Behavior Covariates"
+[1] "------------------------------"
+[1] ""
+Time difference of 1.101072 hours
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: tested ~ vax_status + continuous_age + gender + race + dir_cert +  
+    prior_infections + first_test_indicator + weeks_since_last_test +  
+    tests_last_4weeks + test_density + week + (1 | schoolname) +      (1 | ID)
+   Data: VScohort_weekly
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  94402.6   94566.7  -47184.3   94368.6    114757 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+ -5.700  -0.428  -0.030   0.496 154.431 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ ID         (Intercept) 0.2785   0.5277  
+ schoolname (Intercept) 0.1454   0.3813  
+Number of obs: 114774, groups:  ID, 3102; schoolname, 25
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.1098511  0.3289745   3.374 0.000742 ***
+vax_status             0.0996938  0.0300050   3.323 0.000892 ***
+continuous_age        -0.0419866  0.0145210  -2.891 0.003835 ** 
+genderM               -0.0151084  0.0266153  -0.568 0.570268    
+raceBlack             -0.2145034  0.1335496  -1.606 0.108236    
+raceHispanic          -0.2236309  0.1395885  -1.602 0.109140    
+raceOther             -0.2405808  0.1476113  -1.630 0.103138    
+raceWhite             -0.0933220  0.1339502  -0.697 0.485996    
+dir_cert              -0.0026786  0.0036711  -0.730 0.465611    
+prior_infections      -0.0678458  0.0283200  -2.396 0.016589 *  
+first_test_indicator  -0.3590740  0.0437706  -8.204 2.33e-16 ***
+weeks_since_last_test -0.2778308  0.0057325 -48.466  < 2e-16 ***
+tests_last_4weeks      0.3829488  0.0087955  43.539  < 2e-16 ***
+test_density           0.1509750  0.0338838   4.456 8.36e-06 ***
+week                  -0.0281128  0.0008219 -34.207  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] ""
+[1] ""
+[1] ""
+[1] "------------------------------"
+[1] "------------------------------"
+[1] "End File 3: Saving Weekly testing by ID with Propensity Scores"
+[1] "------------------------------"
+[1] "------------------------------"
+[1] ""
+[1] ""
+[1] ""
