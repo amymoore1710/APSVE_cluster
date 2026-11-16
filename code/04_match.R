@@ -10,8 +10,8 @@ print("")
 
 
 #Run Locally?
-cluster = TRUE
-# cluster = FALSE
+# cluster = TRUE
+cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -242,35 +242,23 @@ print("")
   #Reduce Weekly test data to only include eligible tests
     #Exclude weeks from before enrollment
     #Exclude weeks for late vaxers who are used as unvaxed and censored at vaccination
-    #Exclude weeks when no testing occured
-VScohort_weekly_match_observed <- VScohort_weekly_match %>%
+VScohort_weekly_match_only <- VScohort_weekly_match %>%
   filter(enrollment_date <= week_start_date) %>%
   filter(final_group != "Unvaccinated (censored at vax date)" |
-           week_start_date < vax_date) %>%
-  filter(tested == 1)
-
-  #Checking that both matches have tests
-checking <- VScohort_weekly_match_observed %>% group_by(subclass) %>% summarize(n_IDs = length(unique(ID))) %>% filter(n_IDs < 2)
-print(paste("Check #2 - # matches with a partner with 0 tests post enrollment:", nrow(checking)))
-
-
-  #Removing matched pairs where one member has no tests after enrollment
-VScohort_weekly_match_observed <- VScohort_weekly_match_observed %>%
-  filter(!(subclass %in% checking$subclass))
-
+           week_start_date < vax_date)
 
   #Reduce Weekly test data to censor after first positive result
     #Collect Week number of first positive for each with at least one positive
-first_positive_events <- VScohort_weekly_match_observed %>%
+first_positive_events <- VScohort_weekly_match_only %>%
   filter(positive == 1) %>%
   group_by(ID) %>%
   summarise(first_positive_week = min(week, na.rm = TRUE), .groups = "drop")
 
-VScohort_weekly_match_observed <- VScohort_weekly_match_observed %>%
+VScohort_weekly_match_only <- VScohort_weekly_match_only %>%
   left_join(first_positive_events, by = "ID") %>%
   filter(is.na(first_positive_week) | week <= first_positive_week)
 
-VScohort_weekly_match_observed <- VScohort_weekly_match_observed %>%
+VScohort_weekly_match_only <- VScohort_weekly_match_only %>%
   mutate(prior_week = week - 1) %>%
   select(ID, subcohort, school_year, age_group,
          schoolname, gender, race, age, continuous_age,
@@ -282,13 +270,32 @@ VScohort_weekly_match_observed <- VScohort_weekly_match_observed %>%
          test_density, first_test_indicator,
          propensity)
 
+#Exclude weeks when no testing occured
+VScohort_weekly_match_observed <- VScohort_weekly_match_only %>%
+  filter(tested == 1)
+
+#Checking that both matches have tests
+checking <- VScohort_weekly_match_observed %>% group_by(subclass) %>% summarize(n_IDs = length(unique(ID))) %>% filter(n_IDs < 2)
+print(paste("Check #2 - # matches with a partner with 0 tests post enrollment:", nrow(checking)))
+
+
+#Removing matched pairs where one member has no tests after enrollment
+VScohort_weekly_match_observed <- VScohort_weekly_match_observed %>%
+  filter(!(subclass %in% checking$subclass))
+VScohort_weekly_match_only <- VScohort_weekly_match_only %>%
+  filter(!(subclass %in% checking$subclass))
+
 
 if (cluster) {
   saveRDS(VScohort_weekly_match_observed,
           file = paste0("/home/amoor53/APSVE_cluster/cleandata/", task$subcohort, "_", task$cohort_type, "_matched.rds"))
+  saveRDS(VScohort_weekly_match_only,
+          file = paste0("/home/amoor53/APSVE_cluster/cleandata/", task$subcohort, "_", task$cohort_type, "_matched_all_weeks.rds"))
 } else {
   saveRDS(VScohort_weekly_match_observed,
           file = here("cleandata", paste0(task$subcohort, "_", task$cohort_type, "_matched.rds")))
+  saveRDS(VScohort_weekly_match_only,
+          file = here("cleandata", paste0(task$subcohort, "_", task$cohort_type, "_matched_all_weeks.rds")))
 }
 
 print("")

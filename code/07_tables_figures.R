@@ -55,6 +55,7 @@ weekly_2021_5_11        <- readRDS(file = here("cleandata", "2021_5_11_weekly_te
 propensity_2021_5_11    <- readRDS(file = here("cleandata", "2021_5_11_weekly_propensity.rds"))
 propensity_ST_2021_5_11 <- readRDS(file = here("cleandata", "2021_5_11_ST_weekly_propensity.rds"))
 matched_2021_5_11       <- readRDS(file = here("cleandata", "2021_5_11_full_matched.rds"))
+matched_all_2021_5_11   <- readRDS(file = here("cleandata", "2021_5_11_full_matched_all_weeks.rds"))
 matched_ST_2021_5_11    <- readRDS(file = here("cleandata", "2021_5_11_super_tester_matched.rds"))
 by_ID_2021_5_11         <- readRDS(file = here("cleandata", "2021_5_11_full_by_ID.rds"))
 # by_ID_ST_2021_5_11      <- readRDS(file = here("cleandata", "2021_5_11_super_tester_by_ID.rds"))
@@ -773,3 +774,52 @@ if (saving) {
   write.csv(table3_data,
             file = here("results", "tab and figs", "table3.csv"))
 }
+
+
+  ##### Figure 4: Propensity Score Histogram #####
+
+# ---- 0. Grab Data ------------------------------------------------------------
+
+matched_all_2021_5_11   <- readRDS(file = here("cleandata", "2021_5_11_full_matched_all_weeks.rds"))
+matched_all_2021_12_18  <- readRDS(file = here("cleandata", "2021_12_18_full_matched_all_weeks.rds"))
+
+matched_df <- rbind(matched_all_2021_5_11, matched_all_2021_12_18)
+
+matched_df <- matched_df %>%
+  mutate(age_group = factor(age_group, levels = age_group_order, labels = age_group_labels),
+         vax_status = factor(vax_status, levels = vax_status_order, labels = vax_status_labels),
+         tested = factor(tested, levels = c(1,0), labels = c("Tested", "Untested")),
+         grp = interaction(age_group, tested, sep = " ")) 
+
+# ---- 1. Plot -----------------------------------------------------------------
+
+# swap in the exact hex codes from your other figures
+cols <- c(
+  "Age 5-11 Tested"    = color_2021_5_11_ST_matched,  # dark blue
+  "Age 5-11 Untested"  = color_2021_5_11_full_matched,  # light blue
+  "Age 12-18 Tested"   = color_2021_12_18_ST_matched,  # dark green
+  "Age 12-18 Untested" = color_2021_12_18_full_matched   # light green
+)
+
+# matched_df <- matched_df %>%
+#   dplyr::mutate(
+#     grp = interaction(age_group, tested, sep = "_")
+#   )
+
+ggplot(matched_df, aes(x = propensity, fill = grp, color = grp, linetype = tested)) +
+  geom_density(alpha = 0.6, adjust = 1.2, linewidth = 0.6) +
+  facet_grid(vax_status ~ age_group) +
+  scale_fill_manual(values = cols, guide = "none") +
+  scale_color_manual(values = cols, guide = "none") +
+  scale_linetype_manual(values = c("Tested" = "solid", "Untested" = "dashed")) +
+  guides(linetype = guide_legend(override.aes = list(fill = c("grey40", "grey85"), color = c("grey20", "grey65"), alpha = 0.6))) +
+  labs(x = "Predicted Propensity of Testing",
+       y = "Density", linetype = NULL) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+
+if (saving) {
+  ggsave(here("results", "tab and figs", "figure4.png"), width = 10, height = 8, dpi = 300)
+}
+
+
