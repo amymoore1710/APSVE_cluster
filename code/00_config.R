@@ -1,8 +1,8 @@
 # Setting Up Parameter Options
 
 #Run Locally?
-# cluster = TRUE
-cluster = FALSE
+cluster = TRUE
+# cluster = FALSE
 
 #Extra Print outs
 verbose = TRUE
@@ -43,6 +43,11 @@ analysis_grid <- analysis_grid %>%
 model_grid <- expand_grid(subcohort = subcohorts,
                           cohort_type = c("full", "super_tester", "full")) %>%
   mutate(model_method = rep(c("Standard", "Standard", "Weighted"), 4))
+
+bootstrap_grid <- expand_grid(subcohort = subcohorts) %>%
+  mutate(start_dates = c(rep(ymd("2021-09-07"), 2), rep(ymd("2022-08-01"),2)),
+         end_dates = c(rep(ymd("2022-05-26"), 2), rep(ymd("2023-05-24"),2)),
+         first_sunday = c(rep(ymd("2021-09-05"), 2), rep(ymd("2022-07-31"),2)))
 
 
 # Maps the SLURM array index to a row of the grid; defaults to task 1 so you can test interactively

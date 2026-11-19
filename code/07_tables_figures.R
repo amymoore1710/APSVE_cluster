@@ -17,6 +17,7 @@ library(glue)
 library(DiagrammeR)
 library(DiagrammeRsvg)
 library(rsvg)
+library(colorspace)
 
 #Color Palette
 color_2021_5_11_full <- '#6DC7FF'
@@ -806,20 +807,168 @@ cols <- c(
 #     grp = interaction(age_group, tested, sep = "_")
 #   )
 
+bw <- 0.02  # propensity bin width the percentage refers to
+
 ggplot(matched_df, aes(x = propensity, fill = grp, color = grp, linetype = tested)) +
-  geom_density(alpha = 0.6, adjust = 1.2, linewidth = 0.6) +
+  geom_density(aes(y = after_stat(density) * bw * 100),
+               alpha = 0.6, adjust = 1.2, linewidth = 0.6) +
   facet_grid(vax_status ~ age_group) +
   scale_fill_manual(values = cols, guide = "none") +
-  scale_color_manual(values = cols, guide = "none") +
+  scale_color_manual(values = darken(cols, amount = 0.2, method = "relative"), guide = "none") +
   scale_linetype_manual(values = c("Tested" = "solid", "Untested" = "dashed")) +
-  guides(linetype = guide_legend(override.aes = list(fill = c("grey40", "grey85"), color = c("grey20", "grey65"), alpha = 0.6))) +
+  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  guides(linetype = guide_legend(
+    override.aes = list(fill = c("grey40", "grey85"), 
+                        color = darken(c("grey40", "grey85"), amount = 0.2, method = "relative"), 
+                        alpha = 0.6))) +
   labs(x = "Predicted Propensity of Testing",
-       y = "Density", linetype = NULL) +
-  theme_bw() +
+       y = "Percent of person-weeks",
+       linetype = NULL) +
+  theme_bw(base_size = 18) +
   theme(legend.position = "bottom")
 
 if (saving) {
   ggsave(here("results", "tab and figs", "figure4.png"), width = 10, height = 8, dpi = 300)
 }
+
+
+  ##### Figure 5: Forest Plot #####
+
+# =====================================================================
+# Figure 4: Forest plot of VE estimates by adjustment method,
+#            grouped by subcohort (one tall column), reference line at 0%,
+#            propensity weighting highlighted
+# =====================================================================
+
+# ---- 1. Simulate VE results (replace with your actual Table 3 data) ---
+
+# subcohort_order <- c("2021-22, 5-11", "2021-22, 12-18")
+
+# subcohort_order <- c("2021-22 Age 5-11")
+# method_order <- c("Demographic info", 
+#                   "Supertester cohort",
+#                   "Propensity weighting")
+# 
+# 
+# sub_cohorts <- data.frame(year = c("2021"),
+#                           age = c("5_11"))
+# cohort_types <- c("full", "super_tester", "full")
+# method_types <- c("Standard", "Standard", "Weighted")
+# sub_cohorts <- data.frame(year = c("2021", "2022", "2021", "2022"),
+#                           age = c("5_11", "5_11", "12_18", "12_18"))
+
+file_names <- data.frame(school_year = rep(c("2021"), each = 6),
+                         age_group = rep(c("5_11", "12_18"), each = 3),
+                         cohort_type = c("full", "super_tester", "full"),
+                         method_type = c("Standard", "Standard", "Weighted")) %>%
+  mutate(subcohort = paste0(school_year, "_", age_group),
+         file_name = paste0(subcohort, "_", cohort_type, "_", method_type, "_VE_model_summary.RDS"))
+
+ve_data <- data.frame(subcohort = factor(rep(c("2021-22 Age 5-11", "2021-22 Age 12-18"), each = 3),
+                                         levels = c("2021-22 Age 5-11", "2021-22 Age 12-18")),
+                      method = rep(c("Demographic Info", "Super Tester Cohort", "Propensity Weighting"), times = 1),
+                      ve = NA,
+                      width = NA,
+                      lower = NA, 
+                      upper = NA, 
+                      pval = NA,
+                      highlight = rep(c(FALSE, FALSE, TRUE), times = 1))
+
+for (i in 1:nrow(file_names)) {
+  
+  model_summary <- readRDS(here("results", file_names$file_name[i]))
+  
+  ve_data$ve[i] <- model_summary$VE_est
+  ve_data$pval[i] <- model_summary$pval
+  
+  if(file_names$method_type[i] == "Standard") {
+    ve_data$lower[i] <- model_summary$VE_lower
+    ve_data$upper[i] <- model_summary$VE_upper
+    ve_data$width[i] <- model_summary$VE_upper - model_summary$VE_lower
+  } else { #Weighted Models
+    bootstrap_ve <- readRDS(here("results", paste0(file_names$subcohort[i], "_bootstrap_summary.RDS")))
+    ve_data$lower[i] <- unname(bootstrap_ve[4])*100
+    ve_data$upper[i] <- unname(bootstrap_ve[5])*100
+    ve_data$width[i] <- (unname(bootstrap_ve[5]) - unname(bootstrap_ve[4]))*100
+  }
+  
+}
+
+method_include <- c("Demographic Info", "Super Tester Cohort", "Propensity Weighting")
+
+
+
+# results_table <- data.frame(X = rep(1, 3),
+#                             method = NA,
+#                             nstudents = NA,
+#                             ntests = NA,
+#                             VE = NA,
+#                             pval = NA)
+# 
+# 
+# 
+# for (j in 1:nrow(sub_cohorts)) {
+#   year <- sub_cohorts[j,]$year
+#   age <- sub_cohorts[j,]$age
+#   
+#   #Load parameter lists
+#   # params_list_TND <- read.csv(here("cleandata", paste0(year, "_age_", age, "_TND_params.csv")))
+#   params_list_TTE <- read.csv(here("cleandata",paste0(year, "_age_", age, "_TTE_params.csv")))
+#   
+#   # params_list <- rbind(params_list_TTE, params_list_TND)
+#   params_list <- params_list_TTE
+#   
+#   for (i in 1:nrow(params_list)) {
+#     method <- params_list$method[i]
+#     results_table[(6*(j-1) +i),] <- read.csv(here("results", paste0(year, "_age_", age, "_", method, "_model_fit.csv")))
+#   }
+# }
+# 
+# 
+# 
+# ve_data <- results_table %>%
+#   mutate(
+#     ve    = as.numeric(str_extract(VE, "^-?[0-9.]+")),
+#     lower = as.numeric(str_extract(VE, "(?<=\\()-?[0-9.]+")),
+#     upper = as.numeric(str_extract(VE, "(?<=to )-?[0-9.]+")),
+#     width = upper - lower,
+#     subcohort = factor(rep(subcohort_order, each = 6),
+#                        levels = subcohort_order),
+#     method = rep(method_order, times = 4),
+#     highlight = ifelse(method == "Propensity weighting", TRUE, FALSE)
+#   ) %>%
+#   select(subcohort, method, ve, width, lower, upper, pval, highlight)
+# 
+# method_include <- c("Demographic Info", "Super Tester Cohort", "Propensity Weighting")
+# 
+# ve_data <- ve_data %>%
+#   filter(method %in% method_include)
+
+# =====================================================================
+# 2. Plot
+# =====================================================================
+
+ggplot(ve_data, aes(x = ve, y = method, color = highlight, linewidth = highlight)) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black", linewidth = 0.4) +
+  geom_pointrange(aes(xmin = lower, xmax = upper, shape = highlight, size = highlight)) +
+  facet_grid(subcohort ~ ., scales = "free_y", space = "free_y", switch = "y") +
+  scale_y_discrete(limits = rev(method_include)) +
+  scale_color_manual(values = c(`FALSE` = "grey40", `TRUE` = color_2021_5_11_ST), guide = "none") +
+  scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 18), guide = "none") +
+  scale_linewidth_manual(values = c(`FALSE` = 0.6, `TRUE` = 1.1), guide = "none") +
+  scale_size_manual(values = c(`FALSE` = 0.5, `TRUE` = 0.9), guide = "none") +
+  labs(x = "Vaccine Efficacy (%)", y = NULL) +
+  theme_bw(base_size = 11) +
+  theme(
+    strip.background = element_blank(),
+    strip.text.y.left = element_text(face = "bold", angle = 0),
+    strip.placement = "outside",
+    panel.grid.minor = element_blank(),
+    panel.spacing = unit(1, "lines"),
+    axis.text.y = element_text(hjust = 0)
+  )
+
+ggsave(here("results", "tab and figs","figure5.png"), width = 8, height = 6, dpi = 300)
+
 
 

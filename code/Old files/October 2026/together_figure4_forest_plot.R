@@ -33,14 +33,17 @@ for (j in 1:nrow(sub_cohorts)) {
   
   #Load parameter lists
     # params_list_TND <- read.csv(here("cleandata", paste0(year, "_age_", age, "_TND_params.csv")))
-    params_list_TTE <- read.csv(here("cleandata",paste0(year, "_age_", age, "_TTE_params.csv")))
+    params_list_TTE <- read.csv(here("cleandata",
+                                     "Old Versions - Pre October 2026", 
+                                     paste0(year, "_age_", age, "_TTE_params.csv")))
   
   # params_list <- rbind(params_list_TTE, params_list_TND)
   params_list <- params_list_TTE
   
   for (i in 1:nrow(params_list)) {
     method <- params_list$method[i]
-      results_table[(6*(j-1) +i),] <- read.csv(here("results", paste0(year, "_age_", age, "_", method, "_model_fit.csv")))
+      results_table[(6*(j-1) +i),] <- read.csv(here("results", 
+                                                    "Old Versions", paste0(year, "_age_", age, "_", method, "_model_fit.csv")))
   }
 }
 
