@@ -1,0 +1,24 @@
+Loading required package: Matrix
+Loading required package: survival
+Loading required package: bdsmatrix
+
+Attaching package: ‘bdsmatrix’
+
+The following object is masked from ‘package:base’:
+
+    backsolve
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Error in library(future.apply) : 
+  there is no package called ‘future.apply’
+Execution halted
